@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.Service;
 
 import java.util.List;
 
@@ -20,8 +19,7 @@ public class Pack {
     private Double prixTotal;
     private Double reduction;
 
+    // Assurez-vous que l'importation de Service est correcte
     @OneToMany
-    private List<Service> services;
-
-    // Getters et Setters (générés par Lombok via @Data)
+    private List<Service> services;  // Utilise la classe com.example.demo3.model.Service
 }

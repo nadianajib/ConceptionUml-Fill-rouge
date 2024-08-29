@@ -7,19 +7,21 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import java.util.Set;
+
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Pack {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Double prixTotal;
     private Double reduction;
+    private String titre;
+    private String description;
 
-    // Assurez-vous que l'importation de Service est correcte
-    @OneToMany
-    private List<Service> services;  // Utilise la classe com.example.demo3.model.Service
+    @ManyToMany(mappedBy = "packs")
+    private Set<Utilisateur> utilisateurs;
+
+    // Getters et Setters pour utilisateurs et autres champs
 }
+

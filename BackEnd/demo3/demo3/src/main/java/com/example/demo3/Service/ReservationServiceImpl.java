@@ -110,5 +110,9 @@ public class ReservationServiceImpl implements ReservationService {
             return null;  // Ou lancer une exception
         }
     }
+    @Override
+    public void annulerReservation(Long id) {
+        reservationRepository.deleteById(id);
+    }
 
 }

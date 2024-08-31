@@ -1,7 +1,9 @@
 package com.example.demo3.Dto;
 
-import java.util.Set;
+import lombok.Data;
 
+import java.util.Set;
+@Data
 public class PackDto {
     private Long id;
     private Double prixTotal;

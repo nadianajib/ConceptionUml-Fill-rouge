@@ -4,11 +4,9 @@ import lombok.Data;
 
 @Data
 public class ReservationDto {
-    private Long id; // Utilisé uniquement pour la consultation
+    private Long id;
     private String dateDebut;
     private String dateFin;
-    private Long utilisateurId; // Utilisé pour la création
-    private Long packId; // Utilisé pour la création
-    private String utilisateurNom; // Utilisé pour la consultation
-    private String packTitre; // Utilisé pour la consultation
+    private Long utilisateurId; // Identifiant pour Utilisateur
+    private Long packId; // Identifiant pour Pack
 }

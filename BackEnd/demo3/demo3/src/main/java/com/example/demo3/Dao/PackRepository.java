@@ -1,8 +1,8 @@
 package com.example.demo3.Dao;
 
-import com.example.demo3.model.Utilisateur;
+import com.example.demo3.model.Pack;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
+public interface PackRepository extends JpaRepository<Pack, Long> {
     // Méthodes personnalisées ici
 }

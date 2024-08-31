@@ -13,7 +13,7 @@ public class PackController {
     @Autowired
     private PackService packService;
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<PackDto> addPack(@RequestBody PackDto packDTO) {
         PackDto createdPack = packService.createPack(packDTO);
         return ResponseEntity.ok(createdPack);

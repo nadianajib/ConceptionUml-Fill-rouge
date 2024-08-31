@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/reservations")
 public class ReservationController {
@@ -22,4 +24,14 @@ public class ReservationController {
             return ResponseEntity.badRequest().body(null);  // Retourne un 400 avec plus de détails si besoin
         }
     }
+    @GetMapping("/user/{utilisateurId}")
+    public ResponseEntity<List<ReservationDto>> getReservationsByUtilisateurId(@PathVariable Long utilisateurId) {
+        try {
+            List<ReservationDto> reservations = reservationService.getReservationsByUtilisateurId(utilisateurId);
+            return ResponseEntity.ok(reservations);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);  // Retourne un 400 avec plus de détails si besoin
+        }
+    }
 }
+

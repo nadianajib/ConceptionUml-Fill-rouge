@@ -10,6 +10,8 @@ import com.example.demo3.model.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -69,5 +71,16 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
         return dto;
+    }
+    @Override
+    public List<ReservationDto> getReservationsByUtilisateurId(Long utilisateurId) {
+        List<Reservation> reservations = reservationRepository.findByUtilisateurId(utilisateurId);
+        List<ReservationDto> reservationDtos = new ArrayList<>();
+
+        for (Reservation reservation : reservations) {
+            reservationDtos.add(entityToDto(reservation));
+        }
+
+        return reservationDtos;
     }
 }

@@ -33,5 +33,19 @@ public class ReservationController {
             return ResponseEntity.badRequest().body(null);  // Retourne un 400 avec plus de détails si besoin
         }
     }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ReservationDto> mettreAJourReservation(@PathVariable Long id, @RequestBody ReservationDto reservationDto) {
+        try {
+            ReservationDto updatedReservation = reservationService.mettreAJourReservation(id, reservationDto);
+            if (updatedReservation != null) {
+                return ResponseEntity.ok(updatedReservation);
+            } else {
+                return ResponseEntity.notFound().build();  // Réservation non trouvée
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);  // Retourne un 400 avec plus de détails si besoin
+        }
+    }
+
 }
 

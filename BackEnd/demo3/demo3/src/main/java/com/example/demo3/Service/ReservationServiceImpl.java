@@ -83,4 +83,32 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationDtos;
     }
+    @Override
+    public ReservationDto mettreAJourReservation(Long id, ReservationDto reservationDto) {
+        Optional<Reservation> optionalReservation = reservationRepository.findById(id);
+        if (optionalReservation.isPresent()) {
+            Reservation reservation = optionalReservation.get();
+            reservation.setDateDebut(reservationDto.getDateDebut());
+            reservation.setDateFin(reservationDto.getDateFin());
+
+            // Associer l'utilisateur si disponible
+            if (reservationDto.getUtilisateurId() != null) {
+                Optional<Utilisateur> utilisateur = utilisateurRepository.findById(reservationDto.getUtilisateurId());
+                utilisateur.ifPresent(reservation::setUtilisateur);
+            }
+
+            // Associer le pack si disponible
+            if (reservationDto.getPackId() != null) {
+                Optional<Pack> pack = packRepository.findById(reservationDto.getPackId());
+                pack.ifPresent(reservation::setPack);
+            }
+
+            Reservation updatedReservation = reservationRepository.save(reservation);
+            return entityToDto(updatedReservation);
+        } else {
+            // Gérer le cas où la réservation n'existe pas
+            return null;  // Ou lancer une exception
+        }
+    }
+
 }

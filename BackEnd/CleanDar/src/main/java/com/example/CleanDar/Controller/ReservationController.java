@@ -25,6 +25,7 @@ public class ReservationController {
             return ResponseEntity.badRequest().body(null);  // Retourne un 400 avec plus de détails si besoin
         }
     }
+
     @GetMapping("/user/{utilisateurId}")
     public ResponseEntity<List<ReservationDto>> getReservationsByUtilisateurId(@PathVariable Long utilisateurId) {
         try {
@@ -34,6 +35,7 @@ public class ReservationController {
             return ResponseEntity.badRequest().body(null);  // Retourne un 400 avec plus de détails si besoin
         }
     }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<ReservationDto> mettreAJourReservation(@PathVariable Long id, @RequestBody ReservationDto reservationDto) {
         try {
@@ -47,4 +49,15 @@ public class ReservationController {
             return ResponseEntity.badRequest().body(null);  // Retourne un 400 avec plus de détails si besoin
         }
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> annulerReservation(@PathVariable Long id) {
+        try {
+            reservationService.annulerReservation(id); // Appelle le service pour annuler la réservation
+            return ResponseEntity.noContent().build();  // Retourne un 204 No Content si la suppression est réussie
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();  // Retourne un 404 Not Found si la réservation n'est pas trouvée
+        }
+    }
+
 }

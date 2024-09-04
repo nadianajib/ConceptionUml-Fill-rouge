@@ -11,6 +11,8 @@ import com.example.CleanDar.model.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -72,4 +74,43 @@ public class ReservationServiceImpl implements ReservationService {
 
         return dto;
     }
+    @Override
+    public List<ReservationDto> getReservationsByUtilisateurId(Long utilisateurId) {
+        List<Reservation> reservations = reservationRepository.findByUtilisateurId(utilisateurId);
+        List<ReservationDto> reservationDtos = new ArrayList<>();
+
+        for (Reservation reservation : reservations) {
+            reservationDtos.add(entityToDto(reservation));
+        }
+
+        return reservationDtos;
+    }
+    @Override
+    public ReservationDto mettreAJourReservation(Long id, ReservationDto reservationDto) {
+        Optional<Reservation> optionalReservation = reservationRepository.findById(id);
+        if (optionalReservation.isPresent()) {
+            Reservation reservation = optionalReservation.get();
+            reservation.setDateDebut(reservationDto.getDateDebut());
+            reservation.setDateFin(reservationDto.getDateFin());
+
+            // Associer l'utilisateur si disponible
+            if (reservationDto.getUtilisateurId() != null) {
+                Optional<Utilisateur> utilisateur = utilisateurRepository.findById(reservationDto.getUtilisateurId());
+                utilisateur.ifPresent(reservation::setUtilisateur);
+            }
+
+            // Associer le pack si disponible
+            if (reservationDto.getPackId() != null) {
+                Optional<Pack> pack = packRepository.findById(reservationDto.getPackId());
+                pack.ifPresent(reservation::setPack);
+            }
+
+            Reservation updatedReservation = reservationRepository.save(reservation);
+            return entityToDto(updatedReservation);
+        } else {
+            // Gérer le cas où la réservation n'existe pas
+            return null;  // Ou lancer une exception
+        }
+    }
+
 }

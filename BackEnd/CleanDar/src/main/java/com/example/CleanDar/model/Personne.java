@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Personne {
+public abstract class Personne implements UserDetails {  // Ajouter implements UserDetails
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,53 +27,45 @@ public abstract class Personne {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-
     public Personne(String nom, String email, String password, Role role) {
         this.nom = nom;
         this.email = email;
         this.password = password;
         this.role = role;
-
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
     public String getPassword() {
         return password;
-
     }
 
     @Override
     public String getUsername() {
-
         return email;
-
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
+        return true; // Changez cela si vous avez une logique spécifique pour l'expiration des comptes
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
+        return true; // Changez cela si vous avez une logique spécifique pour le verrouillage des comptes
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
+        return true; // Changez cela si vous avez une logique spécifique pour l'expiration des identifiants
     }
 
     @Override
     public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
+        return true; // Changez cela si vous avez une logique spécifique pour l'activation des comptes
     }
 }
-

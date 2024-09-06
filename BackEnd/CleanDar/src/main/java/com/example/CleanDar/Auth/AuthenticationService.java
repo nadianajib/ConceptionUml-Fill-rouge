@@ -39,7 +39,7 @@ public class AuthenticationService {
                 .build();
     }
 
-    //Register Admin ;:hna blasst user andir admin et technicien
+    //Register Admin ;
     public AuthenticationResponse registerAdmin(RegisterRequest request) {
 
         var admin = new Admin();

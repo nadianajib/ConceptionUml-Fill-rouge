@@ -29,6 +29,19 @@ public class ReservationServiceImpl implements ReservationService {
     private PackRepository packRepository;
 
     @Override
+    public List<ReservationDto> getReservations(Utilisateur utilisateur) {
+        List<Reservation> reservations = reservationRepository.findByUtilisateur(utilisateur);
+        List<ReservationDto> reservationDtos = new ArrayList<>();
+
+        for (Reservation reservation : reservations) {
+            reservationDtos.add(entityToDto(reservation));
+        }
+
+        return reservationDtos;
+    }
+
+
+    @Override
     public ReservationDto creerReservation(ReservationDto reservationDto) {
         Reservation reservation = dtoToEntity(reservationDto);
         Reservation savedReservation = reservationRepository.save(reservation);
@@ -74,17 +87,17 @@ public class ReservationServiceImpl implements ReservationService {
 
         return dto;
     }
-    @Override
-    public List<ReservationDto> getReservationsByUtilisateurId(Long utilisateurId) {
-        List<Reservation> reservations = reservationRepository.findByUtilisateurId(utilisateurId);
-        List<ReservationDto> reservationDtos = new ArrayList<>();
-
-        for (Reservation reservation : reservations) {
-            reservationDtos.add(entityToDto(reservation));
-        }
-
-        return reservationDtos;
-    }
+//    @Override
+//    public List<ReservationDto> getReservationsByUtilisateurId(Long utilisateurId) {
+//        List<Reservation> reservations = reservationRepository.findByUtilisateurId(utilisateurId);
+//        List<ReservationDto> reservationDtos = new ArrayList<>();
+//
+//        for (Reservation reservation : reservations) {
+//            reservationDtos.add(entityToDto(reservation));
+//        }
+//
+//        return reservationDtos;
+//    }
     @Override
     public ReservationDto mettreAJourReservation(Long id, ReservationDto reservationDto) {
         Optional<Reservation> optionalReservation = reservationRepository.findById(id);

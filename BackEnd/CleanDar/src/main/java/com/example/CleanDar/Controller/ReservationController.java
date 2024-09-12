@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping("/api/v1/auth/User/reservation")
+@RequestMapping("/api/v1/auth/")
 public class ReservationController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class ReservationController {
     @Autowired
     private UtilisateurRepository userRepository;
 
-    @PostMapping("/add")
+    @PostMapping("User/reservation/add")
     public ResponseEntity<ReservationDto> addReservation(@RequestBody ReservationDto reservationDto, @AuthenticationPrincipal Utilisateur user) {
         try {
             Utilisateur utilisateurVerifie = userRepository

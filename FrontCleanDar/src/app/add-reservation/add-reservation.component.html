@@ -1,1 +1,16 @@
-<p>add-reservation works!</p>
+<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+    <label for="dateDebut">Date de Début:</label>
+    <input id="dateDebut" formControlName="dateDebut" type="date" />
+  
+    <label for="dateFin">Date de Fin:</label>
+    <input id="dateFin" formControlName="dateFin" type="date" />
+  
+    <label for="utilisateurId">ID Utilisateur:</label>
+    <input id="utilisateurId" formControlName="utilisateurId" type="number" />
+  
+    <label for="packId">ID Pack:</label>
+    <input id="packId" formControlName="packId" type="number" />
+  
+    <button type="submit" [disabled]="reservationForm.invalid">Ajouter Réservation</button>
+  </form>
+  

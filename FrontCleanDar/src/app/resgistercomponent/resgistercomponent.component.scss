@@ -1,0 +1,38 @@
+.register-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      margin-bottom: 20px;
+    }
+  
+    .form-group {
+      margin-bottom: 15px;
+  
+      .error {
+        color: red;
+        font-size: 0.9em;
+      }
+    }
+  
+    .success-message {
+      color: green;
+      font-size: 1em;
+      margin-top: 15px;
+    }
+  
+    .error-message {
+      color: red;
+      font-size: 1em;
+      margin-top: 15px;
+    }
+  
+    .btn {
+      margin-top: 10px;
+    }
+  }
+  

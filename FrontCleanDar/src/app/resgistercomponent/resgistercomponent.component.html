@@ -1,0 +1,30 @@
+<div class="register-container">
+    <h2>Inscription</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input id="nom" formControlName="nom" type="text" class="form-control" />
+        <div *ngIf="registerForm.get('nom')?.invalid && registerForm.get('nom')?.touched" class="error">
+          Nom requis
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" formControlName="email" type="email" class="form-control" />
+        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error">
+          Email invalide
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input id="password" formControlName="password" type="password" class="form-control" />
+        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error">
+          Mot de passe requis
+        </div>
+      </div>
+      <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">S'inscrire</button>
+    </form>
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </div>
+  

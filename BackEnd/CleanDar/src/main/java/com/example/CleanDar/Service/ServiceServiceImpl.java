@@ -34,6 +34,20 @@ public class ServiceServiceImpl implements ServiceService {
                 .orElseThrow(() -> new RuntimeException("Service not found"));
         return convertToDto(service);
     }
+    @Override
+    public ServiceDto updateService(Long id, ServiceDto serviceDto) {
+        Service existingService = serviceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Service not found"));
+
+        existingService.setNom(serviceDto.getNom());
+        existingService.setDescription(serviceDto.getDescription());
+        existingService.setPrix(serviceDto.getPrix());
+        existingService.setImage(serviceDto.getImage());
+        existingService.setTypeService(TypeService.valueOf(serviceDto.getTypeService()));
+
+        Service updatedService = serviceRepository.save(existingService);
+        return convertToDto(updatedService);
+    }
     private ServiceDto convertToDto(Service service) {
         ServiceDto dto = new ServiceDto();
         dto.setId(service.getId());

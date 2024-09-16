@@ -11,6 +11,8 @@ public interface ServiceService {
     ServiceDto addService(ServiceDto serviceDto);
     List<ServiceDto> getAllServices();
     ServiceDto getServiceById(Long id);
+    ServiceDto updateService(Long id, ServiceDto serviceDto);
+
 
 
 }

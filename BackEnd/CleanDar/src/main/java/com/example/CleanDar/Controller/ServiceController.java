@@ -43,4 +43,13 @@ public class ServiceController {
             return ResponseEntity.notFound().build();
         }
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<ServiceDto> updateService(@PathVariable Long id, @RequestBody ServiceDto serviceDto) {
+        try {
+            ServiceDto updatedService = serviceCrudService.updateService(id, serviceDto);
+            return ResponseEntity.ok(updatedService);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

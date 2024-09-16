@@ -48,6 +48,11 @@ public class ServiceServiceImpl implements ServiceService {
         Service updatedService = serviceRepository.save(existingService);
         return convertToDto(updatedService);
     }
+    @Override
+    public void deleteService(Long id) {
+        serviceRepository.deleteById(id);
+    }
+
     private ServiceDto convertToDto(Service service) {
         ServiceDto dto = new ServiceDto();
         dto.setId(service.getId());

@@ -52,4 +52,13 @@ public class ServiceController {
             return ResponseEntity.notFound().build();
         }
     }
+    @DeleteMapping("Delete/{id}")
+    public ResponseEntity<Void> deleteService(@PathVariable Long id) {
+        try {
+            serviceCrudService.deleteService(id);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

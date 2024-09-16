@@ -12,6 +12,7 @@ public interface ServiceService {
     List<ServiceDto> getAllServices();
     ServiceDto getServiceById(Long id);
     ServiceDto updateService(Long id, ServiceDto serviceDto);
+    void deleteService(Long id);
 
 
 

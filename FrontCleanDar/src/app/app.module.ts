@@ -6,13 +6,16 @@ import { AppComponent } from './app.component';
 import { AddReservationComponent } from './add-reservation/add-reservation.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RegisterComponent } from './resgistercomponent/resgistercomponent.component';
+import { RegistrercomponentComponent } from './resgistercomponent/resgistercomponent.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddReservationComponent,
-    RegisterComponent
+    RegistrercomponentComponent,
+    LoginComponent,
+    
 
   ],
   imports: [

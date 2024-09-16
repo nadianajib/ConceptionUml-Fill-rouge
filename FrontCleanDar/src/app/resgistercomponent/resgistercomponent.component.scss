@@ -1,38 +1,49 @@
-.register-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  
-    h2 {
-      margin-bottom: 20px;
+// Styles de base pour le formulaire
+.form-group {
+  margin-bottom: 15px;
+
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  input {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: #80bdff;
+      outline: none;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }
-  
-    .form-group {
-      margin-bottom: 15px;
-  
-      .error {
-        color: red;
-        font-size: 0.9em;
-      }
+
+    &.is-invalid {
+      border-color: #dc3545;
     }
-  
-    .success-message {
-      color: green;
-      font-size: 1em;
-      margin-top: 15px;
-    }
-  
-    .error-message {
-      color: red;
-      font-size: 1em;
-      margin-top: 15px;
-    }
-  
-    .btn {
-      margin-top: 10px;
+
+    &.ng-valid.ng-touched {
+      border-color: #28a745;
     }
   }
-  
+
+  .invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 5px;
+  }
+}
+
+// Bouton
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+
+  &:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+}

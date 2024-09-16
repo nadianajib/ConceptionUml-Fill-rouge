@@ -1,13 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>FrontCleanDar</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CleanDar</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Assure-toi que tes styles sont correctement importés -->
 </head>
 <body>
-  <app-root></app-root>
+  <nav class="navbar">
+    <div class="navbar__container">
+      <a href="#" class="navbar__logo">Clean<span>Dar</span></a>
+      <div class="navbar__menu">
+        <a href="#" class="navbar__item navbar__item--active">Home</a>
+        <a href="#" class="navbar__item">Services</a>
+        <a href="#" class="navbar__item">Pack</a>
+        <a href="#" class="navbar__item">About</a>
+        <a href="login" class="navbar__item">login</a>
+      </div>
+      <div class="navbar__contact">
+        <a href="tel:+001234567" class="navbar__phone">+00 1234 567</a>
+        <a href="#" class="navbar__button">Se Connecter</a>
+      </div>
+      <button class="navbar__toggle">
+        <span class="navbar__toggle-icon"></span>
+      </button>
+    </div>
+  </nav>
+  
+  <app-root></app-root> <!-- Ce sera le point d'entrée de ton application Angular -->
+
+  <script src="runtime.js"></script>
+  <script src="polyfills.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
+

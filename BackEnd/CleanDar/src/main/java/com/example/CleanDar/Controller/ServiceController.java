@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/services")
+@RequestMapping("/api/services/Admin")
 
 public class ServiceController {
 
@@ -22,9 +22,25 @@ public class ServiceController {
         this.serviceCrudService = serviceCrudService;
     }
 
-    @PostMapping("Admin/add")
+    @PostMapping("/add")
     public ResponseEntity<ServiceDto> addService(@RequestBody ServiceDto serviceDto) {
         ServiceDto newService = serviceCrudService.addService(serviceDto);
         return new ResponseEntity<>(newService, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ServiceDto>> getAllServices() {
+        List<ServiceDto> services = serviceCrudService.getAllServices();
+        return ResponseEntity.ok(services);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ServiceDto> getServiceById(@PathVariable Long id) {
+        try {
+            ServiceDto service = serviceCrudService.getServiceById(id);
+            return ResponseEntity.ok(service);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

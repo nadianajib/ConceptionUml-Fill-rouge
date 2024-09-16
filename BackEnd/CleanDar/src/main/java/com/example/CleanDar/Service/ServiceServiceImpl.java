@@ -6,7 +6,8 @@ import com.example.CleanDar.model.Service;
 import com.example.CleanDar.model.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @org.springframework.stereotype.Service
@@ -20,6 +21,18 @@ public class ServiceServiceImpl implements ServiceService {
         Service service = convertToEntity(serviceDto);
         Service savedService = serviceRepository.save(service);
         return convertToDto(savedService);
+    }
+    @Override
+    public List<ServiceDto> getAllServices() {
+        return serviceRepository.findAll().stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+    @Override
+    public ServiceDto getServiceById(Long id) {
+        Service service = serviceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Service not found"));
+        return convertToDto(service);
     }
     private ServiceDto convertToDto(Service service) {
         ServiceDto dto = new ServiceDto();

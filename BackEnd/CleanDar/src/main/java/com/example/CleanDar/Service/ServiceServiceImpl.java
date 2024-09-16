@@ -1,38 +1,44 @@
 package com.example.CleanDar.Service;
 
 import com.example.CleanDar.Dao.ServiceRepository;
+import com.example.CleanDar.Dto.ServiceDto;
 import com.example.CleanDar.model.Service;
-import lombok.RequiredArgsConstructor;
+import com.example.CleanDar.model.TypeService;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
 
-@Service
+
+
+@org.springframework.stereotype.Service
 public class ServiceServiceImpl implements ServiceService {
 
-    private final ServiceRepository serviceRepository;
+    @Autowired
+    private ServiceRepository serviceRepository;
 
     @Override
-    public Service addService(Service service) {
-        return serviceRepository.save(service);
+    public ServiceDto addService(ServiceDto serviceDto) {
+        Service service = convertToEntity(serviceDto);
+        Service savedService = serviceRepository.save(service);
+        return convertToDto(savedService);
+    }
+    private ServiceDto convertToDto(Service service) {
+        ServiceDto dto = new ServiceDto();
+        dto.setId(service.getId());
+        dto.setNom(service.getNom());
+        dto.setDescription(service.getDescription());
+        dto.setPrix(service.getPrix());
+        dto.setImage(service.getImage());
+        dto.setTypeService(service.getTypeService().name());
+        return dto;
     }
 
-    @Override
-    public Service updateService(Service service) {
-        return serviceRepository.save(service);
-    }
-
-    @Override
-    public void deleteService(Long id) {
-        serviceRepository.deleteById(id);
-    }
-
-    @Override
-    public Service getServiceById(Long id) {
-        return serviceRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public List<Service> getAllServices() {
-        return serviceRepository.findAll();
+    private Service convertToEntity(ServiceDto dto) {
+        Service service = new Service();
+        service.setNom(dto.getNom());
+        service.setDescription(dto.getDescription());
+        service.setPrix(dto.getPrix());
+        service.setImage(dto.getImage());
+        service.setTypeService(TypeService.valueOf(dto.getTypeService()));
+        return service;
     }
 }

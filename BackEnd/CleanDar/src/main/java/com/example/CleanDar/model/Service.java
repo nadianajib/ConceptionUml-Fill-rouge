@@ -17,6 +17,7 @@ public class Service {
     private String nom;
     private String description;
     private Double prix;
+    private String image;
 
     @Enumerated(EnumType.STRING)
     private TypeService typeService;

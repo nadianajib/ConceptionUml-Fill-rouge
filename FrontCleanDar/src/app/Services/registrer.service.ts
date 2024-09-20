@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Jwt } from '../models/Jwt';
 
-const BASE_URL = "http://localhost:9095/api/v1/auth/register"; // URL correcte
+const BASE_URL = "http://localhost:9095/api/v1/auth/"; 
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,11 @@ export class RegistrerService {
 
   constructor(private http: HttpClient) { }
 
-  // Correction de l'URL en supprimant la concaténation incorrecte de 'signup'
   registrer(signRequest: any): Observable<any> {
     return this.http.post(BASE_URL, signRequest);
   }
   login(loginRequest:any): Observable<Jwt>{
-    return this.http.post<Jwt>(URL+'authenticate', loginRequest)
+    return this.http.post<Jwt>(BASE_URL+'authenticate', loginRequest)
   }
   sayHello(): Observable<any> {
     const headers = this.createAuthorizationHeader();

@@ -13,7 +13,7 @@ export class ReservationService {
 
   addReservation(reservation: Reservation): Observable<Reservation> {
     const headers = this.createAuthorizationHeader();
-    return this.http.post<Reservation>(`${this.apiUrl}add`, reservation, { headers });
+    return this.http.post<Reservation>(`${this.apiUrl}/add`, reservation, { headers });
   }
 
   private createAuthorizationHeader(): HttpHeaders {

@@ -74,20 +74,16 @@ public class ReservationServiceImpl implements ReservationService {
         dto.setId(reservation.getId());
         dto.setDateDebut(reservation.getDateDebut());
         dto.setDateFin(reservation.getDateFin());
-
-        // Ajouter l'ID de l'utilisateur si disponible
-        if (reservation.getUtilisateur() != null) {
-            dto.setUtilisateurId(reservation.getUtilisateur().getId());
-        }
-
-        // Ajouter l'ID du pack si disponible
-        if (reservation.getPack() != null) {
-            dto.setPackId(reservation.getPack().getId());
-        }
+        dto.setPackId(reservation.getId());
 
         return dto;
     }
-//    @Override
+
+
+
+
+
+    //    @Override
 //    public List<ReservationDto> getReservationsByUtilisateurId(Long utilisateurId) {
 //        List<Reservation> reservations = reservationRepository.findByUtilisateurId(utilisateurId);
 //        List<ReservationDto> reservationDtos = new ArrayList<>();

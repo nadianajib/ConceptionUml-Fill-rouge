@@ -29,19 +29,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
+        // Extraction de l'en-tête d'autorisation
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String userEmail;
+
+        // Vérification de l'en-tête d'autorisation
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            System.out.println("Authorization header is missing or does not start with Bearer");
             filterChain.doFilter(request, response);
             return;
         }
-        //Extracting
+
+        // Extraction du JWT (le token commence après "Bearer ")
         jwt = authHeader.substring(7);
         userEmail = jwtService.extractUsername(jwt);
+
+        // Vérification que l'email de l'utilisateur est présent et qu'il n'est pas déjà authentifié
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-            if(jwtService.isTokenValid(jwt, userDetails)) {
+
+            // Vérification que le token est valide
+            if (jwtService.isTokenValid(jwt, userDetails)) {
+                // Création d'un objet UsernamePasswordAuthenticationToken pour l'utilisateur authentifié
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
@@ -50,10 +60,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authToken.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
+
+                // Mise à jour du contexte de sécurité
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+                System.out.println("User authenticated: " + userEmail);
+            } else {
+                System.out.println("JWT is invalid or expired");
             }
         }
-        filterChain.doFilter(request, response);
 
+        // Passer à la suite des filtres
+        filterChain.doFilter(request, response);
     }
 }

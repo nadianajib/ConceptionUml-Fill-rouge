@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -31,8 +32,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/v1/auth/registerAdmin", "/api/v1/auth/authenticate", "/api/v1/auth/register").permitAll()
                         .requestMatchers("/api/v1/auth/Admin/**").hasAuthority("ADMIN")
-                        .requestMatchers("/api/v1/auth/User/**").hasAuthority("USER")
-                        .requestMatchers("/api/v1/auth/my-reservations/**").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/api/v1/User/**").hasAuthority("USER")
+                        .requestMatchers("/api/v1/my-reservations/**").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest()
                         .authenticated()
                 )
@@ -42,7 +43,7 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-
+                http.cors(Customizer.withDefaults());
         return http.build();
     }
 

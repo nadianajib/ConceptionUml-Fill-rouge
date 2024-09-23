@@ -8,7 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/packs")
+@CrossOrigin()
+@RequestMapping("/api/v1/packs/User")
 public class PackController {
 
     @Autowired

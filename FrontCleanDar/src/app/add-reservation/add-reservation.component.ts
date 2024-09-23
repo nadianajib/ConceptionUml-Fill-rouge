@@ -8,43 +8,33 @@ import { Reservation } from '../models/Reservation';
   templateUrl: './add-reservation.component.html'
 })
 export class AddReservationComponent implements OnInit {
-  reservationForm: FormGroup;
-  errorMessage: string = '';
-  successMessage: string = '';
+  reservationForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private reservationService: ReservationService
-  ) {
+  ) { }
+
+  ngOnInit(): void {
     this.reservationForm = this.fb.group({
       dateDebut: ['', Validators.required],
       dateFin: ['', Validators.required],
-      packId: [null, [Validators.required, Validators.min(1)]]
+      packId: ['', Validators.required]          // ID du pack
     });
-  }
-
-  ngOnInit() {
-    // Vous pouvez initialiser des données ici si nécessaire
   }
 
   onSubmit() {
     if (this.reservationForm.valid) {
-      const reservation: Reservation = this.reservationForm.value;
-      this.reservationService.addReservation(reservation).subscribe(
-        (response) => {
-          console.log('Réservation ajoutée avec succès:', response);
-          this.successMessage = 'Réservation ajoutée avec succès!';
-          this.errorMessage = '';
-          this.reservationForm.reset();
+      const reservationData: Reservation = this.reservationForm.value;
+      console.log(reservationData)
+      this.reservationService.addReservation(reservationData).subscribe({
+        next: (response) => {
+          console.log('Réservation ajoutée avec succès', response);
         },
-        (error) => {
-          console.error('Erreur complète:', error);
-          this.errorMessage = `Erreur lors de l'ajout de la réservation: ${error.message || 'Erreur inconnue'}`;
-          this.successMessage = '';
+        error: (err) => {
+          console.error('Erreur lors de l\'ajout de la réservation', err);
         }
-      );
-    } else {
-      this.errorMessage = 'Veuillez remplir tous les champs correctement.';
+      });
     }
   }
 }

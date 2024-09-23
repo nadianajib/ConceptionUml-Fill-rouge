@@ -1,38 +1,61 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Jwt } from '../models/Jwt';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { RegisterData } from '../models/RegisterData';
+import { LoginData } from '../models/LoginData';
 
-const BASE_URL = "http://localhost:9095/api/v1/auth/"; 
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrerService {
+  private readonly TOKEN_KEY = 'jwt';
+  private readonly ROLE_KEY = 'role';
 
-  constructor(private http: HttpClient) { }
+  private BASE_URL = "http://localhost:9095/api/v1/auth"; 
 
-  registrer(signRequest: any): Observable<any> {
-    return this.http.post(BASE_URL, signRequest);
-  }
-  login(loginRequest:any): Observable<Jwt>{
-    return this.http.post<Jwt>(BASE_URL+'authenticate', loginRequest)
-  }
-  sayHello(): Observable<any> {
-    const headers = this.createAuthorizationHeader();
-    return this.http.get(URL + 'demo', { headers });
-  }
-  
-  private createAuthorizationHeader(): HttpHeaders | undefined {
-    const jwtToken = localStorage.getItem('jwt');
-    if (jwtToken) {
-      console.log("JWT token found in local storage", jwtToken);
-      return new HttpHeaders().set("Authorization", "Bearer " + jwtToken);
-    } else {
-      console.log("JWT token not found in local storage");
-      return undefined;
-    }
-  }
-  
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private jwtHelper: JwtHelperService
+  ) { }
 
+  register(registerdata: RegisterData): Observable<Jwt> {
+    return this.http.post<Jwt>(`${this.BASE_URL}/register`, registerdata);
+  }
+
+  login(logindata: LoginData): Observable<Jwt> {
+    return this.http.post<Jwt>(`${this.BASE_URL}/authenticate`, logindata).pipe(
+      tap((response: Jwt) => {
+        if (response && response.token) {
+          localStorage.setItem(this.TOKEN_KEY, response.token);
+          localStorage.setItem(this.ROLE_KEY, response.role);
+        }
+      })
+    );
+  }
+
+
+  logout(): void {
+    localStorage.removeItem(this.ROLE_KEY);
+    localStorage.removeItem(this.TOKEN_KEY);
+    this.router.navigate(['/login']);
+  }
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem(this.TOKEN_KEY);
+    return token != null && !this.jwtHelper.isTokenExpired(token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem(this.TOKEN_KEY);
+  }
+
+  getRole(): string | null {
+    return localStorage.getItem(this.ROLE_KEY);
+  }
 }

@@ -39,9 +39,9 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('role', userRole);
 
         // Rediriger l'utilisateur selon son rôle
-        if (userRole === 'Admin') {
+        if (userRole === 'ADMIN') {
           this.router.navigateByUrl('/admin-dashboard'); // Tableau de bord admin
-        } else if (userRole === 'User') {
+        } else if (userRole === 'USER') {
           this.router.navigateByUrl('/add-reservation'); // Vue utilisateur
         }
       }

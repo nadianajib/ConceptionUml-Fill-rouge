@@ -5,9 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddReservationComponent } from './add-reservation/add-reservation.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RegistrercomponentComponent } from './resgistercomponent/resgistercomponent.component';
 import { LoginComponent } from './login/login.component';
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { RegistrerService } from './Services/registrer.service';
+import { AuthInterceptorInterceptor } from './interceptor/auth-interceptor.interceptor';
+import { ListReservationComponent } from './list-reservation/list-reservation.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +19,7 @@ import { LoginComponent } from './login/login.component';
     AddReservationComponent,
     RegistrercomponentComponent,
     LoginComponent,
+    ListReservationComponent,
     
 
   ],
@@ -24,7 +29,13 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+    [RegistrerService,
+      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true }
+    ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

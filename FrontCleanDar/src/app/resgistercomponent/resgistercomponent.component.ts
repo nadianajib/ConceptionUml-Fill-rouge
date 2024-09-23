@@ -40,7 +40,7 @@ export class RegistrercomponentComponent implements OnInit {
     }
 
     // Appel du service pour enregistrer l'utilisateur
-    this.service.registrer(this.registerForm.value).subscribe({
+    this.service.register(this.registerForm.value).subscribe({
       next: () => {
         console.log('Inscription réussie');
         console.log(this.registerForm.value);

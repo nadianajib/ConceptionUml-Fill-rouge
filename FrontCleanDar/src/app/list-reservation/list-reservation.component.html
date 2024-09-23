@@ -1,0 +1,13 @@
+<p>list-reservation works!</p>
+<!-- my-reservations.component.html -->
+<div>
+    <h2>Mes Réservations</h2>
+    <ul>
+      <li *ngFor="let reservation of reservations">
+        <p>Date de début: {{ reservation.dateDebut }}</p>
+        <p>Date de fin: {{ reservation.dateFin }}</p>
+        <!-- Ajoutez d'autres informations selon votre DTO -->
+      </li>
+    </ul>
+  </div>
+  

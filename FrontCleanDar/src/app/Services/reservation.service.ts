@@ -18,7 +18,9 @@ export class ReservationService {
 
 
   getMyReservations(): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(this.apiUrl);
+    return this.http.get<Reservation[]>(`${this.apiUrl}my-reservations`);
   }
+  
+  
   
 }

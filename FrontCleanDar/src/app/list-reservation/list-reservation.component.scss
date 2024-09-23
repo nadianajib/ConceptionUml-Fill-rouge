@@ -1,0 +1,24 @@
+// list-reservation.component.scss
+.reservations-container {
+    margin: 20px;
+  
+    .reservation-list {
+      list-style-type: none;
+      padding: 0;
+  
+      .reservation-item {
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+  
+        .reservation-details {
+          h3 {
+            margin: 0 0 10px;
+          }
+        }
+      }
+    }
+  }
+  

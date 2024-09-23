@@ -1,8 +1,6 @@
-// list-reservation.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Reservation } from '../models/Reservation';
 import { ReservationService } from '../Services/reservation.service';
-
 
 @Component({
   selector: 'app-list-reservation',
@@ -21,6 +19,7 @@ export class ListReservationComponent implements OnInit {
   loadMyReservations(): void {
     this.reservationService.getMyReservations().subscribe({
       next: (data) => {
+        console.log('Données récupérées:', data);
         this.reservations = data;
       },
       error: (error) => {
@@ -28,4 +27,6 @@ export class ListReservationComponent implements OnInit {
       }
     });
   }
+  
+  
 }

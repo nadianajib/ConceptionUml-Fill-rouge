@@ -1,13 +1,17 @@
-<p>list-reservation works!</p>
-<!-- my-reservations.component.html -->
-<div>
-    <h2>Mes Réservations</h2>
-    <ul>
-      <li *ngFor="let reservation of reservations">
-        <p>Date de début: {{ reservation.dateDebut }}</p>
-        <p>Date de fin: {{ reservation.dateFin }}</p>
-        <!-- Ajoutez d'autres informations selon votre DTO -->
+<div *ngIf="reservations.length > 0; else noReservations">
+    <ul class="reservation-list">
+      <li *ngFor="let reservation of reservations" class="reservation-item">
+        <div class="reservation-details">
+          <h3>Réservation n°{{ reservation.id }}</h3>
+          <p><strong>Date de début :</strong> {{ reservation.dateDebut }}</p>
+          <p><strong>Date de fin :</strong> {{ reservation.dateFin }}</p>
+          <p><strong>ID du Pack :</strong> {{ reservation.id }}</p>
+        </div>
       </li>
     </ul>
   </div>
+  
+  <ng-template #noReservations>
+    <p>Aucune réservation trouvée.</p>
+  </ng-template>
   

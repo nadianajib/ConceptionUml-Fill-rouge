@@ -19,7 +19,7 @@ export class ListReservationComponent implements OnInit {
   loadMyReservations(): void {
     this.reservationService.getMyReservations().subscribe({
       next: (data) => {
-        console.log('Données récupérées:', data);
+        console.log('Données récupérées:', data); // شوف واش packId كاين
         this.reservations = data;
       },
       error: (error) => {
@@ -27,6 +27,8 @@ export class ListReservationComponent implements OnInit {
       }
     });
   }
+  
+  
   
   
 }

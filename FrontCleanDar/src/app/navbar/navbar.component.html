@@ -1,0 +1,42 @@
+ <!-- Navbar -->
+ <nav class="navbar">
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <span>CleanDar</span>
+    </div>
+    <div class="menu">
+      <a href="#">Accueil</a>
+      <a href="#">Qui sommes-nous</a>
+      <a href="#">Services</a>
+      <!-- <a href="add-reservation">Pack</a> -->
+      <a [routerLink]="['/add-reservation']">Pack</a>
+      <a href="#">Blog</a>
+      <a href="#">FAQ</a>
+      <a href="#">Parrainage</a>
+      <a href="#">Espace clients</a>
+      <a href="login" class="btn-connect">Se connecter</a>
+    </div>
+  </nav>
+
+  <!-- Section Principale -->
+  <section class="main-section">
+    <div class="text-content">
+      <h1>Services à domicile <span class="highlight">pratique et de qualité</span></h1>
+      <div class="icon-section">
+        <i class="fas fa-broom"></i>
+        <span>Réservez un service de nettoyage, <strong>même en 1 heure !</strong></span>
+      </div>
+      <div class="icon-section">
+        <i class="fas fa-shield-alt"></i>
+        <span>Professionnels agréés et assurés contre les accidents corporels</span>
+      </div>
+      <div class="icon-section">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Opérant dans plus de <strong>5 villes</strong> à travers le Maroc</span>
+      </div>
+      <button class="btn-primary">VOIR LES PRESTATIONS</button>
+    </div>
+    <div class="image-content">
+      <img src="assets/8040816.jpg" alt="Service de nettoyage">
+    </div>
+  </section>

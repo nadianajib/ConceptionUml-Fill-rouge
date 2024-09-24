@@ -1,17 +1,11 @@
 <div *ngIf="reservations.length > 0; else noReservations">
-    <ul class="reservation-list">
-      <li *ngFor="let reservation of reservations" class="reservation-item">
-        <div class="reservation-details">
-          <h3>Réservation n°{{ reservation.id }}</h3>
-          <p><strong>Date de début :</strong> {{ reservation.dateDebut }}</p>
-          <p><strong>Date de fin :</strong> {{ reservation.dateFin }}</p>
-          <p><strong>ID du Pack :</strong> {{ reservation.id }}</p>
-        </div>
-      </li>
-    </ul>
+  <div *ngFor="let reservation of reservations" class="reservation-item">
+    <p><strong>ID du Pack :</strong> {{ reservation.packId ? reservation.packId : 'Non attribué' }}</p>
+    <p><strong>Date de début :</strong> {{ reservation.dateDebut | date: 'yyyy-MM-dd' }}</p>
+    <p><strong>Date de fin :</strong> {{ reservation.dateFin | date: 'yyyy-MM-dd' }}</p>
   </div>
-  
-  <ng-template #noReservations>
-    <p>Aucune réservation trouvée.</p>
-  </ng-template>
-  
+</div>
+
+<ng-template #noReservations>
+  <p>Aucune réservation disponible pour le moment.</p>
+</ng-template>

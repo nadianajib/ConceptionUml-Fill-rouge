@@ -15,6 +15,7 @@ import { ListReservationComponent } from './list-reservation/list-reservation.co
 import { TestComponent } from './test/test.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
+import { UpdateReservationComponent } from './update-reservation/update-reservation.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { DashbordComponent } from './dashbord/dashbord.component';
     TestComponent,
     NavbarComponent,
     DashbordComponent,
+    UpdateReservationComponent,
     
 
   ],

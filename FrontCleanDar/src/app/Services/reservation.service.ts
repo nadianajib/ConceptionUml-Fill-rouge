@@ -21,6 +21,9 @@ export class ReservationService {
     return this.http.get<Reservation[]>(`${this.apiUrl}my-reservations`);
   }
   
-  
+   // Mettre à jour une réservation
+   updateReservation(reservation: Reservation): Observable<Reservation> {
+    return this.http.put<Reservation>(`${this.apiUrl}User/reservation/update/${reservation.id}`, reservation);
+  }
   
 }

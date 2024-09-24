@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         if (userRole === 'ADMIN') {
           this.router.navigateByUrl('/admin-dashboard'); // Tableau de bord admin
         } else if (userRole === 'USER') {
-          this.router.navigateByUrl('/add-reservation'); // Vue utilisateur
+          this.router.navigateByUrl('/dashboard'); // Vue utilisateur
         }
       }
     );

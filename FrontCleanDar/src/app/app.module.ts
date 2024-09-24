@@ -12,6 +12,9 @@ import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { RegistrerService } from './Services/registrer.service';
 import { AuthInterceptorInterceptor } from './interceptor/auth-interceptor.interceptor';
 import { ListReservationComponent } from './list-reservation/list-reservation.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { DashbordComponent } from './dashbord/dashbord.component';
+import { UpdateReservationComponent } from './update-reservation/update-reservation.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { ListReservationComponent } from './list-reservation/list-reservation.co
     RegistrercomponentComponent,
     LoginComponent,
     ListReservationComponent,
+    NavbarComponent,
+    DashbordComponent,
+    UpdateReservationComponent,
     
 
   ],

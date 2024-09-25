@@ -14,7 +14,6 @@ import { AuthInterceptorInterceptor } from './interceptor/auth-interceptor.inter
 import { ListReservationComponent } from './list-reservation/list-reservation.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
-import { UpdateReservationComponent } from './update-reservation/update-reservation.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import { UpdateReservationComponent } from './update-reservation/update-reservat
     ListReservationComponent,
     NavbarComponent,
     DashbordComponent,
-    UpdateReservationComponent,
     
 
   ],

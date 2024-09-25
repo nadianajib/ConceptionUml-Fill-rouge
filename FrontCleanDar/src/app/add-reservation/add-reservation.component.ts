@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReservationService } from '../Services/reservation.service';
 import { Reservation } from '../models/Reservation';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-reservation',
@@ -14,21 +14,21 @@ export class AddReservationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private reservationService: ReservationService,
-    private router : Router
-  ) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.reservationForm = this.fb.group({
       dateDebut: ['', Validators.required],
       dateFin: ['', Validators.required],
-      packId: ['', Validators.required]          // ID du pack
+      packId: ['', Validators.required] // Utilisez "packId"
     });
   }
 
   onSubmit() {
     if (this.reservationForm.valid) {
       const reservationData: Reservation = this.reservationForm.value;
-      console.log(reservationData)
+      console.log(reservationData);
       this.reservationService.addReservation(reservationData).subscribe({
         next: (response) => {
           console.log('Réservation ajoutée avec succès', response);

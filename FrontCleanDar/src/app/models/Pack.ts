@@ -1,5 +1,5 @@
 export class Pack {
-    id!: number;
+    packId!: number;
     prixTotal!: number;
     reduction!: number;
     titre!: string;

@@ -1,63 +1,101 @@
+$primary-color: #007bff; // Couleur principale
+$secondary-color: #28a745; // Couleur secondaire
+$error-color: #dc3545; // Couleur d'erreur
+
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #f0f2f5;
-  }
-  
-  .login-form {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-  
-    h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('/assets/pexels-jonathanborba-28576626.jpg'); // Image de fond
+  background-size: cover; // Couvrir tout l'élément
+  background-position: center; // Centrer l'image
+  background: linear-gradient(to right, rgba(162, 223, 247, 0.7), rgba(246, 248, 250, 0.7)); // Dégradé de couleurs avec transparence
+
+  .logo {
+    margin-bottom: 30px;
+
+    img {
+      width: 150px; // Ajustez la taille du logo
+      height: auto;
     }
-  
+  }
+
+  .login-form {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+
+    h2 {
+      margin-bottom: 20px;
+      font-family: 'Arial', sans-serif;
+      color: $primary-color;
+      font-weight: bold;
+    }
+
     .form-group {
-      margin-bottom: 1.5rem;
-  
+      margin-bottom: 20px;
+
       label {
-        margin-bottom: 0.5rem;
         display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
         color: #555;
       }
-  
-      .form-control {
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 0.5rem;
+
+      input {
         width: 100%;
-      }
-  
-      .form-control:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+
+        &:focus {
+          border-color: $primary-color;
+          outline: none;
+          box-shadow: 0 0 5px rgba($primary-color, 0.5);
+        }
       }
     }
-  
-    .btn {
-      width: 100%;
-      padding: 0.75rem;
-      background-color: #007bff;
-      color: #fff;
+
+    .btn-submit {
+      background-color: $primary-color; // Couleur mise à jour
+      color: white;
       border: none;
+      padding: 10px 20px;
       border-radius: 4px;
+      font-size: 16px;
       cursor: pointer;
-      font-size: 1rem;
-  
+      transition: background-color 0.3s;
+
       &:hover {
-        background-color: #0056b3;
+        background-color: darken($primary-color, 10%); // S'assombrir légèrement au survol
       }
-  
+
       &:disabled {
-        background-color: #cccccc;
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 14px;
+
+      a {
+        color: $primary-color;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
+}

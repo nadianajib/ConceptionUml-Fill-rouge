@@ -2,22 +2,23 @@ $primary-color: #007bff; // Couleur principale
 $secondary-color: #28a745; // Couleur secondaire
 $error-color: #dc3545; // Couleur d'erreur
 
+// Styles de base pour les petits écrans (mobile-first)
 .login-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url('/assets/pexels-jonathanborba-28576626.jpg'); // Image de fond
+  padding: 10px; // Padding pour les petits écrans
+  background-image: url('/assets/pexels-jonathanborba-28576635.jpg');
   background-size: cover; // Couvrir tout l'élément
-  background-position: center; // Centrer l'image
-  background: linear-gradient(to right, rgba(162, 223, 247, 0.7), rgba(246, 248, 250, 0.7)); // Dégradé de couleurs avec transparence
+  background-position: center;
 
   .logo {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 
     img {
-      width: 150px; // Ajustez la taille du logo
+      width: 100px; // Taille du logo réduite pour petits écrans
       height: auto;
     }
   }
@@ -26,24 +27,25 @@ $error-color: #dc3545; // Couleur d'erreur
     background: white;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    padding: 40px;
+    padding: 20px;
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     text-align: center;
 
     h2 {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
       font-family: 'Arial', sans-serif;
       color: $primary-color;
-      font-weight: bold;
     }
 
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
 
       label {
         display: block;
         margin-bottom: 5px;
+        font-size: 0.9rem;
         font-weight: bold;
         color: #555;
       }
@@ -53,7 +55,7 @@ $error-color: #dc3545; // Couleur d'erreur
         padding: 10px;
         border: 1px solid #ddd;
         border-radius: 4px;
-        font-size: 16px;
+        font-size: 14px;
         transition: border-color 0.3s;
 
         &:focus {
@@ -65,17 +67,18 @@ $error-color: #dc3545; // Couleur d'erreur
     }
 
     .btn-submit {
-      background-color: $primary-color; // Couleur mise à jour
+      background-color: $primary-color;
       color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 12px;
+      width: 100%; // Bouton pleine largeur pour les petits écrans
       border-radius: 4px;
-      font-size: 16px;
+      font-size: 1rem;
       cursor: pointer;
       transition: background-color 0.3s;
 
       &:hover {
-        background-color: darken($primary-color, 10%); // S'assombrir légèrement au survol
+        background-color: darken($primary-color, 10%);
       }
 
       &:disabled {
@@ -85,8 +88,8 @@ $error-color: #dc3545; // Couleur d'erreur
     }
 
     .footer {
-      margin-top: 20px;
-      font-size: 14px;
+      margin-top: 15px;
+      font-size: 0.9rem;
 
       a {
         color: $primary-color;
@@ -96,6 +99,38 @@ $error-color: #dc3545; // Couleur d'erreur
           text-decoration: underline;
         }
       }
+    }
+  }
+}
+
+// Responsivité pour tablettes et petits ordinateurs portables
+@media (min-width: 576px) {
+  .login-container {
+    .logo img {
+      width: 120px; // Taille du logo augmentée pour tablettes
+    }
+
+    .login-form {
+      padding: 30px;
+      max-width: 400px; // Largeur du formulaire augmentée pour les tablettes
+    }
+  }
+}
+
+// Responsivité pour les ordinateurs et écrans plus larges
+@media (min-width: 768px) {
+  .login-container {
+    .logo img {
+      width: 150px; // Taille du logo pour les plus grands écrans
+    }
+
+    .login-form {
+      padding: 40px;
+      max-width: 450px; // Largeur maximale du formulaire sur grands écrans
+    }
+
+    h2 {
+      font-size: 2rem; // Taille du texte augmentée sur les grands écrans
     }
   }
 }

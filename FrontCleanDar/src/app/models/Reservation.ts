@@ -1,6 +1,7 @@
 export interface Reservation {
-  id: number;         // ID de la réservation
-  dateDebut: Date;   // Date de début
-  dateFin: Date;     // Date de fin
-  packId?: number;   // ID du pack (optionnel)
+  id: number;
+  dateDebut: string;
+  dateFin: string;
+  packId: number; // ID du pack
+  utilisateurId: number; // ID de l'utilisateur
 }

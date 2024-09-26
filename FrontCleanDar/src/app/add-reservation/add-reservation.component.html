@@ -1,22 +1,62 @@
-<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="dateDebut">Date de Début</label>
-    <input id="dateDebut" formControlName="dateDebut" type="date" />
+<nav class="navbar">
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>CleanDar</span>
+  </div>
+  <div class="menu">
+    <a href="#">Accueil</a>
+    <a href="#">Qui sommes-nous</a>
+    <a href="#">Services</a>
+    <!-- <a href="add-reservation">Pack</a> -->
+    <a [routerLink]="['/add-reservation']">Pack</a>
+    <a href="#">Blog</a>
+    <a href="#">FAQ</a>
+    <a href="#">Parrainage</a>
+    <a href="register">register</a>
+    <a href="login" class="btn-connect">Se connecter</a>
   </div>
 
-  <div>
-    <label for="dateFin">Date de Fin</label>
-    <input id="dateFin" formControlName="dateFin" type="date" />
-  </div>
+</nav>
+<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()" class="reservation-form">
+  <div class="form-container">
+    <h2 class="form-title">Ajouter une Réservation</h2>
+    
+    <div class="input-group">
+      <label for="dateDebut">Date de Début*</label>
+      <div class="input-wrapper">
+        <i class="fas fa-calendar-alt"></i>
+        <input id="dateDebut" formControlName="dateDebut" type="date" placeholder="jj/mm/aaaa">
+      </div>
+      <div class="error-message" *ngIf="reservationForm.get('dateDebut')?.hasError('required')">
+        La date de début est requise.
+      </div>
+    </div>
+    
+    <div class="input-group">
+      <label for="dateFin">Date de Fin*</label>
+      <div class="input-wrapper">
+        <i class="fas fa-calendar-alt"></i>
+        <input id="dateFin" formControlName="dateFin" type="date" placeholder="jj/mm/aaaa">
+      </div>
+      <div class="error-message" *ngIf="reservationForm.get('dateFin')?.hasError('required')">
+        La date de fin est requise.
+      </div>
+    </div>
 
-  <div>
-    <label for="packId">ID du Pack</label>
-    <input id="packId" formControlName="packId" type="text" />
-  </div>
+    <div class="input-group">
+      <label for="packId">ID du Pack*</label>
+      <div class="input-wrapper">
+        <i class="fas fa-box"></i>
+        <input id="packId" formControlName="packId" type="number" placeholder="Entrez l'ID du pack">
+      </div>
+      <div class="error-message" *ngIf="reservationForm.get('packId')?.hasError('required')">
+        L'ID du pack est requis.
+      </div>
+    </div>
 
-  <div *ngIf="reservationForm.errors?.['dateMismatch'] && reservationForm.touched" class="alert alert-danger">
-    Les dates doivent être valides. La date de début doit être antérieure à la date de fin.
+    <div class="button-group">
+      <button type="submit" class="submit-btn" [disabled]="reservationForm.invalid">Ajouter Réservation</button>
+      <button type="button" class="cancel-btn" (click)="router.navigate(['/dashboard'])">Annuler</button>
+    </div>
   </div>
-
-  <button type="submit" [disabled]="reservationForm.invalid">Ajouter Réservation</button>
 </form>

@@ -1,5 +1,6 @@
 <div *ngIf="reservations.length > 0; else noReservations">
   <div *ngFor="let reservation of reservations" class="reservation-item">
+    <p><strong>ID de l'utilisateur :</strong> {{ reservation.utilisateurId ? reservation.utilisateurId : 'Non attribué' }}</p>
     <p><strong>ID du Pack :</strong> {{ reservation.packId ? reservation.packId : 'Non attribué' }}</p>
     <p><strong>Date de début :</strong> {{ reservation.dateDebut | date: 'yyyy-MM-dd' }}</p>
     <p><strong>Date de fin :</strong> {{ reservation.dateFin | date: 'yyyy-MM-dd' }}</p>

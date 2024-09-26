@@ -9,15 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-reservation.component.scss']
 })
 export class AddReservationComponent implements OnInit {
-  reservationForm!: FormGroup;
+  reservationForm!: FormGroup; // Déclaration du formulaire
 
   constructor(
     private fb: FormBuilder,
     private reservationService: ReservationService,
-    private router: Router
+    protected router: Router
   ) {}
 
   ngOnInit(): void {
+    // Initialisation du formulaire avec des contrôles et des validateurs
     this.reservationForm = this.fb.group({
       dateDebut: ['', Validators.required],
       dateFin: ['', Validators.required],
@@ -28,20 +29,22 @@ export class AddReservationComponent implements OnInit {
     this.reservationForm.setValidators(this.dateMismatchValidator);
   }
 
+  // Validator personnalisé pour vérifier si la date de début est avant la date de fin
   dateMismatchValidator(control: AbstractControl) {
     const formGroup = control as FormGroup;
     const dateDebut = formGroup.get('dateDebut')?.value;
     const dateFin = formGroup.get('dateFin')?.value;
 
     if (dateDebut && dateFin && new Date(dateDebut) >= new Date(dateFin)) {
-      return { dateMismatch: true };
+      return { dateMismatch: true }; // Erreur de validation
     }
-    return null;
+    return null; // Validation réussie
   }
 
+  // Fonction appelée lors de la soumission du formulaire
   onSubmit(): void {
     if (this.reservationForm.valid) {
-      const reservationData = this.reservationForm.value;
+      const reservationData = this.reservationForm.value; // Récupération des données du formulaire
       this.reservationService.addReservation(reservationData).subscribe(
         response => {
           console.log('Réservation ajoutée avec succès', response);

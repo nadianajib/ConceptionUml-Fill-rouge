@@ -1,0 +1,194 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+  
+    .logo {
+      display: flex;
+      align-items: center;
+      
+      img {
+        height: 40px;
+        margin-right: 10px;
+      }
+  
+      span {
+        font-size: 24px;
+        font-weight: bold;
+        color: #57A0E2; // Logo color
+      }
+    }
+  
+    .menu {
+      display: flex;
+      align-items: center;
+  
+      a {
+        color: #333;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 16px;
+        transition: color 0.3s ease;
+  
+        &:hover {
+          color: #57A0E2;
+        }
+      }
+  
+      .btn-connect {
+        background-color: transparent;
+        border: 1px solid #57A0E2;
+        padding: 5px 10px;
+        border-radius: 4px;
+        color: #57A0E2;
+        transition: background-color 0.3s ease;
+  
+        &:hover {
+          background-color: #57A0E2;
+          color: white;
+        }
+      }
+    }
+    
+  }
+  .reservation-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;  // Ajout de padding pour les petits écrans
+  
+    .form-container {
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in-out;
+  
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+  
+      .form-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #3f51b5;
+        margin-bottom: 20px;
+      }
+  
+      .input-group {
+        margin-bottom: 20px;
+        text-align: left;
+  
+        label {
+          display: block;
+          font-size: 0.9rem;
+          color: #333;
+          margin-bottom: 5px;
+        }
+  
+        .input-wrapper {
+          position: relative;
+  
+          i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #3f51b5;
+          }
+  
+          input {
+            width: 100%;
+            padding: 10px 15px 10px 35px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+  
+            &:focus {
+              border-color: #3f51b5;
+              outline: none;
+            }
+          }
+        }
+  
+        .error-message {
+          color: #f44336;
+          font-size: 0.8rem;
+          margin-top: 5px;
+        }
+      }
+  
+      .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        flex-wrap: wrap;  // Permet aux boutons de s'ajuster sur plusieurs lignes si nécessaire
+  
+        .submit-btn, .cancel-btn {
+          width: 48%;
+          padding: 10px 0;
+          font-size: 1rem;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+  
+          @media (max-width: 480px) {
+            width: 100%;  // Les boutons prennent toute la largeur sur les petits écrans
+            margin-bottom: 10px;  // Espace entre les boutons
+          }
+        }
+  
+        .submit-btn {
+          background-color: #3f51b5;
+          color: #fff;
+          
+          &:hover {
+            background-color: #303f9f;
+          }
+  
+          &:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+          }
+        }
+  
+        .cancel-btn {
+          background-color: #f44336;
+          color: #fff;
+  
+          &:hover {
+            background-color: #d32f2f;
+          }
+        }
+      }
+    }
+  }
+  

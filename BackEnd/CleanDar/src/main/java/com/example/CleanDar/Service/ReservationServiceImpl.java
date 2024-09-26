@@ -1,6 +1,5 @@
 package com.example.CleanDar.Service;
 
-
 import com.example.CleanDar.Dao.PackRepository;
 import com.example.CleanDar.Dao.ReservationRepository;
 import com.example.CleanDar.Dao.UtilisateurRepository;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -39,7 +37,6 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationDtos;
     }
-
 
     @Override
     public ReservationDto creerReservation(ReservationDto reservationDto) {
@@ -74,26 +71,18 @@ public class ReservationServiceImpl implements ReservationService {
         dto.setId(reservation.getId());
         dto.setDateDebut(reservation.getDateDebut());
         dto.setDateFin(reservation.getDateFin());
-        dto.setPackId(reservation.getId());
+
+        if (reservation.getPack() != null) {
+            dto.setPackId(reservation.getPack().getId());
+        }
+
+        if (reservation.getUtilisateur() != null) {
+            dto.setUtilisateurId(reservation.getUtilisateur().getId());
+        }
 
         return dto;
     }
 
-
-
-
-
-    //    @Override
-//    public List<ReservationDto> getReservationsByUtilisateurId(Long utilisateurId) {
-//        List<Reservation> reservations = reservationRepository.findByUtilisateurId(utilisateurId);
-//        List<ReservationDto> reservationDtos = new ArrayList<>();
-//
-//        for (Reservation reservation : reservations) {
-//            reservationDtos.add(entityToDto(reservation));
-//        }
-//
-//        return reservationDtos;
-//    }
     @Override
     public ReservationDto mettreAJourReservation(Long id, ReservationDto reservationDto) {
         Optional<Reservation> optionalReservation = reservationRepository.findById(id);
@@ -121,9 +110,9 @@ public class ReservationServiceImpl implements ReservationService {
             return null;  // Ou lancer une exception
         }
     }
+
     @Override
     public void annulerReservation(Long id) {
         reservationRepository.deleteById(id);
     }
-
 }

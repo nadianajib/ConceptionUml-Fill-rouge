@@ -152,27 +152,20 @@ body {
     padding: 10px;
 
     .menu {
-      display: none; /* Cacher le menu par défaut */
-      flex-direction: column;
+      display: flex; /* Afficher le menu en ligne sur mobile */
+      flex-direction: column; /* Alignement vertical des liens */
       width: 100%;
-      position: absolute;
-      top: 60px;
-      left: 0;
       background-color: white;
       border-top: 1px solid #ddd;
 
       a {
-        margin: 10px 0;
+        margin: 10px 0; /* Espacement entre les liens */
         text-align: center; /* Centrer les liens */
       }
     }
 
-    &.responsive .menu {
-      display: flex; /* Afficher le menu lorsque le hamburger est cliqué */
-    }
-
     .hamburger {
-      display: flex; /* Afficher le hamburger sur mobile */
+      display: none; /* Cacher le hamburger sur mobile */
     }
   }
 

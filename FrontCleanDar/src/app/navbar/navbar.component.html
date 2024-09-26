@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="navbar.component.scss"> <!-- Assure-toi que le fichier CSS est bien compilé -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Pour les icônes -->
+    <link rel="stylesheet" href="navbar.component.scss">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>CleanDar</title>
 </head>
 <body>
@@ -32,7 +32,6 @@
     </div>
 </nav>
 
-<!-- Section Principale -->
 <section class="main-section">
     <div class="text-content">
         <h1>Services à domicile <span class="highlight">pratique et de qualité</span></h1>
@@ -56,13 +55,12 @@
 </section>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const hamburger = document.getElementById('hamburger');
-        const navbar = document.getElementById('navbar');
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('navbar-menu');
 
-        hamburger.addEventListener('click', () => {
-            navbar.classList.toggle('responsive');
-        });
+    hamburger.addEventListener('click', () => {
+        menu.classList.toggle('responsive');
+        hamburger.classList.toggle('active');
     });
 </script>
 

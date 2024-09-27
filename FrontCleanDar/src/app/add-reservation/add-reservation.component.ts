@@ -48,7 +48,7 @@ export class AddReservationComponent implements OnInit {
       this.reservationService.addReservation(reservationData).subscribe(
         response => {
           console.log('Réservation ajoutée avec succès', response);
-          this.router.navigate(['/dashboard']); // Redirige vers la liste des réservations
+          this.router.navigate(['/list-reservation']); // Redirige vers la liste des réservations
         },
         error => {
           console.error('Erreur lors de l\'ajout de la réservation', error);

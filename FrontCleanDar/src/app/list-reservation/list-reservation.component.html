@@ -1,12 +1,33 @@
-<div *ngIf="reservations.length > 0; else noReservations">
-  <div *ngFor="let reservation of reservations" class="reservation-item">
-    <p><strong>ID de l'utilisateur :</strong> {{ reservation.utilisateurId ? reservation.utilisateurId : 'Non attribué' }}</p>
-    <p><strong>ID du Pack :</strong> {{ reservation.packId ? reservation.packId : 'Non attribué' }}</p>
-    <p><strong>Date de début :</strong> {{ reservation.dateDebut | date: 'yyyy-MM-dd' }}</p>
-    <p><strong>Date de fin :</strong> {{ reservation.dateFin | date: 'yyyy-MM-dd' }}</p>
+<!-- navbar.component.html -->
+<nav class="navbar">
+  <div class="logo">
+    <img src="assets/logo.png" alt="Logo">
+    <span>CleanDar</span>
+  </div>
+  <div class="menu">
+    <a href="#">Accueil</a>
+    <a href="#">Qui sommes-nous</a>
+    <a href="#">Services</a>
+    <a [routerLink]="['/add-reservation']">Pack</a>
+    <a [routerLink]="['/register']">Register</a>
+    <a [routerLink]="['/login']" class="btn-connect">Se connecter</a>
+  </div>
+</nav>
+
+<!-- reservations.component.html -->
+<div class="container">
+  <div class="row">
+    <div class="col" *ngFor="let reservation of reservations">
+      <div class="card">
+        <img src="assets/reservation-image.jpg" class="card-img-top" alt="Reservation Image">
+        <div class="card-body">
+          <h5 class="card-title">{{ reservation.dateDebut }} - {{ reservation.dateFin }}</h5>
+          <p class="card-text">Pack ID: {{ reservation.packId }}</p>
+          <p class="card-text">Utilisateur ID: {{ reservation.utilisateurId }}</p>
+          <button (click)="editReservation(reservation.id)" class="btn btn-edit">Modifier</button>
+          <button (click)="deleteReservation(reservation.id)" class="btn btn-delete">Supprimer</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-<ng-template #noReservations>
-  <p>Aucune réservation disponible pour le moment.</p>
-</ng-template>

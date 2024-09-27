@@ -8,20 +8,14 @@ import { DashbordComponent } from './dashbord/dashbord.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 const routes: Routes = [
-
   { path: 'dashboard', component: DashbordComponent, children: [
     { path: '', component: NavbarComponent },
-  
-
   ]},
-  // {path: 'dashboard',component: DashbordComponent },
-  { path : '', redirectTo: 'dashboard', pathMatch : 'full'},
-  // { path: 'add-reservation', component: AddReservationComponent },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'add-reservation', component: AddReservationComponent },
   { path: 'register', component: RegistrercomponentComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'list-reservation', component: ListReservationComponent},
-
+  { path: 'list-reservation', component: ListReservationComponent },
 ];
 
 @NgModule({

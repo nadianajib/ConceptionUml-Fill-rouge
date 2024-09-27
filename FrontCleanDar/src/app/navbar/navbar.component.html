@@ -1,37 +1,44 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="navbar.component.scss">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <title>CleanDar</title>
-</head>
-<body>
-
-<nav class="navbar" id="navbar">
-    <div class="logo">
-        <img src="logo.png" alt="Logo">
-        <span>CleanDar</span>
-    </div>
-    <div class="menu" id="navbar-menu">
-        <a href="#">Accueil</a>
-        <a href="#">Qui sommes-nous</a>
-        <a href="#">Services</a>
-        <a href="#" [routerLink]="['/add-reservation']">Pack</a>
-        <a href="#">Blog</a>
-        <a href="#">FAQ</a>
-        <a href="#">Parrainage</a>
-        <a href="register">Register</a>
-        <a href="login" class="btn-connect">Se connecter</a>
-    </div>
-    <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</nav>
-
+<div *ngIf="userRole === 'USER'">
+    <nav class="navbar" id="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            <span>CleanDar</span>
+        </div>
+            <div class="menu" id="navbar-menu">
+                <a href="#">Accueil</a>
+                <a href="#">Qui sommes-nous</a>
+                <a href="#">Services</a>
+                <a href="#" [routerLink]="['/add-reservation']">Pack</a>
+                <a href="register">Register</a>
+                <a href="login" class="btn-connect">Se connecter</a>
+            </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</div>
+<div *ngIf="userRole === 'ADMIN'">
+    <nav class="navbar" id="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+            <span>CleanDar</span>
+        </div>
+            <div class="menu" id="navbar-menu">
+                <a href="#">Accueil</a>
+                <a href="#">Qui sommes-nous</a>
+                <a href="#">Services</a>
+                <a href="#" [routerLink]="['/add-reservation']">Pack</a>
+                <a href="login" class="btn-connect">Se connecter</a>
+            </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</div>
 <section class="main-section">
     <div class="text-content">
         <h1>Services à domicile <span class="highlight">pratique et de qualité</span></h1>
@@ -63,6 +70,3 @@
         hamburger.classList.toggle('active');
     });
 </script>
-
-</body>
-</html>

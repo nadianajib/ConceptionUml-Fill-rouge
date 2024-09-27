@@ -26,25 +26,38 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // submitForm(): void {
+  //   console.log(this.loginForm.value);
+  //   this.service.login(this.loginForm.value).subscribe(
+  //     (response: Jwt) => {
+   
+  //       const jwToken = response.token;
+  //       const userRole = response.role; // récupérer le rôle
+
+  //       // Stocker le token et le rôle dans le localStorage
+  //       localStorage.setItem('jwt', jwToken);
+  //       localStorage.setItem('role', userRole);
+
+  //       // // Rediriger l'utilisateur selon son rôle
+  //       // if (userRole === 'ADMIN') {
+  //       //   this.router.navigateByUrl('/admin-dashboard'); // Tableau de bord admin
+  //       // } else if (userRole === 'USER') {
+  //       //   this.router.navigateByUrl('/dashboard'); // Vue utilisateur
+  //       // }
+  //     }
+  //   );
+  // }
+
   submitForm(): void {
     console.log(this.loginForm.value);
     this.service.login(this.loginForm.value).subscribe(
-      (response: Jwt) => {
-   
-        const jwToken = response.token;
-        const userRole = response.role; // récupérer le rôle
-
-        // Stocker le token et le rôle dans le localStorage
-        localStorage.setItem('jwt', jwToken);
-        localStorage.setItem('role', userRole);
-
-        // Rediriger l'utilisateur selon son rôle
-        if (userRole === 'ADMIN') {
-          this.router.navigateByUrl('/admin-dashboard'); // Tableau de bord admin
-        } else if (userRole === 'USER') {
-          this.router.navigateByUrl('/dashboard'); // Vue utilisateur
+      (response : Jwt) => {
+            const jwToken = response.token;
+            console.log("role is :",response.role)
+            localStorage.setItem('jwt', jwToken);
+            localStorage.setItem('role', response.role);
+           this.router.navigateByUrl("/dashboard")
         }
-      }
-    );
+    )
   }
 }

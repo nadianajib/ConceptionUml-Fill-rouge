@@ -1,33 +1,47 @@
-<!-- navbar.component.html -->
 <nav class="navbar">
   <div class="logo">
-    <img src="assets/logo.png" alt="Logo">
+    <img src="logo.png" alt="Logo">
     <span>CleanDar</span>
   </div>
-  <div class="menu">
+  <div class="menu" id="navbarMenu">
     <a href="#">Accueil</a>
     <a href="#">Qui sommes-nous</a>
     <a href="#">Services</a>
     <a [routerLink]="['/add-reservation']">Pack</a>
-    <a [routerLink]="['/register']">Register</a>
-    <a [routerLink]="['/login']" class="btn-connect">Se connecter</a>
+    <a href="#">Blog</a>
+    <a href="#">FAQ</a>
+    <a href="#">Parrainage</a>
+    <a href="register">Inscription</a>
+    <a href="login" class="btn-connect">Se connecter</a>
   </div>
+  <button class="hamburger" (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
 
-<!-- reservations.component.html -->
-<div class="container">
-  <div class="row">
-    <div class="col" *ngFor="let reservation of reservations">
-      <div class="card">
-        <img src="assets/reservation-image.jpg" class="card-img-top" alt="Reservation Image">
-        <div class="card-body">
-          <h5 class="card-title">{{ reservation.dateDebut }} - {{ reservation.dateFin }}</h5>
-          <p class="card-text">Pack ID: {{ reservation.packId }}</p>
-          <p class="card-text">Utilisateur ID: {{ reservation.utilisateurId }}</p>
-          <button (click)="editReservation(reservation.id)" class="btn btn-edit">Modifier</button>
-          <button (click)="deleteReservation(reservation.id)" class="btn btn-delete">Supprimer</button>
+<div class="reservation-list">
+  <h2>Mes Réservations</h2>
+
+  <div class="card-container">
+    <div class="card" *ngFor="let reservation of reservations">
+      <img [src]="reservation.image" alt="Image de la réservation" class="card-image" />
+      <div class="card-content">
+        <h3>Réservation ID: {{ reservation.id }}</h3>
+        <p>Date Début: {{ reservation.dateDebut }}</p>
+        <p>Date Fin: {{ reservation.dateFin }}</p>
+        <p>ID du Pack: {{ reservation.packId }}</p>
+        <div class="card-actions">
+          <button (click)="editReservation(reservation.id)">Modifier</button>
+           <button (click)="deleteReservation(reservation.id)" class="btn-delete">Supprimer</button>
+
         </div>
       </div>
     </div>
+  </div>
+
+  <div *ngIf="reservations.length === 0">
+    <p>Aucune réservation trouvée.</p>
   </div>
 </div>

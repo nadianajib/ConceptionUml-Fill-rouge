@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Reservation } from '../models/Reservation';
 import { ReservationService } from '../Services/reservation.service';
-import { Router } from '@angular/router'; // Pour la redirection après modification
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-reservation',
@@ -10,6 +10,7 @@ import { Router } from '@angular/router'; // Pour la redirection après modifica
 })
 export class ListReservationComponent implements OnInit {
   reservations: Reservation[] = [];
+  menuActive: boolean = false; // Ajouter une propriété pour gérer l'état du menu
 
   constructor(private reservationService: ReservationService, private router: Router) {}
 
@@ -29,9 +30,13 @@ export class ListReservationComponent implements OnInit {
     });
   }
 
+  toggleMenu(): void {
+    this.menuActive = !this.menuActive; // Alterner l'état du menu
+  }
+
   // Méthode pour modifier la réservation
   editReservation(id: number): void {
-    this.router.navigate(['/edit-reservation', id]); // Rediriger vers le composant de modification
+    this.router.navigate(['/edit-reservation', id]);
   }
 
   // Méthode pour supprimer la réservation
@@ -40,7 +45,7 @@ export class ListReservationComponent implements OnInit {
       this.reservationService.deleteReservation(id).subscribe({
         next: () => {
           console.log('Réservation supprimée avec succès');
-          this.loadMyReservations(); // Recharger la liste après suppression
+          this.loadMyReservations(); // Recharge les réservations après la suppression
         },
         error: (error) => {
           console.error('Erreur lors de la suppression de la réservation', error);

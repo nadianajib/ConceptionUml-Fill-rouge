@@ -25,9 +25,10 @@ export class ReservationService {
   updateReservation(id: number, reservation: Reservation): Observable<Reservation> {
     return this.http.put<Reservation>(`${this.apiUrl}/update/${id}`, reservation);
   }
+
    // Supprimer une réservation
-   deleteReservation(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  deleteReservation(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}delete/${id}`); // Vérifie l'URL ici
   }
 
   

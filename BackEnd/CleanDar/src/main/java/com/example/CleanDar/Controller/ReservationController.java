@@ -58,15 +58,15 @@ public class ReservationController {
         }
     }
 
-//    @GetMapping("/User/{utilisateurId}")
-//    public ResponseEntity<List<ReservationDto>> getReservationsByUtilisateurId(@PathVariable Long utilisateurId) {
-//        try {
-//            List<ReservationDto> reservations = reservationService.getReservationsByUtilisateurId(utilisateurId);
-//            return ResponseEntity.ok(reservations);
-//        } catch (Exception e) {
-//            return ResponseEntity.badRequest().body(null);  // Retourne un 400 avec plus de détails si besoin
-//        }
-//    }
+    @GetMapping("/User/{utilisateurId}")
+    public ResponseEntity<List<ReservationDto>> getReservationsByUtilisateurId(@PathVariable Long utilisateurId) {
+        try {
+            List<ReservationDto> reservations = reservationService.getReservationsByUtilisateurId(utilisateurId);
+            return ResponseEntity.ok(reservations);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);  // Retourne un 400 avec plus de détails si besoin
+        }
+    }
 //@GetMapping("/all")
 //public ResponseEntity<List<ReservationDto>> getAllReservations() {
 //    try {

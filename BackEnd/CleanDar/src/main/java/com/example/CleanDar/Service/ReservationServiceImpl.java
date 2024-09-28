@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -44,6 +45,21 @@ public class ReservationServiceImpl implements ReservationService {
         Reservation savedReservation = reservationRepository.save(reservation);
         return entityToDto(savedReservation);
     }
+
+    @Override
+    public List<ReservationDto> getReservationsByUtilisateurId(Long utilisateurId) {
+        // Récupérer les réservations à partir du repository
+        List<Reservation> reservations = reservationRepository.findByUtilisateurId(utilisateurId);
+        List<ReservationDto> reservationDtos = new ArrayList<>(); // Créez une liste vide pour les DTOs
+
+        // Utiliser une boucle for pour convertir chaque réservation en ReservationDto
+        for (Reservation reservation : reservations) {
+            reservationDtos.add(entityToDto(reservation)); // Ajoutez le DTO à la liste
+        }
+
+        return reservationDtos; // Retournez la liste des DTOs
+    }
+
 
     private Reservation dtoToEntity(ReservationDto reservationDto) {
         Reservation reservation = new Reservation();

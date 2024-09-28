@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ReservationService {
     ReservationDto creerReservation(ReservationDto reservationDto);
-//    List<ReservationDto> getReservationsByUtilisateurId(Long utilisateurId);
+    List<ReservationDto> getReservationsByUtilisateurId(Long utilisateurId);
     ReservationDto mettreAJourReservation(Long id, ReservationDto reservationDto);
     void annulerReservation(Long id);
     List<ReservationDto> getReservations(Utilisateur utilisateur);

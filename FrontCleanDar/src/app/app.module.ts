@@ -19,6 +19,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpdateReservationComponent } from './update-reservation/update-reservation.component';
+import { AddPackComponent } from './add-pack/add-pack.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { UpdateReservationComponent } from './update-reservation/update-reservat
     NavbarComponent,
     UpdateReservationComponent,
     DashbordComponent,
+    AddPackComponent,
     
 
   ],

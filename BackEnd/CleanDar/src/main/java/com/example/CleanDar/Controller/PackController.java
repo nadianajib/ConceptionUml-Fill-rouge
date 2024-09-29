@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/v1/packs/User")
+@RequestMapping("/api/v1/packs/Admin")
 public class PackController {
 
     @Autowired

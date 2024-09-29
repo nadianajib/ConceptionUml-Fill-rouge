@@ -1,0 +1,25 @@
+<div class="update-reservation">
+  <h2>Mettre à jour la réservation ID: {{ reservationId }}</h2>
+
+  <div *ngIf="loading">Chargement des détails de la réservation...</div>
+
+  <form *ngIf="!loading && reservation" (ngSubmit)="updateReservation()">
+    <div class="form-group">
+      <label for="dateDebut">Date Début:</label>
+      <input type="date" id="dateDebut" [(ngModel)]="reservation.dateDebut" name="dateDebut" required />
+    </div>
+
+    <div class="form-group">
+      <label for="dateFin">Date Fin:</label>
+      <input type="date" id="dateFin" [(ngModel)]="reservation.dateFin" name="dateFin" required />
+    </div>
+
+    <div class="form-group">
+      <label for="packId">ID du Pack:</label>
+      <input type="number" id="packId" [(ngModel)]="reservation.packId" name="packId" required />
+    </div>
+
+    <button type="submit" class="btn-update">Mettre à jour</button>
+    <button type="button" (click)="router.navigate(['/list-reservation'])" class="btn-cancel">Annuler</button>
+  </form>
+</div>

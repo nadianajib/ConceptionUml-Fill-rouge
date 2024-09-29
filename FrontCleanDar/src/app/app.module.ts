@@ -18,6 +18,7 @@ import { ListReservationComponent } from './list-reservation/list-reservation.co
 import { NavbarComponent } from './navbar/navbar.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UpdateReservationComponent } from './update-reservation/update-reservation.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     ListReservationComponent,
     NavbarComponent,
+    UpdateReservationComponent,
     DashbordComponent,
     
 
@@ -40,7 +42,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatCardModule,

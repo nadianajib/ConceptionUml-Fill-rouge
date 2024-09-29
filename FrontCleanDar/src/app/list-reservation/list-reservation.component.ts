@@ -36,7 +36,7 @@ export class ListReservationComponent implements OnInit {
 
   // Méthode pour modifier la réservation
   editReservation(id: number): void {
-    this.router.navigate(['/edit-reservation', id]);
+    this.router.navigate(['/update-reservation', id]);
   }
 
   // Méthode pour supprimer la réservation

@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { ListReservationComponent } from './list-reservation/list-reservation.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UpdateReservationComponent } from './update-reservation/update-reservation.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashbordComponent, children: [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'register', component: RegistrercomponentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'list-reservation', component: ListReservationComponent },
+  { path: 'update-reservation/:id', component: UpdateReservationComponent },  // Route pour la mise à jour d'une réservation
 ];
 
 @NgModule({

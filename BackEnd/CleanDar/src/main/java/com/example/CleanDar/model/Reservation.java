@@ -14,7 +14,7 @@ public class Reservation {
 
     private String dateDebut;
     private String dateFin;
-
+    private String image;
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")
     private Utilisateur utilisateur;
@@ -23,5 +23,4 @@ public class Reservation {
     @JoinColumn(name = "pack_id")
     private Pack pack;
 
-    // Autres attributs et méthodes...
 }

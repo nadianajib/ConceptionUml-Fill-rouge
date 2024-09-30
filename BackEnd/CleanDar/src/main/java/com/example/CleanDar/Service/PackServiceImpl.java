@@ -8,6 +8,9 @@ import com.example.CleanDar.model.Pack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class PackServiceImpl implements PackService {
 
@@ -36,4 +39,24 @@ public class PackServiceImpl implements PackService {
 
         return result;
     }
+
+    @Override
+    public List<PackDto> getAllPacks() {
+        List<Pack> packs = packRepository.findAll();
+        List<PackDto> packDtos = new ArrayList<>();
+
+        for (Pack pack : packs) {
+            PackDto dto = new PackDto();
+            dto.setId(pack.getId());
+            dto.setPrixTotal(pack.getPrixTotal());
+            dto.setReduction(pack.getReduction());
+            dto.setTitre(pack.getTitre());
+            dto.setDescription(pack.getDescription());
+            packDtos.add(dto);
+        }
+
+        return packDtos;
+    }
+
+
 }

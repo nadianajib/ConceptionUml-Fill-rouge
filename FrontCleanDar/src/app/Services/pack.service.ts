@@ -16,4 +16,7 @@ export class PackService {
   createPack(pack: Pack): Observable<Pack> {
     return this.http.post<Pack>(`${this.apiUrl}/add`, pack);
   }
+  getAllPacks(): Observable<Pack[]> {
+    return this.http.get<Pack[]>(`${this.apiUrl}/all`); // Ajoutez "/all" pour appeler l'endpoint
+  }
 }

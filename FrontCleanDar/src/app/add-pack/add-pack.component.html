@@ -1,40 +1,48 @@
+
 <div class="container">
-    <h2>Ajouter un nouveau pack</h2>
-  
-    <form [formGroup]="packForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="titre">Titre</label>
-        <input type="text" id="titre" formControlName="titre" class="form-control" [ngClass]="{'is-invalid': submitted && f['titre'].errors}">
-        <div *ngIf="submitted && f['titre'].errors" class="invalid-feedback">
-          Le titre est requis.
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea id="description" formControlName="description" class="form-control" [ngClass]="{'is-invalid': submitted && f['description'].errors}"></textarea>
-        <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
-          La description est requise.
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="prixTotal">Prix Total</label>
-        <input type="number" id="prixTotal" formControlName="prixTotal" class="form-control" [ngClass]="{'is-invalid': submitted && f['prixTotal'].errors}">
-        <div *ngIf="submitted && f['prixTotal'].errors" class="invalid-feedback">
-          Le prix total est requis et doit être positif.
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="reduction">Réduction</label>
-        <input type="number" id="reduction" formControlName="reduction" class="form-control" [ngClass]="{'is-invalid': submitted && f['reduction'].errors}">
-        <div *ngIf="submitted && f['reduction'].errors" class="invalid-feedback">
-          La réduction est requise et doit être positive.
-        </div>
-      </div>
-  
-      <button type="submit" class="btn btn-primary">Ajouter le pack</button>
-    </form>
-  </div>
-  
+  <h2>Ajouter un nouveau pack</h2>
+
+  <form [formGroup]="packForm" (ngSubmit)="onSubmit()">
+    <!-- Champ Titre -->
+    <div class="form-group">
+      <label for="titre">Titre</label>
+      <input type="text" id="titre" formControlName="titre" class="form-control" [ngClass]="{'is-invalid': submitted && f['titre'].errors}">
+      <div *ngIf="submitted && f['titre'].errors" class="invalid-feedback">Le titre est requis.</div>
+    </div>
+
+    <!-- Champ Description -->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control" [ngClass]="{'is-invalid': submitted && f['description'].errors}"></textarea>
+      <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">La description est requise.</div>
+    </div>
+
+    <!-- Champ Prix Total -->
+    <div class="form-group">
+      <label for="prixTotal">Prix Total</label>
+      <input type="number" id="prixTotal" formControlName="prixTotal" class="form-control" [ngClass]="{'is-invalid': submitted && f['prixTotal'].errors}">
+      <div *ngIf="submitted && f['prixTotal'].errors" class="invalid-feedback">Le prix total est requis et doit être positif.</div>
+    </div>
+
+    <!-- Champ Réduction -->
+    <div class="form-group">
+      <label for="reduction">Réduction</label>
+      <input type="number" id="reduction" formControlName="reduction" class="form-control" [ngClass]="{'is-invalid': submitted && f['reduction'].errors}">
+      <div *ngIf="submitted && f['reduction'].errors" class="invalid-feedback">La réduction est requise et doit être positive.</div>
+    </div>
+
+   
+   <!-- Champ Image -->
+   <div class="form-group">
+    <label for="image">l'image</label>
+    <input id="image" type="file" (change)="onFileSelected($event, 'image')" required>
+    <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">L'URL de l'image est requise.</div>
+ </div>
+ <div *ngIf="image">
+  <h3>Aperçu de l'image :</h3>
+  <img [src]="image" alt="Image Preview" style="max-width: 50%; height: 50%;">
+</div>
+
+    <button type="submit" class="btn btn-primary">Ajouter le pack</button>
+  </form>
+</div>

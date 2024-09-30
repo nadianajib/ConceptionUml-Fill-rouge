@@ -1,0 +1,31 @@
+<!-- <div class="pack-container">
+    <div class="pack-card" *ngFor="let pack of packs">
+      <img [src]="'assets/test/'  + '.jpg' " alt="{{ pack.titre }}" class="pack-image">
+      <h3>{{ pack.titre }}</h3>
+      <p>{{ pack.description }}</p>
+      <div class="pack-footer">
+        <span class="pack-price">{{ pack.prixTotal | currency }}</span>
+        <button class="learn-more-btn">Ajouter une réservation</button>
+      </div>
+    </div>
+  </div> -->
+
+
+  <div class="pack-container">
+    <div class="pack-card" *ngFor="let pack of packs">
+      <!-- <img [src]="'assets/pack/' + pack.image + '.jpg'" class="pack-image"> -->
+   
+        <!-- Image -->
+        <img class="pack-image" [src]="pack.image" alt="">
+      <h3>{{ pack.titre }}</h3>
+      <p>{{ pack.description }}</p>
+      <div class="pack-footer">
+        <span class="pack-price">{{ pack.prixTotal | currency }}</span>
+        <button class="learn-more-btn">Ajouter une réservation</button>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  

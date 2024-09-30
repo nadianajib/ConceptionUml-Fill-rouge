@@ -20,6 +20,7 @@ import { DashbordComponent } from './dashbord/dashbord.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpdateReservationComponent } from './update-reservation/update-reservation.component';
 import { AddPackComponent } from './add-pack/add-pack.component';
+import { PackListComponent } from './pack-list/pack-list.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AddPackComponent } from './add-pack/add-pack.component';
     UpdateReservationComponent,
     DashbordComponent,
     AddPackComponent,
+    PackListComponent,
     
 
   ],

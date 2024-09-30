@@ -24,6 +24,7 @@ public class PackServiceImpl implements PackService {
         pack.setPrixTotal(packDTO.getPrixTotal());
         pack.setReduction(packDTO.getReduction());
         pack.setTitre(packDTO.getTitre());
+        pack.setImage(packDTO.getImage());
         pack.setDescription(packDTO.getDescription());
 
         // Save entity
@@ -35,6 +36,7 @@ public class PackServiceImpl implements PackService {
         result.setPrixTotal(savedPack.getPrixTotal());
         result.setReduction(savedPack.getReduction());
         result.setTitre(savedPack.getTitre());
+        result.setImage(savedPack.getImage());
         result.setDescription(savedPack.getDescription());
 
         return result;
@@ -52,6 +54,7 @@ public class PackServiceImpl implements PackService {
             dto.setReduction(pack.getReduction());
             dto.setTitre(pack.getTitre());
             dto.setDescription(pack.getDescription());
+            dto.setImage(pack.getImage());
             packDtos.add(dto);
         }
 

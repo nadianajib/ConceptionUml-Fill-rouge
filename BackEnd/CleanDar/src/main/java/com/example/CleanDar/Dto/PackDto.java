@@ -10,6 +10,7 @@ public class PackDto {
     private Double reduction;
     private String titre;
     private String description;
+    private String image;
     private Set<Long> utilisateurId; // IDs des utilisateurs associés
 
     // Getters et Setters

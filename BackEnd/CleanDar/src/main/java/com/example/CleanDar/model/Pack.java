@@ -11,11 +11,11 @@ public class Pack {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Double prixTotal;
     private Double reduction;
     private String titre;
     private String description;
+    private String image;
 
     @OneToMany(mappedBy = "pack")
     private List<Reservation> reservations;

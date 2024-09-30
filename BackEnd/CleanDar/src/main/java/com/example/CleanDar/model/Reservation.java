@@ -20,7 +20,7 @@ public class Reservation {
     private Utilisateur utilisateur;
 
     @ManyToOne
-    @JoinColumn(name = "pack_id")
+    @JoinColumn(name = "idPack")
     private Pack pack;
 
 }

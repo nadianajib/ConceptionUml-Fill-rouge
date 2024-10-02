@@ -19,4 +19,12 @@ export class PackService {
   getAllPacks(): Observable<Pack[]> {
     return this.http.get<Pack[]>(`${this.apiUrl}/all`); // Ajoutez "/all" pour appeler l'endpoint
   }
+  // Supprimer une réservation
+  deletePack(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/delete/${id}`);
+  }
+  
+  
+
+  
 }

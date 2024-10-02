@@ -1,16 +1,28 @@
-<div *ngIf="userRole === 'USER'">
+<div>
     <nav class="navbar" id="navbar">
         <div class="logo">
             <img src="logo.png" alt="Logo">
             <span>CleanDar</span>
         </div>
             <div class="menu" id="navbar-menu">
-                <a href="#">Accueil</a>
+                <a href="/home">Accueil</a>
                 <a href="#">Qui sommes-nous</a>
+                
+                <ng-container *ngIf="isLoggedIn(); else loggedOut">
                 <a href="#">Services</a>
-                <a href="#" [routerLink]="['/add-reservation']">Pack</a>
-                <a href="register">Register</a>
-                <a href="login" class="btn-connect">Se connecter</a>
+                <a href="/pack-list">Pack</a>
+                    <button mat-button color="warn" (click)="logout()">
+                      <mat-icon>logout</mat-icon> Déconnexion
+                    </button>
+                  </ng-container>
+                  <ng-template #loggedOut>
+                    <button mat-button color="primary" (click)="login()">
+                      <mat-icon>login</mat-icon> Login
+                    </button>
+                    <button mat-button color="accent" (click)="signup()">
+                      <mat-icon>person_add</mat-icon> Sign Up
+                    </button>
+                  </ng-template>
             </div>
         <div class="hamburger" id="hamburger">
             <span></span>
@@ -19,54 +31,3 @@
         </div>
     </nav>
 </div>
-<div *ngIf="userRole === 'ADMIN'">
-    <nav class="navbar" id="navbar">
-        <div class="logo">
-            <img src="logo.png" alt="Logo">
-            <span>CleanDar</span>
-        </div>
-            <div class="menu" id="navbar-menu">
-                <a href="#">Accueil</a>
-                <a href="#">Qui sommes-nous</a>
-                <a href="#">Services</a>
-                <a href="#" [routerLink]="['/add-pack']">Pack</a>
-                <a href="login" class="btn-connect">Se connecter</a>
-            </div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
-</div>
-<section class="main-section">
-    <div class="text-content">
-        <h1>Services à domicile <span class="highlight">pratique et de qualité</span></h1>
-        <div class="icon-section">
-            <i class="fas fa-broom"></i>
-            <span>Réservez un service de nettoyage, <strong>même en 1 heure !</strong></span>
-        </div>
-        <div class="icon-section">
-            <i class="fas fa-shield-alt"></i>
-            <span>Professionnels agréés et assurés contre les accidents corporels</span>
-        </div>
-        <div class="icon-section">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Opérant dans plus de <strong>5 villes</strong> à travers le Maroc</span>
-        </div>
-        <button class="btn-primary">VOIR LES PRESTATIONS</button>
-    </div>
-    <div class="image-content">
-        <img src="assets/8040816.jpg" alt="Service de nettoyage">
-    </div>
-</section>
-
-<script>
-    const hamburger = document.getElementById('hamburger');
-    const menu = document.getElementById('navbar-menu');
-
-    hamburger.addEventListener('click', () => {
-        menu.classList.toggle('responsive');
-        hamburger.classList.toggle('active');
-    });
-</script>

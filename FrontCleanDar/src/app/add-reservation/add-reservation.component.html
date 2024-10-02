@@ -1,22 +1,4 @@
-<nav class="navbar">
-  <div class="logo">
-    <img src="logo.png" alt="Logo">
-    <span>CleanDar</span>
-  </div>
-  <div class="menu">
-    <a href="#">Accueil</a>
-    <a href="#">Qui sommes-nous</a>
-    <a href="#">Services</a>
-    <!-- <a href="add-reservation">Pack</a> -->
-    <a [routerLink]="['/add-reservation']">Pack</a>
-    <a href="#">Blog</a>
-    <a href="#">FAQ</a>
-    <a href="#">Parrainage</a>
-    <a href="register">register</a>
-    <a href="login" class="btn-connect">Se connecter</a>
-  </div>
 
-</nav>
 <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()" class="reservation-form">
   <div class="form-container">
     <h2 class="form-title">Ajouter une Réservation</h2>
@@ -56,7 +38,7 @@
 
     <div class="button-group">
       <button type="submit" class="submit-btn" [disabled]="reservationForm.invalid">Ajouter Réservation</button>
-      <button type="button" class="cancel-btn" (click)="router.navigate(['/dashboard'])">Annuler</button>
+      <button type="button" class="cancel-btn" (click)="router.navigate(['/pack-list'])">Annuler</button>
     </div>
   </div>
 </form>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ReservationService } from '../Services/reservation.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router'; // Assure-toi que ActivatedRoute est importé
 
 @Component({
   selector: 'app-add-reservation',
@@ -10,11 +10,13 @@ import { Router } from '@angular/router';
 })
 export class AddReservationComponent implements OnInit {
   reservationForm!: FormGroup; // Déclaration du formulaire
+  packId!: number; // Déclaration de packId
 
   constructor(
     private fb: FormBuilder,
     private reservationService: ReservationService,
-    protected router: Router
+    protected router: Router,
+    private route: ActivatedRoute // Injection d'ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -25,8 +27,12 @@ export class AddReservationComponent implements OnInit {
       packId: ['', Validators.required]
     });
 
-    // Ajouter la validation personnalisée pour la vérification des dates
-    this.reservationForm.setValidators(this.dateMismatchValidator);
+    // Récupérer l'ID du pack depuis les paramètres de route
+    this.packId = +this.route.snapshot.paramMap.get('packId')!;
+    console.log('Pack ID:', this.packId); 
+
+    // Remplir le champ packId dans le formulaire
+    this.reservationForm.patchValue({ packId: this.packId });
   }
 
   // Validator personnalisé pour vérifier si la date de début est avant la date de fin

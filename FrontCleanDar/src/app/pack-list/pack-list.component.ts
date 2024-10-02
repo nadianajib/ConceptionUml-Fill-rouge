@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pack } from '../models/Pack';
 import { PackService } from '../Services/pack.service';
+import { RegistrerService } from '../Services/registrer.service';
 
 @Component({
   selector: 'app-pack-list',
@@ -10,11 +11,20 @@ import { PackService } from '../Services/pack.service';
 export class PackListComponent implements OnInit {
   packs: Pack[] = [];
   imageString:string ="assets/pack/"
+  role?: string | null;
 
-  constructor(private packService: PackService) {}
+  constructor(private packService: PackService,
+    private registrerService : RegistrerService
+  ) {}
 
   ngOnInit(): void {
     this.loadPacks();
+    this.getUserRole();
+  }
+
+  getUserRole() {
+    this.role = this.registrerService.getRole(); 
+    console.log('User Role:', this.role);
   }
 
   loadPacks() {

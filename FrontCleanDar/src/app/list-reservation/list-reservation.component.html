@@ -26,7 +26,6 @@
 
   <div class="card-container">
     <div class="card" *ngFor="let reservation of reservations">
-      <img [src]="reservation.image" alt="Image de la réservation" class="card-image" />
       <div class="card-content">
         <h3>Réservation ID: {{ reservation.id }}</h3>
         <p>Date Début: {{ reservation.dateDebut }}</p>

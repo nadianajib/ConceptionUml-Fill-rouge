@@ -60,6 +60,9 @@ public class PackServiceImpl implements PackService {
 
         return packDtos;
     }
-
+    @Override
+    public void annulerPack(Long id) {
+        packRepository.deleteById(id);
+    }
 
 }

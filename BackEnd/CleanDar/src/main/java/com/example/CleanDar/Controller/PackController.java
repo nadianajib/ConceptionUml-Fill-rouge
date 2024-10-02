@@ -27,4 +27,13 @@ public class PackController {
         List<PackDto> packs = packService.getAllPacks();
         return ResponseEntity.ok(packs);
     }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> annulerPack(@PathVariable Long id) {
+        try {
+            packService.annulerPack(id); // Appelle le service pour annuler la réservation
+            return ResponseEntity.noContent().build();  // Retourne un 204 No Content si la suppression est réussie
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();  // Retourne un 404 Not Found si la réservation n'est pas trouvée
+        }
+    }
 }

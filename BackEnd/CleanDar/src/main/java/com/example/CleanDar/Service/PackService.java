@@ -8,4 +8,5 @@ public interface PackService {
     PackDto createPack(PackDto packDTO);
     List<PackDto> getAllPacks(); // Ajoutez cette ligne
 
+    void annulerPack(Long id);
 }

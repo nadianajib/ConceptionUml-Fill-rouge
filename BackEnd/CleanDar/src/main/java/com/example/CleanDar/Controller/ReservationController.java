@@ -92,6 +92,11 @@ public class ReservationController {
             return ResponseEntity.badRequest().body(null);  // Retourne un 400 avec plus de détails si besoin
         }
     }
+    @GetMapping("/{id}")
+    public ReservationDto getReservationById(@PathVariable Long id) {
+        // Appel au service pour récupérer la réservation
+        return reservationService.getReservationById(id);
+    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> annulerReservation(@PathVariable Long id) {

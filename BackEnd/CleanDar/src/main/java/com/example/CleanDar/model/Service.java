@@ -1,12 +1,12 @@
 package com.example.CleanDar.model;
 
 import jakarta.persistence.*;
-
-
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-
-@Data
+@Getter
+@Setter
 @Entity
 public class Service {
 
@@ -16,10 +16,9 @@ public class Service {
 
     private String nom;
     private String description;
-    private Double prix;
+    private Double prix; // Assurez-vous que ce champ est bien écrit
     private String image;
 
     @Enumerated(EnumType.STRING)
     private TypeService typeService;
 }
-

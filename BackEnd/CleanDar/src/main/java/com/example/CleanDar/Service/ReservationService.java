@@ -9,6 +9,9 @@ public interface ReservationService {
     ReservationDto creerReservation(ReservationDto reservationDto);
     List<ReservationDto> getReservationsByUtilisateurId(Long utilisateurId);
     ReservationDto mettreAJourReservation(Long id, ReservationDto reservationDto);
+
+    ReservationDto getReservationById(Long id);
+
     void annulerReservation(Long id);
     List<ReservationDto> getReservations(Utilisateur utilisateur);
 

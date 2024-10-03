@@ -3,11 +3,13 @@ package com.example.CleanDar.Controller;
 
 import com.example.CleanDar.Dto.PackDto;
 import com.example.CleanDar.Service.PackService;
+import com.example.CleanDar.model.Pack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
@@ -17,10 +19,18 @@ public class PackController {
     @Autowired
     private PackService packService;
 
-    @PostMapping("/add")
-    public ResponseEntity<PackDto> addPack(@RequestBody PackDto packDTO) {
-        PackDto createdPack = packService.createPack(packDTO);
-        return ResponseEntity.ok(createdPack);
+    @PostMapping("/creer")
+    public ResponseEntity<Pack> creerPack(@RequestBody Map<String, List<Long>> request) {
+        try {
+            List<Long> serviceIds = request.get("serviceIds");
+            Pack nouveauPack = packService.creerPack(serviceIds);
+
+            // Retourner le pack nouvellement créé avec le statut HTTP 201 Created
+            return ResponseEntity.ok(nouveauPack);
+        } catch (Exception e) {
+            // Gérer les erreurs éventuelles
+            return ResponseEntity.status(500).body(null);
+        }
     }
     @GetMapping("/all")
     public ResponseEntity<List<PackDto>> getAllPacks() {

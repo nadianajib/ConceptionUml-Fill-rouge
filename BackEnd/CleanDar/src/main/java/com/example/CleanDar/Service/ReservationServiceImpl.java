@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -125,6 +124,21 @@ public class ReservationServiceImpl implements ReservationService {
             // Gérer le cas où la réservation n'existe pas
             return null;  // Ou lancer une exception
         }
+    }
+    @Override
+    public ReservationDto getReservationById(Long id) {
+        Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reservation not found"));
+
+        ReservationDto dto = new ReservationDto();
+        dto.setId(reservation.getId());
+        dto.setDateDebut(reservation.getDateDebut());
+        dto.setDateFin(reservation.getDateFin());
+
+        dto.setUtilisateurId(reservation.getUtilisateur().getId());
+        dto.setPackId(reservation.getPack().getId());
+
+        return dto;
     }
 
     @Override

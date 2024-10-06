@@ -23,6 +23,7 @@ import { UpdateReservationComponent } from './update-reservation/update-reservat
 import { AddPackComponent } from './add-pack/add-pack.component';
 import { PackListComponent } from './pack-list/pack-list.component';
 import { HomeComponent } from './home/home.component';
+import { AddServiceComponent } from './add-service/add-service.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { HomeComponent } from './home/home.component';
     AddPackComponent,
     PackListComponent,
     HomeComponent,
+    AddServiceComponent,
     
 
   ],

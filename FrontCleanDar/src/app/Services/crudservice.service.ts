@@ -7,7 +7,7 @@ import { Service } from '../models/Service';
   providedIn: 'root'
 })
 export class ServiceCrudService {
-  private apiUrl = 'http://localhost:8080/api/services/Admin'; // Base URL de ton API
+  private apiUrl = 'http://localhost:9095/api/services/Admin'; // Base URL de ton API
 
   constructor(private http: HttpClient) {}
 

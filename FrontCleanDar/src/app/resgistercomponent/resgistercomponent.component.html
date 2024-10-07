@@ -1,50 +1,57 @@
-<p>Registrer Component Works!</p>
-
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="nom">Nom</label>
-    <input
-      type="text"
-      class="form-control"
-      id="nom"
-      formControlName="nom"
-      placeholder="Entrez votre nom"
-      [ngClass]="{ 'is-invalid': registerForm.get('nom')?.invalid && registerForm.get('nom')?.touched }"
-    />
-    <div *ngIf="registerForm.get('nom')?.invalid && registerForm.get('nom')?.touched" class="invalid-feedback">
-      Le nom est requis.
+<div class="login-container">
+  
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login-form">
+    <h2>Inscrivez-vous</h2>
+    
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input
+        type="text"
+        id="nom"
+        formControlName="nom"
+        placeholder="Entrez votre nom"
+        required
+        [ngClass]="{ 'is-invalid': registerForm.get('nom')?.invalid && registerForm.get('nom')?.touched }"
+      />
+      <div *ngIf="registerForm.get('nom')?.invalid && registerForm.get('nom')?.touched" class="invalid-feedback">
+        Le nom est requis.
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input
-      type="email"
-      class="form-control"
-      id="email"
-      formControlName="email"
-      placeholder="Entrez votre email"
-      [ngClass]="{ 'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched }"
-    />
-    <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="invalid-feedback">
-      Un email valide est requis.
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        placeholder="EX: Test@Exemple.com"
+        required
+        [ngClass]="{ 'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched }"
+      />
+      <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="invalid-feedback">
+        Un email valide est requis.
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="password">Mot de passe</label>
-    <input
-      type="password"
-      class="form-control"
-      id="password"
-      formControlName="password"
-      placeholder="Entrez votre mot de passe"
-      [ngClass]="{ 'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched }"
-    />
-    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="invalid-feedback">
-      Le mot de passe doit contenir au moins 6 caractères.
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        placeholder="Entrez votre mot de passe"
+        required
+        [ngClass]="{ 'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched }"
+      />
+      <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="invalid-feedback">
+        Le mot de passe doit contenir au moins 6 caractères.
+      </div>
     </div>
-  </div>
 
-  <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">S'inscrire</button>
-</form>
+    <button type="submit" class="btn-submit" [disabled]="registerForm.invalid">S'inscrire</button>
+
+    <div class="footer">
+      <p>Vous avez déjà un compte? <a href="/login">Connectez-vous ici</a></p>
+    </div>
+  </form>
+</div>

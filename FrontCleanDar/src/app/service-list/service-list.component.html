@@ -1,3 +1,9 @@
+<div class="container">
+    <!-- Bouton pour ajouter un service -->
+    <button class="btn btn-success mb-3" (click)="onAddService()">
+      Ajouter un service
+    </button>
+  
 <div class="service-grid">
     <div *ngFor="let service of services" class="service-card">
       <img [src]="service.image" [alt]="service.nom" class="service-image">
@@ -11,3 +17,4 @@
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
+  

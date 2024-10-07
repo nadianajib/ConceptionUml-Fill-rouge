@@ -48,6 +48,9 @@ export class ServiceListComponent implements OnInit {
       );
     }
   }
+  onAddService(): void {
+    this.router.navigate(['/AddService']); // Remplacez par la route de votre formulaire d'ajout de service
+}
 
   updateService(serviceId: number): void {
     this.router.navigate(['/service-edit', serviceId]); // Redirige vers le composant de mise à jour

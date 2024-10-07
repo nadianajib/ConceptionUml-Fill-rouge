@@ -12,6 +12,7 @@ import { UpdateReservationComponent } from './update-reservation/update-reservat
 import { HomeComponent } from './home/home.component';
 import { AddServiceComponent } from './add-service/add-service.component';
 import { ServiceListComponent } from './service-list/service-list.component';
+import { ServiceEditComponent } from './service-edit/service-edit.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashbordComponent, children: [
@@ -28,6 +29,8 @@ const routes: Routes = [
   {path:  'pack-list', component: PackListComponent},
   {path:  'AddService', component: AddServiceComponent},
   {path:  'service-list', component: ServiceListComponent},
+  { path: 'service-edit/:id', component: ServiceEditComponent },
+
 
 
 

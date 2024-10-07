@@ -26,13 +26,12 @@ export class ServiceCrudService {
     return this.http.get<Service>(`${this.apiUrl}/${id}`);
   }
 
-  // Méthode pour mettre à jour un service
-  updateService(id: number, service: Service): Observable<Service> {
-    return this.http.put<Service>(`${this.apiUrl}/${id}`, service);
+  updateService(serviceId: number, service: Service): Observable<Service> {
+    return this.http.put<Service>(`${this.apiUrl}/${serviceId}`, service);
   }
-
     // Méthode pour supprimer un service par ID
-    deleteService(id: number): Observable<void> {
-      return this.http.delete<void>(`${this.apiUrl}/Delete/${id}`);
-    }
+deleteService(id: number): Observable<void> {
+  return this.http.delete<void>(`${this.apiUrl}/Delete/${id}`);
+}
+
 }

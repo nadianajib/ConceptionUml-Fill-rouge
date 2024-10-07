@@ -25,6 +25,7 @@ import { PackListComponent } from './pack-list/pack-list.component';
 import { HomeComponent } from './home/home.component';
 import { AddServiceComponent } from './add-service/add-service.component';
 import { ServiceListComponent } from './service-list/service-list.component';
+import { ServiceEditComponent } from './service-edit/service-edit.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ServiceListComponent } from './service-list/service-list.component';
     HomeComponent,
     AddServiceComponent,
     ServiceListComponent,
+    ServiceEditComponent,
     
 
   ],

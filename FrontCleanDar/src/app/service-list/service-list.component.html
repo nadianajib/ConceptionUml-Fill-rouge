@@ -4,6 +4,7 @@
       <h3 class="service-title">{{ service.nom }}</h3>
       <p class="service-description">{{ service.description }}</p>
       <p class="service-price">{{ service.prix }} MAD</p>
+      <button class="btn-update" (click)="service.id !== undefined ? updateService(service.id) : null">Mettre à jour</button>
       <button class="btn-delete" (click)="deleteService(service.id)">Supprimer</button>    </div>
   </div>
   

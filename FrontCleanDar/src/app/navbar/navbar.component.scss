@@ -78,5 +78,30 @@ body {
       margin: 3px 0;
     }
   }
-}
 
+  @media (max-width: 768px) {
+    .menu {
+      display: none; /* Cacher le menu sur les petits écrans */
+      flex-direction: column;
+      position: absolute;
+      top: 60px; /* Ajuster en fonction de la hauteur de la barre de navigation */
+      right: 0;
+      background-color: white; /* Garder la couleur d'origine */
+      width: 100%;
+      z-index: 1; /* S'assurer que le menu est au-dessus des autres éléments */
+
+      a {
+        margin: 10px 0; /* Ajuster l'espacement pour les petits écrans */
+        padding: 10px 15px;
+      }
+    }
+
+    .hamburger {
+      display: flex; /* Afficher le hamburger sur les petits écrans */
+    }
+
+    .active {
+      display: flex; /* Afficher le menu lorsque le hamburger est cliqué */
+    }
+  }
+}

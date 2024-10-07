@@ -31,7 +31,7 @@ export class PackListComponent implements OnInit {
   loadPacks() {
     this.packService.getAllPacks().subscribe(
       (data: Pack[]) => {
-        console.log('Données récupérées:', data); // Vérifie la structure des données
+        console.log('Données récupérées:', data); 
         this.packs = data;
       },
       error => {
@@ -41,7 +41,7 @@ export class PackListComponent implements OnInit {
   }
    // Méthode pour rediriger vers le formulaire d'ajout de réservation
    ajouterReservation(id: number) {
-    this.router.navigate(['/add-reservation', id]); // Redirection avec l'ID du pack
+    this.router.navigate(['/add-reservation', id]); 
   }
 
   deletePack(id: number) {

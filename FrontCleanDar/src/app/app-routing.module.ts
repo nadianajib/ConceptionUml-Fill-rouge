@@ -11,6 +11,7 @@ import { PackListComponent } from './pack-list/pack-list.component';
 import { UpdateReservationComponent } from './update-reservation/update-reservation.component';
 import { HomeComponent } from './home/home.component';
 import { AddServiceComponent } from './add-service/add-service.component';
+import { ServiceListComponent } from './service-list/service-list.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashbordComponent, children: [
@@ -26,6 +27,8 @@ const routes: Routes = [
   { path: 'update-reservation/:id', component: UpdateReservationComponent },
   {path:  'pack-list', component: PackListComponent},
   {path:  'AddService', component: AddServiceComponent},
+  {path:  'service-list', component: ServiceListComponent},
+
 
 
 

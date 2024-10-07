@@ -1,37 +1,48 @@
 <div class="container">
-    <h2>Ajouter un service</h2>
-  
-    <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="nom">Nom</label>
-        <input type="text" id="nom" formControlName="nom" class="form-control">
-      </div>
-  
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea id="description" formControlName="description" class="form-control"></textarea>
-      </div>
-  
-      <div class="form-group">
-        <label for="prix">Prix</label>
-        <input type="number" id="prix" formControlName="prix" class="form-control">
-      </div>
-  
-      <div class="form-group">
-        <label for="image">Image</label>
-        <input type="text" id="image" formControlName="image" class="form-control">
-      </div>
-  
-      <div class="form-group">
-        <label for="typeService">Type de Service</label>
-        <select id="typeService" formControlName="typeService" class="form-control">
-          <option value="NETTOYAGESTANDARD">Nettoyage Standard</option>
-          <option value="CUISINE">Cuisine</option>
-          <option value="SALLE_DE_BAIN">Salle de Bain</option>
-        </select>
-      </div>
-  
-      <button type="submit" class="btn btn-primary">Ajouter le service</button>
-    </form>
-  </div>
-  
+  <h2>Ajouter un service</h2>
+
+  <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" formControlName="nom" class="form-control">
+      <div *ngIf="submitted && f['nom'].errors" class="invalid-feedback">Le nom est requis.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+      <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">La description est requise.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="prix">Prix</label>
+      <input type="number" id="prix" formControlName="prix" class="form-control">
+      <div *ngIf="submitted && f['prix'].errors" class="invalid-feedback">Le prix est requis et doit être positif.</div>
+    </div>
+
+    <!-- Champ Image -->
+    <div class="form-group">
+      <label for="image">Image</label>
+      <input id="image" type="file" (change)="onFileSelected($event, 'image')" required>
+      <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">L'image est requise.</div>
+    </div>
+
+    <!-- Preview de l'image -->
+    <div *ngIf="image">
+      <h3>Aperçu de l'image :</h3>
+      <img [src]="image" alt="Image Preview" style="max-width: 50%; height: 50%;">
+    </div>
+
+    <div class="form-group">
+      <label for="typeService">Type de Service</label>
+      <select id="typeService" formControlName="typeService" class="form-control">
+        <option value="NETTOYAGESTANDARD">Nettoyage Standard</option>
+        <option value="CUISINE">Cuisine</option>
+        <option value="SALLE_DE_BAIN">Salle de Bain</option>
+      </select>
+      <div *ngIf="submitted && f['typeService'].errors" class="invalid-feedback">Le type de service est requis.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter le service</button>
+  </form>
+</div>

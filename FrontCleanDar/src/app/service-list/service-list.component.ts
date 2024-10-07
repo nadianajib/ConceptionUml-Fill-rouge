@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Service } from '../models/Service';
 import { ServiceCrudService } from '../Services/crudservice.service';
-import { Router } from '@angular/router'; // Importer Router
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-service-list',
@@ -13,7 +12,7 @@ export class ServiceListComponent implements OnInit {
   services: Service[] = [];
   errorMessage: string = '';
 
-  constructor(private crudService: ServiceCrudService,private router: Router) {}
+  constructor(private crudService: ServiceCrudService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadServices();
@@ -49,7 +48,7 @@ export class ServiceListComponent implements OnInit {
       );
     }
   }
-  // Ajoutez cette méthode
+
   updateService(serviceId: number): void {
     this.router.navigate(['/service-edit', serviceId]); // Redirige vers le composant de mise à jour
   }

@@ -55,7 +55,21 @@
       background-color: #0077cc;
     }
   }
+  .btn-update{
+    background-color: #3cb371;
+    ;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   
+    &:hover {
+      background-color: #3cb371;
+    }
+  }
   .error-message {
     color: #ff0000;
     background-color: #ffeeee;

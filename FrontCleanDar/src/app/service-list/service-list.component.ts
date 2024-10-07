@@ -8,25 +8,43 @@ import { ServiceCrudService } from '../Services/crudservice.service';
   styleUrls: ['./service-list.component.scss']
 })
 export class ServiceListComponent implements OnInit {
-  services: Service[] = []; // Tableau pour stocker les services
-  errorMessage: string = ''; // Pour stocker les messages d'erreur
+  services: Service[] = [];
+  errorMessage: string = '';
 
-  constructor(private crudService: ServiceCrudService) {} // Changez ici le nom
+  constructor(private crudService: ServiceCrudService) {}
 
   ngOnInit(): void {
-    this.loadServices(); // Charger les services au démarrage
+    this.loadServices();
   }
 
-  // Méthode pour charger tous les services
   loadServices(): void {
     this.crudService.getAllServices().subscribe(
       (data: Service[]) => {
-        this.services = data; // Assigner les données reçues au tableau
+        this.services = data;
       },
       error => {
-        this.errorMessage = 'Erreur lors de la récupération des services'; // Gérer les erreurs
-        console.error(error); // Log des erreurs dans la console
+        this.errorMessage = 'Erreur lors de la récupération des services';
+        console.error(error);
       }
     );
+  }
+
+  deleteService(id: number | undefined): void {
+    if (id === undefined) {
+      this.errorMessage = 'Impossible de supprimer un service sans identifiant';
+      return;
+    }
+
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce service ?')) {
+      this.crudService.deleteService(id).subscribe(
+        () => {
+          this.services = this.services.filter(service => service.id !== id);
+        },
+        error => {
+          this.errorMessage = 'Erreur lors de la suppression du service';
+          console.error(error);
+        }
+      );
+    }
   }
 }

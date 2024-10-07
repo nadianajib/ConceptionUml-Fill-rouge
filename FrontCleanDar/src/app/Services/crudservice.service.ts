@@ -33,6 +33,6 @@ export class ServiceCrudService {
 
     // Méthode pour supprimer un service par ID
     deleteService(id: number): Observable<void> {
-      return this.http.delete<void>(`${this.apiUrl}/${id}`);
+      return this.http.delete<void>(`${this.apiUrl}/Delete/${id}`);
     }
 }

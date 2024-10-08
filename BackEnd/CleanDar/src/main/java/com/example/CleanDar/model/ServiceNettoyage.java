@@ -1,14 +1,13 @@
 package com.example.CleanDar.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-public class Service {
+public class ServiceNettoyage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +20,8 @@ public class Service {
 
     @Enumerated(EnumType.STRING)
     private TypeService typeService;
+
+    @ManyToOne
+    @JoinColumn(name = "pack_id")
+    private Pack pack;
 }

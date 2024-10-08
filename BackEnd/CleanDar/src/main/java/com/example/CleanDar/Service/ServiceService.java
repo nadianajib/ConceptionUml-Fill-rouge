@@ -1,7 +1,6 @@
 package com.example.CleanDar.Service;
 
 import com.example.CleanDar.Dto.ServiceDto;
-import com.example.CleanDar.model.Service;
 
 import java.util.List;
 

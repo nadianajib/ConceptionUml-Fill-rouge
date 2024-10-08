@@ -5,6 +5,7 @@ import com.example.CleanDar.Dto.PackDto;
 import com.example.CleanDar.Service.PackService;
 import com.example.CleanDar.model.Pack;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,19 +20,30 @@ public class PackController {
     @Autowired
     private PackService packService;
 
-    @PostMapping("Admin/creer")
-    public ResponseEntity<Pack> creerPack(@RequestBody Map<String, List<Long>> request) {
-        try {
-            List<Long> serviceIds = request.get("serviceIds");
-            Pack nouveauPack = packService.creerPack(serviceIds);
-
-            // Retourner le pack nouvellement créé avec le statut HTTP 201 Created
-            return ResponseEntity.ok(nouveauPack);
-        } catch (Exception e) {
-            // Gérer les erreurs éventuelles
-            return ResponseEntity.status(500).body(null);
-        }
-    }
+//    @PostMapping("/creer")
+//    public ResponseEntity<Pack> creerPack(@RequestBody PackDto request) {
+//        try {
+//            List<Long> serviceIds = request.getServicesIds();
+//            Double reduction = request.getReduction();
+//            Pack nouveauPack = packService.creerPack(serviceIds, reduction);
+//
+//            // Retourner le pack nouvellement créé avec le statut HTTP 201 Created
+//            return ResponseEntity.status(HttpStatus.CREATED).body(nouveauPack);
+//        } catch (Exception e) {
+//            // Gérer les erreurs éventuelles
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+//        }
+//    }
+//@PostMapping("/creer")
+//public ResponseEntity<Pack> createPack(@RequestBody PackDto packDto) {
+//    Pack createdPack = packService.creerPack(packDto);
+//    return ResponseEntity.ok(createdPack);
+//}
+@PostMapping("/creer")
+public ResponseEntity<Pack> creerPack(@RequestBody PackDto packDto) {
+    Pack pack = packService.creerPack(packDto);
+    return new ResponseEntity<>(pack, HttpStatus.CREATED);
+}
     @GetMapping("/all")
     public ResponseEntity<List<PackDto>> getAllPacks() {
         List<PackDto> packs = packService.getAllPacks();

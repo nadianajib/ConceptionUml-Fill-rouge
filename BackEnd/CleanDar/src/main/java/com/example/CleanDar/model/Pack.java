@@ -19,4 +19,7 @@ public class Pack {
 
     @OneToMany(mappedBy = "pack")
     private List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "pack")
+    private List<ServiceNettoyage> serviceNettoyages;
 }

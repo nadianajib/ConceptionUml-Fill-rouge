@@ -3,7 +3,7 @@ package com.example.CleanDar.Service;
 
 
 import com.example.CleanDar.Dao.PackRepository;
-import com.example.CleanDar.Dao.ServiceRepository;
+import com.example.CleanDar.Dao.ServiceNettoyageRepository;
 import com.example.CleanDar.Dto.PackDto;
 import com.example.CleanDar.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class PackServiceImpl implements PackService {
     @Autowired
     private PackService packService;
     @Autowired
-    private ServiceRepository serviceRepository;
+    private ServiceNettoyageRepository serviceNettoyageRepository;
 
 //
 //    @Override
@@ -74,36 +74,89 @@ public class PackServiceImpl implements PackService {
         packRepository.deleteById(id);
     }
 
-
     @Override
-    public Pack creerPack(List<Long> serviceIds) {
-        // Récupérer tous les services par leur ID et calculer le prix total
-        Double prixTotal = 0.0;
-
-        for (Long serviceId : serviceIds) {
-            // Trouver le service par ID
-//            Service service = serviceRepository.findById(serviceId).orElse(null);
-            com.example.CleanDar.model.Service service = serviceRepository.findById(serviceId).orElse(null);
-            if (service != null) {
-                // Ajouter le prix du service au prix total
-                prixTotal += service.getPrix();
-
-            }
-        }
-
-        // Calculer la réduction
-        Double reduction = 0.20; // 20%
-        Double montantReduction = prixTotal * reduction; // Montant de la réduction
-        Double prixFinal = prixTotal - montantReduction; // Prix final après réduction
-
-        // Remplir les détails du pack
+    public Pack creerPack(PackDto packDto) {
         Pack pack = new Pack();
-        pack.setTitre("Pack de Services");
-        pack.setDescription("Un pack comprenant plusieurs services.");
-        pack.setPrixTotal(prixFinal); // Mettre à jour le prix total après réduction
-        pack.setReduction(montantReduction); // Stocker le montant de la réduction
+        pack.setTitre(packDto.getTitre());
+        pack.setDescription(packDto.getDescription());
+        pack.setPrixTotal(0.0); // Tu peux mettre à jour ça après avoir ajouté des services
+        pack.setReduction(0.0); // Gérer la réduction plus tard si nécessaire
 
-        // Sauvegarder le pack dans la base de données
+        // Initialisation des listes vides pour éviter les nulls dans la réponse JSON
+        pack.setReservations(new ArrayList<>());
+        pack.setServiceNettoyages(new ArrayList<>());
+
         return packRepository.save(pack);
     }
+
+    //    @Override
+//    public Pack creerPack(List<Long> serviceIds, Double reduction) {
+//        // Récupérer tous les services par leur ID et calculer le prix total
+//        Double prixTotal = 0.0;
+//
+//        for (Long serviceId : serviceIds) {
+//            // Trouver le service par ID
+////            Service service = serviceRepository.findById(serviceId).orElse(null);
+//            ServiceNettoyage serviceNettoyage = serviceRepository.findById(serviceId).orElse(null);
+//            if (serviceNettoyage != null) {
+//                // Ajouter le prix du service au prix total
+//                prixTotal += serviceNettoyage.getPrix();
+//
+//            }
+//        }
+//
+//        // Calculer la réduction
+////        Double reduction = 0.20; // 20%
+//        Double montantReduction = prixTotal * reduction; // Montant de la réduction
+//        Double prixFinal = prixTotal - montantReduction; // Prix final après réduction
+//
+//        // Remplir les détails du pack
+//        Pack pack = new Pack();
+//        pack.setTitre("Pack de Services");
+//        pack.setDescription("Un pack comprenant plusieurs services.");
+//        pack.setPrixTotal(prixFinal); // Mettre à jour le prix total après réduction
+//        pack.setReduction(montantReduction); // Stocker le montant de la réduction
+//
+//        // Sauvegarder le pack dans la base de données
+//        return packRepository.save(pack);
+//    }
+    @Override
+    public Pack modifierReduction(PackDto packDto, Double reduction){
+        Double prixTotal = packDto.getPrixTotal();
+        Double montantReduction = prixTotal * reduction;
+        Double prixFinal = prixTotal - montantReduction;
+        Pack pack = new Pack();
+        pack.setId(packDto.getId());
+        pack.setPrixTotal(prixFinal);
+        pack.setReduction(montantReduction);
+        return packRepository.save(pack);
+
+
+    }
+//    public PackDto entityToDto(Pack pack) {
+//        if (pack == null) {
+//            return null; // or throw an exception based on your preference
+//        }
+//
+//        PackDto dto = new PackDto();
+//        dto.setId(pack.getId());
+//        dto.setPrixTotal(pack.getPrixTotal());
+//        dto.setReduction(pack.getReduction());
+//        dto.setTitre(pack.getTitre());
+//        dto.setDescription(pack.getDescription());
+//        dto.setImage(pack.getImage());
+//
+//        // Mapping associated service IDs without using streams
+//        if (pack.getServiceNettoyages() != null) {
+//            List<Long> serviceIds = new ArrayList<>();
+//            for (ServiceNettoyage serviceNettoyage : pack.getServiceNettoyages()) {
+//                serviceIds.add(serviceNettoyage.getId());
+//            }
+//            dto.setServices(serviceIds);
+//        }
+//
+//        return dto;
+//    }
+
+
 }

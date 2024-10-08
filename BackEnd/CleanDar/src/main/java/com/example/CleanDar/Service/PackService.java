@@ -12,5 +12,9 @@ public interface PackService {
 
     void annulerPack(Long id);
 
-    Pack creerPack(List<Long> serviceIds);
+//    Pack creerPack(List<Long> serviceIds, Double reduction);
+
+    Pack creerPack(PackDto packDto);
+
+    Pack modifierReduction(PackDto packDto, Double reduction);
 }

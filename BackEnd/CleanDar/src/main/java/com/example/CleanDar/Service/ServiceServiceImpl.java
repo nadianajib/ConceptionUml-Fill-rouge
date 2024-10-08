@@ -1,8 +1,8 @@
 package com.example.CleanDar.Service;
 
-import com.example.CleanDar.Dao.ServiceRepository;
+import com.example.CleanDar.Dao.ServiceNettoyageRepository;
 import com.example.CleanDar.Dto.ServiceDto;
-import com.example.CleanDar.model.Service;
+import com.example.CleanDar.model.ServiceNettoyage;
 import com.example.CleanDar.model.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,63 +14,64 @@ import java.util.stream.Collectors;
 public class ServiceServiceImpl implements ServiceService {
 
     @Autowired
-    private ServiceRepository serviceRepository;
+    private ServiceNettoyageRepository serviceNettoyageRepository;
 
     @Override
     public ServiceDto addService(ServiceDto serviceDto) {
-        Service service = convertToEntity(serviceDto);
-        Service savedService = serviceRepository.save(service);
-        return convertToDto(savedService);
+        ServiceNettoyage serviceNettoyage = convertToEntity(serviceDto);
+        ServiceNettoyage savedServiceNettoyage = serviceNettoyageRepository.save(serviceNettoyage);
+        return convertToDto(savedServiceNettoyage);
     }
     @Override
     public List<ServiceDto> getAllServices() {
-        return serviceRepository.findAll().stream()
+        return serviceNettoyageRepository.findAll().stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
     @Override
     public ServiceDto getServiceById(Long id) {
-        Service service = serviceRepository.findById(id)
+        ServiceNettoyage serviceNettoyage = serviceNettoyageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Service not found"));
-        return convertToDto(service);
+        return convertToDto(serviceNettoyage);
     }
     @Override
     public ServiceDto updateService(Long id, ServiceDto serviceDto) {
-        Service existingService = serviceRepository.findById(id)
+        ServiceNettoyage existingServiceNettoyage = serviceNettoyageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Service not found"));
 
-        existingService.setNom(serviceDto.getNom());
-        existingService.setDescription(serviceDto.getDescription());
-        existingService.setPrix(serviceDto.getPrix());
-        existingService.setImage(serviceDto.getImage());
-        existingService.setTypeService(TypeService.valueOf(serviceDto.getTypeService()));
+        existingServiceNettoyage.setNom(serviceDto.getNom());
+        existingServiceNettoyage.setDescription(serviceDto.getDescription());
+        existingServiceNettoyage.setPrix(serviceDto.getPrix());
+        existingServiceNettoyage.setImage(serviceDto.getImage());
+        existingServiceNettoyage.setTypeService(TypeService.valueOf(serviceDto.getTypeService()));
 
-        Service updatedService = serviceRepository.save(existingService);
-        return convertToDto(updatedService);
+        ServiceNettoyage updatedServiceNettoyage = serviceNettoyageRepository.save(existingServiceNettoyage);
+        return convertToDto(updatedServiceNettoyage);
     }
     @Override
     public void deleteService(Long id) {
-        serviceRepository.deleteById(id);
+        serviceNettoyageRepository.deleteById(id);
     }
 
-    private ServiceDto convertToDto(Service service) {
+    private ServiceDto convertToDto(ServiceNettoyage serviceNettoyage) {
         ServiceDto dto = new ServiceDto();
-        dto.setId(service.getId());
-        dto.setNom(service.getNom());
-        dto.setDescription(service.getDescription());
-        dto.setPrix(service.getPrix());
-        dto.setImage(service.getImage());
-        dto.setTypeService(service.getTypeService().name());
+        dto.setId(serviceNettoyage.getId());
+        dto.setNom(serviceNettoyage.getNom());
+        dto.setDescription(serviceNettoyage.getDescription());
+        dto.setPrix(serviceNettoyage.getPrix());
+        dto.setImage(serviceNettoyage.getImage());
+        dto.setTypeService(serviceNettoyage.getTypeService().name());
         return dto;
     }
 
-    private Service convertToEntity(ServiceDto dto) {
-        Service service = new Service();
-        service.setNom(dto.getNom());
-        service.setDescription(dto.getDescription());
-        service.setPrix(dto.getPrix());
-        service.setImage(dto.getImage());
-        service.setTypeService(TypeService.valueOf(dto.getTypeService()));
-        return service;
+    private ServiceNettoyage convertToEntity(ServiceDto dto) {
+        ServiceNettoyage serviceNettoyage = new ServiceNettoyage();
+        serviceNettoyage.setNom(dto.getNom());
+        serviceNettoyage.setDescription(dto.getDescription());
+        serviceNettoyage.setPrix(dto.getPrix());
+        serviceNettoyage.setImage(dto.getImage());
+        serviceNettoyage.setTypeService(TypeService.valueOf(dto.getTypeService()));
+        return serviceNettoyage;
     }
+
 }

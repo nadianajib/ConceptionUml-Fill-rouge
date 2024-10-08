@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/services/Admin")
+@CrossOrigin(origins = "http://localhost:4200")
 
 public class ServiceController {
 

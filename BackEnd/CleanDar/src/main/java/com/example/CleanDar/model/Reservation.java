@@ -14,6 +14,8 @@ public class Reservation {
 
     private String dateDebut;
     private String dateFin;
+    @Enumerated(EnumType.STRING)
+    private StatusReservation status;
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")
     private Utilisateur utilisateur;

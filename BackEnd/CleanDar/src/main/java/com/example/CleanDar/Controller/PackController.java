@@ -13,13 +13,13 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/v1/packs/Admin")
+@RequestMapping("/api/v1/packs")
 public class PackController {
 
     @Autowired
     private PackService packService;
 
-    @PostMapping("/creer")
+    @PostMapping("Admin/creer")
     public ResponseEntity<Pack> creerPack(@RequestBody Map<String, List<Long>> request) {
         try {
             List<Long> serviceIds = request.get("serviceIds");

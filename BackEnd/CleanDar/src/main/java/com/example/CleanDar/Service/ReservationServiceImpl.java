@@ -6,6 +6,7 @@ import com.example.CleanDar.Dao.UtilisateurRepository;
 import com.example.CleanDar.Dto.ReservationDto;
 import com.example.CleanDar.model.Pack;
 import com.example.CleanDar.model.Reservation;
+import com.example.CleanDar.model.StatusReservation;
 import com.example.CleanDar.model.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public ReservationDto creerReservation(ReservationDto reservationDto) {
         Reservation reservation = dtoToEntity(reservationDto);
+        reservation.setStatus(StatusReservation.valueOf("TRAITEMENT_ENCOURS"));
         Reservation savedReservation = reservationRepository.save(reservation);
         return entityToDto(savedReservation);
     }
@@ -86,6 +88,7 @@ public class ReservationServiceImpl implements ReservationService {
         dto.setId(reservation.getId());
         dto.setDateDebut(reservation.getDateDebut());
         dto.setDateFin(reservation.getDateFin());
+        dto.setStatus(String.valueOf(reservation.getStatus()));
 
         if (reservation.getPack() != null) {
             dto.setPackId(reservation.getPack().getId());

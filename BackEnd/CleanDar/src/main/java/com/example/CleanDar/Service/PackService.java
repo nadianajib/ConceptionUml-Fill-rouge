@@ -14,7 +14,9 @@ public interface PackService {
 
 //    Pack creerPack(List<Long> serviceIds, Double reduction);
 
-    Pack creerPack(PackDto packDto);
+//    Pack creerPack(PackDto packDto);
+
+    Pack createPack(PackDto packDto);
 
     Pack modifierReduction(PackDto packDto, Double reduction);
 }

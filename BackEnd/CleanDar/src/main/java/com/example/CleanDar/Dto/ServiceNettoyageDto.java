@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 
-public class ServiceDto {
+public class ServiceNettoyageDto {
     private Long id;
     private String nom;
     private String description;

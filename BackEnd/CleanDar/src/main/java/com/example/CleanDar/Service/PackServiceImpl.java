@@ -68,26 +68,40 @@ public class PackServiceImpl implements PackService {
         return packDtos;
     }
 
+    @Override
+    public Pack createPack(PackDto packDto) {
+        // Créer un nouvel objet Pack à partir du DTO
+        Pack pack = new Pack();
 
+        // Remplir les attributs du pack
+        pack.setPrixTotal(packDto.getPrixTotal());
+        pack.setReduction(packDto.getReduction());
+        pack.setTitre(packDto.getTitre());
+        pack.setDescription(packDto.getDescription());
+        pack.setImage(packDto.getImage());
+
+        // Enregistrer le pack dans la base de données
+        return packRepository.save(pack);
+    }
     @Override
     public void annulerPack(Long id) {
         packRepository.deleteById(id);
     }
 
-    @Override
-    public Pack creerPack(PackDto packDto) {
-        Pack pack = new Pack();
-        pack.setTitre(packDto.getTitre());
-        pack.setDescription(packDto.getDescription());
-        pack.setPrixTotal(0.0); // Tu peux mettre à jour ça après avoir ajouté des services
-        pack.setReduction(0.0); // Gérer la réduction plus tard si nécessaire
-
-        // Initialisation des listes vides pour éviter les nulls dans la réponse JSON
-        pack.setReservations(new ArrayList<>());
-        pack.setServiceNettoyages(new ArrayList<>());
-
-        return packRepository.save(pack);
-    }
+//    @Override
+//    public Pack creerPack(PackDto packDto) {
+//        Pack pack = new Pack();
+//        pack.setTitre(packDto.getTitre());
+//        pack.setDescription(packDto.getDescription());
+//        pack.setPrixTotal(0.0); // Tu peux mettre à jour ça après avoir ajouté des services
+//        pack.setReduction(0.0); // Gérer la réduction plus tard si nécessaire
+//
+//        // Initialisation des listes vides pour éviter les nulls dans la réponse JSON
+//        pack.setReservations(new ArrayList<>());
+//        pack.setServiceNettoyages(new ArrayList<>());
+//
+//        return packRepository.save(pack);
+//    }
 
     //    @Override
 //    public Pack creerPack(List<Long> serviceIds, Double reduction) {

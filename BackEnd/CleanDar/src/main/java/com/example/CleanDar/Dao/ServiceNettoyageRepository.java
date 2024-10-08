@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface ServiceNettoyageRepository extends JpaRepository<ServiceNettoyage, Long> {
 
-    List<ServiceNettoyage> findAllByPack(Long packId);
+//    List<ServiceNettoyage> findAllByPackId(Long packId);
+List<ServiceNettoyage> findAllByPackId(Long packId); // Méthode pour trouver tous les services par pack ID
+
 }

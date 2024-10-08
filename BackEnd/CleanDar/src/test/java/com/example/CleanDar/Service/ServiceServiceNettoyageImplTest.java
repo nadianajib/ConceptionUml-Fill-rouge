@@ -1,6 +1,6 @@
 package com.example.CleanDar.Service;
 
-import com.example.CleanDar.Dto.ServiceDto;
+import com.example.CleanDar.Dto.ServiceNettoyageDto;
 import com.example.CleanDar.model.TypeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,22 +22,22 @@ public class ServiceServiceNettoyageImplTest {
     @BeforeEach
     public void setUp() {
         // On vide la base de données avant chaque test
-        List<ServiceDto> services = serviceService.getAllServices();
-        for (ServiceDto service : services) {
+        List<ServiceNettoyageDto> services = serviceService.getAllServices();
+        for (ServiceNettoyageDto service : services) {
             serviceService.deleteService(service.getId());
         }
     }
 
     @Test
     public void testAddService() {
-        ServiceDto serviceDto = new ServiceDto();
-        serviceDto.setNom("Service Nettoyage");
-        serviceDto.setDescription("Nettoyage standard");
-        serviceDto.setPrix(50.0);
-        serviceDto.setImage("image1.jpg");
-        serviceDto.setTypeService(TypeService.NETTOYAGESTANDARD.name());
+        ServiceNettoyageDto serviceNettoyageDto = new ServiceNettoyageDto();
+        serviceNettoyageDto.setNom("Service Nettoyage");
+        serviceNettoyageDto.setDescription("Nettoyage standard");
+        serviceNettoyageDto.setPrix(50.0);
+        serviceNettoyageDto.setImage("image1.jpg");
+        serviceNettoyageDto.setTypeService(TypeService.NETTOYAGESTANDARD.name());
 
-        ServiceDto savedService = serviceService.addService(serviceDto);
+        ServiceNettoyageDto savedService = serviceService.addService(serviceNettoyageDto);
 
         assertNotNull(savedService.getId());
         assertEquals("Service Nettoyage", savedService.getNom());
@@ -49,14 +49,14 @@ public class ServiceServiceNettoyageImplTest {
 
     @Test
     public void testGetAllServices() {
-        ServiceDto service1 = new ServiceDto();
+        ServiceNettoyageDto service1 = new ServiceNettoyageDto();
         service1.setNom("Service Cuisine");
         service1.setDescription("Nettoyage de cuisine");
         service1.setPrix(70.0);
         service1.setImage("image2.jpg");
         service1.setTypeService(TypeService.CUISINE.name());
 
-        ServiceDto service2 = new ServiceDto();
+        ServiceNettoyageDto service2 = new ServiceNettoyageDto();
         service2.setNom("Service Salle de Bain");
         service2.setDescription("Nettoyage salle de bain");
         service2.setPrix(60.0);
@@ -66,23 +66,23 @@ public class ServiceServiceNettoyageImplTest {
         serviceService.addService(service1);
         serviceService.addService(service2);
 
-        List<ServiceDto> services = serviceService.getAllServices();
+        List<ServiceNettoyageDto> services = serviceService.getAllServices();
 
         assertEquals(2, services.size());
     }
 
     @Test
     public void testGetServiceById() {
-        ServiceDto serviceDto = new ServiceDto();
-        serviceDto.setNom("Service Cuisine");
-        serviceDto.setDescription("Nettoyage cuisine");
-        serviceDto.setPrix(100.0);
-        serviceDto.setImage("image.jpg");
-        serviceDto.setTypeService(TypeService.CUISINE.name());
+        ServiceNettoyageDto serviceNettoyageDto = new ServiceNettoyageDto();
+        serviceNettoyageDto.setNom("Service Cuisine");
+        serviceNettoyageDto.setDescription("Nettoyage cuisine");
+        serviceNettoyageDto.setPrix(100.0);
+        serviceNettoyageDto.setImage("image.jpg");
+        serviceNettoyageDto.setTypeService(TypeService.CUISINE.name());
 
-        ServiceDto savedService = serviceService.addService(serviceDto);
+        ServiceNettoyageDto savedService = serviceService.addService(serviceNettoyageDto);
 
-        ServiceDto foundService = serviceService.getServiceById(savedService.getId());
+        ServiceNettoyageDto foundService = serviceService.getServiceById(savedService.getId());
 
         assertNotNull(foundService);
         assertEquals(savedService.getNom(), foundService.getNom());
@@ -91,23 +91,23 @@ public class ServiceServiceNettoyageImplTest {
 
     @Test
     public void testUpdateService() {
-        ServiceDto serviceDto = new ServiceDto();
-        serviceDto.setNom("Service Cuisine");
-        serviceDto.setDescription("Nettoyage cuisine");
-        serviceDto.setPrix(100.0);
-        serviceDto.setImage("image.jpg");
-        serviceDto.setTypeService(TypeService.CUISINE.name());
+        ServiceNettoyageDto serviceNettoyageDto = new ServiceNettoyageDto();
+        serviceNettoyageDto.setNom("Service Cuisine");
+        serviceNettoyageDto.setDescription("Nettoyage cuisine");
+        serviceNettoyageDto.setPrix(100.0);
+        serviceNettoyageDto.setImage("image.jpg");
+        serviceNettoyageDto.setTypeService(TypeService.CUISINE.name());
 
-        ServiceDto savedService = serviceService.addService(serviceDto);
+        ServiceNettoyageDto savedService = serviceService.addService(serviceNettoyageDto);
 
-        ServiceDto updateDto = new ServiceDto();
+        ServiceNettoyageDto updateDto = new ServiceNettoyageDto();
         updateDto.setNom("Service Cuisine Modifié");
         updateDto.setDescription("Nettoyage cuisine modifié");
         updateDto.setPrix(150.0);
         updateDto.setImage("image_modifiee.jpg");
         updateDto.setTypeService(TypeService.CUISINE.name());
 
-        ServiceDto updatedService = serviceService.updateService(savedService.getId(), updateDto);
+        ServiceNettoyageDto updatedService = serviceService.updateService(savedService.getId(), updateDto);
 
         assertNotNull(updatedService);
         assertEquals("Service Cuisine Modifié", updatedService.getNom());
@@ -118,14 +118,14 @@ public class ServiceServiceNettoyageImplTest {
 
     @Test
     public void testDeleteService() {
-        ServiceDto serviceDto = new ServiceDto();
-        serviceDto.setNom("Service Cuisine");
-        serviceDto.setDescription("Nettoyage cuisine");
-        serviceDto.setPrix(100.0);
-        serviceDto.setImage("image.jpg");
-        serviceDto.setTypeService(TypeService.CUISINE.name());
+        ServiceNettoyageDto serviceNettoyageDto = new ServiceNettoyageDto();
+        serviceNettoyageDto.setNom("Service Cuisine");
+        serviceNettoyageDto.setDescription("Nettoyage cuisine");
+        serviceNettoyageDto.setPrix(100.0);
+        serviceNettoyageDto.setImage("image.jpg");
+        serviceNettoyageDto.setTypeService(TypeService.CUISINE.name());
 
-        ServiceDto savedService = serviceService.addService(serviceDto);
+        ServiceNettoyageDto savedService = serviceService.addService(serviceNettoyageDto);
 
         serviceService.deleteService(savedService.getId());
 

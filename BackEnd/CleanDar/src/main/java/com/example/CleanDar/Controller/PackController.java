@@ -39,15 +39,20 @@ public class PackController {
 //    Pack createdPack = packService.creerPack(packDto);
 //    return ResponseEntity.ok(createdPack);
 //}
-@PostMapping("/creer")
-public ResponseEntity<Pack> creerPack(@RequestBody PackDto packDto) {
-    Pack pack = packService.creerPack(packDto);
-    return new ResponseEntity<>(pack, HttpStatus.CREATED);
-}
+//@PostMapping("/creer")
+//public ResponseEntity<Pack> creerPack(@RequestBody PackDto packDto) {
+//    Pack pack = packService.creerPack(packDto);
+//    return new ResponseEntity<>(pack, HttpStatus.CREATED);
+//}
     @GetMapping("/all")
     public ResponseEntity<List<PackDto>> getAllPacks() {
         List<PackDto> packs = packService.getAllPacks();
         return ResponseEntity.ok(packs);
+    }
+    @PostMapping("/add")
+    public ResponseEntity<Pack> createPack(@RequestBody PackDto packDto) {
+        Pack createdPack = packService.createPack(packDto);
+        return ResponseEntity.ok(createdPack);
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> annulerPack(@PathVariable Long id) {

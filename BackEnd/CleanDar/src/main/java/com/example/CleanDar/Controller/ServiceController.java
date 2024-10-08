@@ -1,8 +1,10 @@
 package com.example.CleanDar.Controller;
 
 
-import com.example.CleanDar.Dto.ServiceDto;
+import com.example.CleanDar.Dao.ServiceNettoyageRepository;
+import com.example.CleanDar.Dto.ServiceNettoyageDto;
 import com.example.CleanDar.Service.ServiceService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,37 +19,42 @@ import java.util.List;
 public class ServiceController {
 
     private final ServiceService serviceCrudService;
-
     @Autowired
     public ServiceController(ServiceService serviceCrudService) {
         this.serviceCrudService = serviceCrudService;
     }
+    @Autowired
+    private ServiceService serviceService;
 
+    @GetMapping("/pack/{packId}")
+    public List<ServiceNettoyageDto> getServicesByPackId(@PathVariable Long packId) {
+        return serviceService.getAllServicesByPackId(packId);
+    }
     @PostMapping("/add")
-    public ResponseEntity<ServiceDto> addService(@RequestBody ServiceDto serviceDto) {
-        ServiceDto newService = serviceCrudService.addService(serviceDto);
+    public ResponseEntity<ServiceNettoyageDto> addService(@RequestBody ServiceNettoyageDto serviceNettoyageDto) {
+        ServiceNettoyageDto newService = serviceCrudService.addService(serviceNettoyageDto);
         return new ResponseEntity<>(newService, HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<ServiceDto>> getAllServices() {
-        List<ServiceDto> services = serviceCrudService.getAllServices();
+    public ResponseEntity<List<ServiceNettoyageDto>> getAllServices() {
+        List<ServiceNettoyageDto> services = serviceCrudService.getAllServices();
         return ResponseEntity.ok(services);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ServiceDto> getServiceById(@PathVariable Long id) {
+    public ResponseEntity<ServiceNettoyageDto> getServiceById(@PathVariable Long id) {
         try {
-            ServiceDto service = serviceCrudService.getServiceById(id);
+            ServiceNettoyageDto service = serviceCrudService.getServiceById(id);
             return ResponseEntity.ok(service);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<ServiceDto> updateService(@PathVariable Long id, @RequestBody ServiceDto serviceDto) {
+    public ResponseEntity<ServiceNettoyageDto> updateService(@PathVariable Long id, @RequestBody ServiceNettoyageDto serviceNettoyageDto) {
         try {
-            ServiceDto updatedService = serviceCrudService.updateService(id, serviceDto);
+            ServiceNettoyageDto updatedService = serviceCrudService.updateService(id, serviceNettoyageDto);
             return ResponseEntity.ok(updatedService);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
@@ -62,4 +69,5 @@ public class ServiceController {
             return ResponseEntity.notFound().build();
         }
     }
+
 }

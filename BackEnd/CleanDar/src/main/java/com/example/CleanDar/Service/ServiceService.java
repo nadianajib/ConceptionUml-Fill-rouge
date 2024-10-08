@@ -1,18 +1,18 @@
 package com.example.CleanDar.Service;
 
-import com.example.CleanDar.Dto.ServiceDto;
+import com.example.CleanDar.Dto.ServiceNettoyageDto;
 
 import java.util.List;
 
 public interface ServiceService {
 
     // Ajouter un service
-    ServiceDto addService(ServiceDto serviceDto);
-    List<ServiceDto> getAllServices();
-    ServiceDto getServiceById(Long id);
-    ServiceDto updateService(Long id, ServiceDto serviceDto);
+    ServiceNettoyageDto addService(ServiceNettoyageDto serviceNettoyageDto);
+    List<ServiceNettoyageDto> getAllServices();
+    ServiceNettoyageDto getServiceById(Long id);
+    ServiceNettoyageDto updateService(Long id, ServiceNettoyageDto serviceNettoyageDto);
     void deleteService(Long id);
-
+    List<ServiceNettoyageDto> getAllServicesByPackId(Long packId);
 
 
 }

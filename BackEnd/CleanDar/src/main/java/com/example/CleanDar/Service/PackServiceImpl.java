@@ -84,57 +84,43 @@ public class PackServiceImpl implements PackService {
         return packRepository.save(pack);
     }
     @Override
+    public Pack editPack(Long packId, PackDto packDto) {
+        // Récupérer le pack existant par ID
+        Pack pack = packRepository.findById(packId)
+                .orElseThrow(() -> new RuntimeException("Pack non trouvé avec l'ID : " + packId));
+
+        // Mettre à jour les attributs du pack avec ceux du DTO
+        pack.setTitre(packDto.getTitre());
+        pack.setDescription(packDto.getDescription());
+        pack.setImage(packDto.getImage());
+
+        Pack packReduction=this.modifierReduction(packDto, packDto.getReduction());
+        pack.setReduction(packReduction.getReduction());
+        pack.setPrixTotal(packReduction.getPrixTotal());
+
+
+        // Enregistrer les modifications dans la base de données
+        return packRepository.save(pack);
+    }
+
+    public Pack modifierReduction(PackDto packDto, Double reduction){
+        Double prixTotal = packDto.getPrixTotal();
+        Double montantReduction = prixTotal * reduction;
+        Double prixFinal = prixTotal - montantReduction;
+        Pack pack = new Pack();
+        pack.setPrixTotal(prixFinal);
+        pack.setReduction(montantReduction);
+        return pack;
+
+
+    }
+
+    @Override
     public void annulerPack(Long id) {
         packRepository.deleteById(id);
     }
 
-//    @Override
-//    public Pack creerPack(PackDto packDto) {
-//        Pack pack = new Pack();
-//        pack.setTitre(packDto.getTitre());
-//        pack.setDescription(packDto.getDescription());
-//        pack.setPrixTotal(0.0); // Tu peux mettre à jour ça après avoir ajouté des services
-//        pack.setReduction(0.0); // Gérer la réduction plus tard si nécessaire
-//
-//        // Initialisation des listes vides pour éviter les nulls dans la réponse JSON
-//        pack.setReservations(new ArrayList<>());
-//        pack.setServiceNettoyages(new ArrayList<>());
-//
-//        return packRepository.save(pack);
-//    }
 
-    //    @Override
-//    public Pack creerPack(List<Long> serviceIds, Double reduction) {
-//        // Récupérer tous les services par leur ID et calculer le prix total
-//        Double prixTotal = 0.0;
-//
-//        for (Long serviceId : serviceIds) {
-//            // Trouver le service par ID
-////            Service service = serviceRepository.findById(serviceId).orElse(null);
-//            ServiceNettoyage serviceNettoyage = serviceRepository.findById(serviceId).orElse(null);
-//            if (serviceNettoyage != null) {
-//                // Ajouter le prix du service au prix total
-//                prixTotal += serviceNettoyage.getPrix();
-//
-//            }
-//        }
-//
-//        // Calculer la réduction
-////        Double reduction = 0.20; // 20%
-//        Double montantReduction = prixTotal * reduction; // Montant de la réduction
-//        Double prixFinal = prixTotal - montantReduction; // Prix final après réduction
-//
-//        // Remplir les détails du pack
-//        Pack pack = new Pack();
-//        pack.setTitre("Pack de Services");
-//        pack.setDescription("Un pack comprenant plusieurs services.");
-//        pack.setPrixTotal(prixFinal); // Mettre à jour le prix total après réduction
-//        pack.setReduction(montantReduction); // Stocker le montant de la réduction
-//
-//        // Sauvegarder le pack dans la base de données
-//        return packRepository.save(pack);
-//    }
-    @Override
     public Pack IncrementerPrixService(Long packId, Double prixService){
         PackDto dto = new PackDto();
         Pack pack = packRepository.findById(packId).get();
@@ -144,7 +130,6 @@ public class PackServiceImpl implements PackService {
         pack.setPrixTotal(prixFinal);
         return packRepository.save(pack);
     }
-    @Override
     public Pack DecrementerPrixService(Long packId, Double prixService){
         PackDto dto = new PackDto();
         Pack pack = packRepository.findById(packId).get();
@@ -153,19 +138,7 @@ public class PackServiceImpl implements PackService {
         pack.setPrixTotal(prixFinal);
         return packRepository.save(pack);
     }
-    @Override
-    public Pack modifierReduction(PackDto packDto, Double reduction){
-        Double prixTotal = packDto.getPrixTotal();
-        Double montantReduction = prixTotal * reduction;
-        Double prixFinal = prixTotal - montantReduction;
-        Pack pack = new Pack();
-        pack.setId(packDto.getId());
-        pack.setPrixTotal(prixFinal);
-        pack.setReduction(montantReduction);
-        return packRepository.save(pack);
 
-
-    }
 //    public PackDto entityToDto(Pack pack) {
 //        if (pack == null) {
 //            return null; // or throw an exception based on your preference

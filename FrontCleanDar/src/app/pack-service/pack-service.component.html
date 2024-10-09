@@ -1,0 +1,15 @@
+<div class="container">
+  
+<div class="service-grid">
+    <div *ngFor="let service of services" class="service-card">
+      <!-- <img [src]="service.image" [alt]="service.nom" class="service-image"> -->
+      <h3 class="service-title">{{ service.nom }}</h3>
+      <p class="service-description">{{ service.description }}</p>
+      <p class="service-price">{{ service.prix }} MAD</p>
+  </div>
+  </div>
+  <button (click)="deleteServices(packId)" class="btn-delete">Supprimer</button>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  

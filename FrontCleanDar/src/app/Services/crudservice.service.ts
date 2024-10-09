@@ -7,7 +7,7 @@ import { Service } from '../models/Service';
   providedIn: 'root'
 })
 export class ServiceCrudService {
-  private apiUrl = 'http://localhost:9095/api/services/Admin'; // Base URL de ton API
+  private apiUrl = 'http://localhost:9095/api/services'; 
 
   constructor(private http: HttpClient) {}
 
@@ -33,5 +33,13 @@ export class ServiceCrudService {
   deleteService(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/Delete/${id}`);
   }
+  getAllServicesByPackId(packId: number): Observable<Service[]> {
+    return this.http.get<Service[]>(`${this.apiUrl}/pack/${packId}`);
+  }
+  deleteServices(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}delete/${id}`); 
+}
+
+
 
 }

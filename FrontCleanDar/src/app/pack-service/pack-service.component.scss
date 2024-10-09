@@ -1,0 +1,25 @@
+// src/app/components/pack-service/pack-service.component.scss
+
+.service-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+  
+    h3 {
+      margin: 0 0 5px;
+    }
+  
+    .service-image {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+    }
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+  }
+  

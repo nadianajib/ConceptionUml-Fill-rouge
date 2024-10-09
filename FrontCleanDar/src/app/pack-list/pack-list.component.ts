@@ -62,4 +62,8 @@ export class PackListComponent implements OnInit {
   Ajouter(){
     this.router.navigate(["/add-pack"]);
   }
+  toServiceList(packId: number) {
+    this.router.navigate([`service/pack/${packId}`]);
+}
+
 }

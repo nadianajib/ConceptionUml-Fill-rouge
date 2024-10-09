@@ -5,5 +5,6 @@ export interface Service {
     prix: number;
     image: string;
     typeService: string; 
+    pack_id?: number;
   }
-  
+ 

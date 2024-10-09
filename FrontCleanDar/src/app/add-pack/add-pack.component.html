@@ -1,48 +1,53 @@
-
 <div class="container">
-  <h2>Ajouter un nouveau pack</h2>
-
+  <h2>Ajouter un Pack</h2>
   <form [formGroup]="packForm" (ngSubmit)="onSubmit()">
-    <!-- Champ Titre -->
     <div class="form-group">
       <label for="titre">Titre</label>
-      <input type="text" id="titre" formControlName="titre" class="form-control" [ngClass]="{'is-invalid': submitted && f['titre'].errors}">
-      <div *ngIf="submitted && f['titre'].errors" class="invalid-feedback">Le titre est requis.</div>
+      <input type="text" id="titre" formControlName="titre" class="form-control" />
+      <div *ngIf="submitted && f['titre'].errors" class="text-danger">
+        <div *ngIf="f['titre'].errors['required']">Le titre est requis.</div>
+      </div>
     </div>
 
-    <!-- Champ Description -->
     <div class="form-group">
       <label for="description">Description</label>
-      <textarea id="description" formControlName="description" class="form-control" [ngClass]="{'is-invalid': submitted && f['description'].errors}"></textarea>
-      <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">La description est requise.</div>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+      <div *ngIf="submitted && f['description'].errors" class="text-danger">
+        <div *ngIf="f['description'].errors['required']">La description est requise.</div>
+      </div>
     </div>
 
-    <!-- Champ Prix Total -->
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="prixTotal">Prix Total</label>
-      <input type="number" id="prixTotal" formControlName="prixTotal" class="form-control" [ngClass]="{'is-invalid': submitted && f['prixTotal'].errors}">
-      <div *ngIf="submitted && f['prixTotal'].errors" class="invalid-feedback">Le prix total est requis et doit être positif.</div>
-    </div>
+      <input type="number" id="prixTotal" formControlName="prixTotal" class="form-control" />
+      <div *ngIf="submitted && f['prixTotal'].errors" class="text-danger">
+        <div *ngIf="f['prixTotal'].errors['required']">Le prix total est requis.</div>
+        <div *ngIf="f['prixTotal'].errors['min']">Le prix total doit être supérieur ou égal à 0.</div>
+      </div>
+    </div> -->
 
-    <!-- Champ Réduction -->
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="reduction">Réduction</label>
-      <input type="number" id="reduction" formControlName="reduction" class="form-control" [ngClass]="{'is-invalid': submitted && f['reduction'].errors}">
-      <div *ngIf="submitted && f['reduction'].errors" class="invalid-feedback">La réduction est requise et doit être positive.</div>
+      <input type="number" id="reduction" formControlName="reduction" class="form-control" />
+      <div *ngIf="submitted && f['reduction'].errors" class="text-danger">
+        <div *ngIf="f['reduction'].errors['required']">La réduction est requise.</div>
+        <div *ngIf="f['reduction'].errors['min']">La réduction doit être supérieure ou égale à 0.</div>
+      </div>
+    </div> -->
+
+    <div class="form-group">
+      <label for="image">Image</label>
+      <input type="file" (change)="onFileSelected($event)" class="form-control" />
+      <div *ngIf="submitted && f['image'].errors" class="text-danger">
+        <div *ngIf="f['image'].errors['required']">L'image est requise.</div>
+      </div>
     </div>
 
-   
-   <!-- Champ Image -->
-   <div class="form-group">
-    <label for="image">l'image</label>
-    <input id="image" type="file" (change)="onFileSelected($event, 'image')" required>
-    <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">L'URL de l'image est requise.</div>
- </div>
- <div *ngIf="image">
-  <h3>Aperçu de l'image :</h3>
-  <img [src]="image" alt="Image Preview" style="max-width: 50%; height: 50%;">
-</div>
+    <div *ngIf="image" class="mb-3">
+      <h5>Aperçu de l'image :</h5>
+      <img [src]="image" alt="Aperçu de l'image" style="max-width: 200px; max-height: 200px;" />
+    </div>
 
-    <button type="submit" class="btn btn-primary">Ajouter le pack</button>
+    <button type="submit" class="btn btn-primary">Ajouter le Pack</button>
   </form>
 </div>

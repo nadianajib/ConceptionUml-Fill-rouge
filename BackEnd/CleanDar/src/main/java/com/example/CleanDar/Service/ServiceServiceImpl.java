@@ -1,7 +1,9 @@
 package com.example.CleanDar.Service;
 
+import com.example.CleanDar.Dao.PackRepository;
 import com.example.CleanDar.Dao.ServiceNettoyageRepository;
 import com.example.CleanDar.Dto.ServiceNettoyageDto;
+import com.example.CleanDar.model.Pack;
 import com.example.CleanDar.model.ServiceNettoyage;
 import com.example.CleanDar.model.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 @org.springframework.stereotype.Service
 public class ServiceServiceImpl implements ServiceService {
 
+    @Autowired
+    private PackRepository packRepository;
     @Autowired
     private ServiceNettoyageRepository serviceNettoyageRepository;
 
@@ -29,17 +33,30 @@ public class ServiceServiceImpl implements ServiceService {
                     dto.setDescription(service.getDescription());
                     dto.setPrix(service.getPrix());
                     dto.setImage(service.getImage());
-                    dto.setTypeService(String.valueOf(service.getTypeService()));
+                    dto.setTypeService(service.getTypeService());
                     return dto;
                 })
                 .collect(Collectors.toList());
     }
+
     @Override
     public ServiceNettoyageDto addService(ServiceNettoyageDto serviceNettoyageDto) {
         ServiceNettoyage serviceNettoyage = convertToEntity(serviceNettoyageDto);
+
+        // Vérifier si pack_id est null et ne pas l'associer si c'est le cas
+        if (serviceNettoyageDto.getPack_id() != null) {
+            Pack pack = packRepository.findById(serviceNettoyageDto.getPack_id())
+                    .orElseThrow(() -> new RuntimeException("Pack non trouvé"));
+            serviceNettoyage.setPack(pack);
+        } else {
+            serviceNettoyage.setPack(null); // S'assurer que le pack est null
+        }
+
         ServiceNettoyage savedServiceNettoyage = serviceNettoyageRepository.save(serviceNettoyage);
         return convertToDto(savedServiceNettoyage);
     }
+
+
     @Override
     public List<ServiceNettoyageDto> getAllServices() {
         return serviceNettoyageRepository.findAll().stream()
@@ -61,7 +78,7 @@ public class ServiceServiceImpl implements ServiceService {
         existingServiceNettoyage.setDescription(serviceNettoyageDto.getDescription());
         existingServiceNettoyage.setPrix(serviceNettoyageDto.getPrix());
         existingServiceNettoyage.setImage(serviceNettoyageDto.getImage());
-        existingServiceNettoyage.setTypeService(TypeService.valueOf(serviceNettoyageDto.getTypeService()));
+        existingServiceNettoyage.setTypeService(serviceNettoyageDto.getTypeService());
 
         ServiceNettoyage updatedServiceNettoyage = serviceNettoyageRepository.save(existingServiceNettoyage);
         return convertToDto(updatedServiceNettoyage);
@@ -78,7 +95,8 @@ public class ServiceServiceImpl implements ServiceService {
         dto.setDescription(serviceNettoyage.getDescription());
         dto.setPrix(serviceNettoyage.getPrix());
         dto.setImage(serviceNettoyage.getImage());
-        dto.setTypeService(serviceNettoyage.getTypeService().name());
+        dto.setTypeService(serviceNettoyage.getTypeService());
+        dto.setPack_id(serviceNettoyage.getPack().getId());
         return dto;
     }
 
@@ -88,7 +106,8 @@ public class ServiceServiceImpl implements ServiceService {
         serviceNettoyage.setDescription(dto.getDescription());
         serviceNettoyage.setPrix(dto.getPrix());
         serviceNettoyage.setImage(dto.getImage());
-        serviceNettoyage.setTypeService(TypeService.valueOf(dto.getTypeService()));
+        serviceNettoyage.setTypeService(dto.getTypeService());
+        serviceNettoyage.setPack(packRepository.getById(dto.getPack_id()));
         return serviceNettoyage;
     }
 

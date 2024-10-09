@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { AddServiceComponent } from './add-service/add-service.component';
 import { ServiceListComponent } from './service-list/service-list.component';
 import { ServiceEditComponent } from './service-edit/service-edit.component';
+import { PackServiceComponent } from './pack-service/pack-service.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashbordComponent, children: [
@@ -30,6 +31,8 @@ const routes: Routes = [
   {path:  'AddService', component: AddServiceComponent},
   {path:  'service-list', component: ServiceListComponent},
   { path: 'service-edit/:id', component: ServiceEditComponent },
+  { path: 'service/pack/:packId', component: PackServiceComponent },
+
 
 
 

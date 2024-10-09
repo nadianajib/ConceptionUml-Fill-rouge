@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/services/Admin")
+@RequestMapping("/api/services")
 @CrossOrigin(origins = "http://localhost:4200")
 
 public class ServiceController {
@@ -26,14 +26,15 @@ public class ServiceController {
     @Autowired
     private ServiceService serviceService;
 
-    @GetMapping("/pack/{packId}")
-    public List<ServiceNettoyageDto> getServicesByPackId(@PathVariable Long packId) {
-        return serviceService.getAllServicesByPackId(packId);
-    }
     @PostMapping("/add")
     public ResponseEntity<ServiceNettoyageDto> addService(@RequestBody ServiceNettoyageDto serviceNettoyageDto) {
-        ServiceNettoyageDto newService = serviceCrudService.addService(serviceNettoyageDto);
-        return new ResponseEntity<>(newService, HttpStatus.CREATED);
+        try {
+            ServiceNettoyageDto newService = serviceCrudService.addService(serviceNettoyageDto);
+            return new ResponseEntity<>(newService, HttpStatus.CREATED);
+        } catch (Exception e) {
+            // Gérer les exceptions (par exemple, pack non trouvé, etc.)
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/all")
@@ -41,6 +42,13 @@ public class ServiceController {
         List<ServiceNettoyageDto> services = serviceCrudService.getAllServices();
         return ResponseEntity.ok(services);
     }
+
+    @GetMapping("/pack/{packId}")
+    public ResponseEntity<List<ServiceNettoyageDto>> getServicesByPackId(@PathVariable Long packId) {
+        List<ServiceNettoyageDto> services = serviceService.getAllServicesByPackId(packId);
+        return ResponseEntity.ok(services);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<ServiceNettoyageDto> getServiceById(@PathVariable Long id) {

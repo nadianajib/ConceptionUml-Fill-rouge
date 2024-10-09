@@ -74,7 +74,7 @@ public class PackServiceImpl implements PackService {
         Pack pack = new Pack();
 
         // Remplir les attributs du pack
-        pack.setPrixTotal(packDto.getPrixTotal());
+        pack.setPrixTotal(0.0);
         pack.setReduction(packDto.getReduction());
         pack.setTitre(packDto.getTitre());
         pack.setDescription(packDto.getDescription());

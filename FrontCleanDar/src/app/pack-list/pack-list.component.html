@@ -1,8 +1,8 @@
 <ng-container *ngIf="role === 'ADMIN'">
-  <button class="learn-more-btn" (click)="Ajouter()">Ajouter</button>
+  <button class="learn-more-btn-admin" (click)="Ajouter()">Ajouter</button>
 </ng-container>
 <div class="pack-container">
-  <div class="pack-card" *ngFor="let pack of packs">
+  <div (click)="toServiceList(pack.id)" class="pack-card" *ngFor="let pack of packs">
     <img class="pack-image" [src]="pack.image" alt="">
     <h3>{{ pack.titre }}</h3>
     <p>{{ pack.description }}</p>
@@ -13,12 +13,10 @@
         <button class="learn-more-btn" (click)="deletePack(pack.id)">Supprimer</button>
       </ng-container>
 
-
       <!-- Bouton de réservation pour les utilisateurs -->
-<ng-container *ngIf="role === 'USER'">
-  <button class="learn-more-btn" (click)="ajouterReservation(pack.id)">Ajouter une réservation</button>
-</ng-container>
-
+      <ng-container *ngIf="role === 'USER'">
+        <button class="learn-more-btn" (click)="ajouterReservation(pack.id)">Ajouter une réservation</button>
+      </ng-container>
     </div>
   </div>
 </div>

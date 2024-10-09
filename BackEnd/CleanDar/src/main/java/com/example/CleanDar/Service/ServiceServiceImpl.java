@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -20,6 +21,8 @@ public class ServiceServiceImpl implements ServiceService {
     private PackRepository packRepository;
     @Autowired
     private ServiceNettoyageRepository serviceNettoyageRepository;
+    @Autowired
+    private PackServiceImpl packServiceImpl;
 
 
     @Override
@@ -53,6 +56,11 @@ public class ServiceServiceImpl implements ServiceService {
         }
 
         ServiceNettoyage savedServiceNettoyage = serviceNettoyageRepository.save(serviceNettoyage);
+        //Tester si l'ajout est effectuer et le pack existe
+        if(savedServiceNettoyage.getId()!=null && savedServiceNettoyage.getPack()!=null){
+            Long packId=savedServiceNettoyage.getPack().getId();
+            packServiceImpl.IncrementerPrixService(packId,savedServiceNettoyage.getPrix());
+        }
         return convertToDto(savedServiceNettoyage);
     }
 
@@ -85,6 +93,11 @@ public class ServiceServiceImpl implements ServiceService {
     }
     @Override
     public void deleteService(Long id) {
+        ServiceNettoyage serviceNettoyage = serviceNettoyageRepository.findById(id).get();
+        if(serviceNettoyage.getId()!=null && serviceNettoyage.getPack()!=null){
+            Long packId=serviceNettoyage.getPack().getId();
+            packServiceImpl.DecrementerPrixService(packId,serviceNettoyage.getPrix());
+        }
         serviceNettoyageRepository.deleteById(id);
     }
 

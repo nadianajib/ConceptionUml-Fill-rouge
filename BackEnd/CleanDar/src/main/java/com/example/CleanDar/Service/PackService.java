@@ -18,5 +18,10 @@ public interface PackService {
 
     Pack createPack(PackDto packDto);
 
+
+    Pack IncrementerPrixService(Long packId, Double prixService);
+
+    Pack DecrementerPrixService(Long packId, Double prixService);
+
     Pack modifierReduction(PackDto packDto, Double reduction);
 }

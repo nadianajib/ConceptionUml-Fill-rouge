@@ -135,6 +135,25 @@ public class PackServiceImpl implements PackService {
 //        return packRepository.save(pack);
 //    }
     @Override
+    public Pack IncrementerPrixService(Long packId, Double prixService){
+        PackDto dto = new PackDto();
+        Pack pack = packRepository.findById(packId).get();
+        Double prixTotal = pack.getPrixTotal();
+        Double prixFinal = prixTotal + prixService;
+
+        pack.setPrixTotal(prixFinal);
+        return packRepository.save(pack);
+    }
+    @Override
+    public Pack DecrementerPrixService(Long packId, Double prixService){
+        PackDto dto = new PackDto();
+        Pack pack = packRepository.findById(packId).get();
+        Double prixTotal = pack.getPrixTotal();
+        Double prixFinal = prixTotal - prixService;
+        pack.setPrixTotal(prixFinal);
+        return packRepository.save(pack);
+    }
+    @Override
     public Pack modifierReduction(PackDto packDto, Double reduction){
         Double prixTotal = packDto.getPrixTotal();
         Double montantReduction = prixTotal * reduction;

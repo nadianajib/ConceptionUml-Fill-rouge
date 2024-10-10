@@ -8,12 +8,12 @@ import { DashbordComponent } from './dashbord/dashbord.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AddPackComponent } from './add-pack/add-pack.component';
 import { PackListComponent } from './pack-list/pack-list.component';
-import { UpdateReservationComponent } from './update-reservation/update-reservation.component';
 import { HomeComponent } from './home/home.component';
 import { AddServiceComponent } from './add-service/add-service.component';
 import { ServiceListComponent } from './service-list/service-list.component';
 import { ServiceEditComponent } from './service-edit/service-edit.component';
 import { PackServiceComponent } from './pack-service/pack-service.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashbordComponent, children: [
@@ -26,12 +26,13 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'list-reservation', component: ListReservationComponent },
   { path: 'add-pack', component: AddPackComponent },
-  { path: 'update-reservation/:id', component: UpdateReservationComponent },
   {path:  'pack-list', component: PackListComponent},
   {path:  'AddService', component: AddServiceComponent},
   {path:  'service-list', component: ServiceListComponent},
   { path: 'service-edit/:id', component: ServiceEditComponent },
   { path: 'service/pack/:packId', component: PackServiceComponent },
+  {path:'about', component: AboutComponent},
+
 
 
 

@@ -89,6 +89,10 @@ public class ServiceServiceImpl implements ServiceService {
         existingServiceNettoyage.setTypeService(serviceNettoyageDto.getTypeService());
 
         ServiceNettoyage updatedServiceNettoyage = serviceNettoyageRepository.save(existingServiceNettoyage);
+
+        Long packId=existingServiceNettoyage.getPack().getId();
+
+        packServiceImpl.IncrementerPrixService(packId,existingServiceNettoyage.getPrix());
         return convertToDto(updatedServiceNettoyage);
     }
     @Override
@@ -101,17 +105,24 @@ public class ServiceServiceImpl implements ServiceService {
         serviceNettoyageRepository.deleteById(id);
     }
 
-    private ServiceNettoyageDto convertToDto(ServiceNettoyage serviceNettoyage) {
+    private ServiceNettoyageDto convertToDto(ServiceNettoyage service) {
         ServiceNettoyageDto dto = new ServiceNettoyageDto();
-        dto.setId(serviceNettoyage.getId());
-        dto.setNom(serviceNettoyage.getNom());
-        dto.setDescription(serviceNettoyage.getDescription());
-        dto.setPrix(serviceNettoyage.getPrix());
-        dto.setImage(serviceNettoyage.getImage());
-        dto.setTypeService(serviceNettoyage.getTypeService());
-        dto.setPack_id(serviceNettoyage.getPack().getId());
+        dto.setId(service.getId());
+        dto.setNom(service.getNom());
+        dto.setDescription(service.getDescription());
+        dto.setPrix(service.getPrix());
+        dto.setImage(service.getImage());
+        dto.setTypeService(service.getTypeService());
+
+        // Vérifier si le pack est null avant d'accéder à ses attributs
+        if (service.getPack() != null) {
+            dto.setPack_id(service.getPack().getId());
+        } else {
+            dto.setPack_id(null);  // Ou vous pouvez choisir de ne pas définir cet attribut
+        }
         return dto;
     }
+
 
     private ServiceNettoyage convertToEntity(ServiceNettoyageDto dto) {
         ServiceNettoyage serviceNettoyage = new ServiceNettoyage();

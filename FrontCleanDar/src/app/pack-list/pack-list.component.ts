@@ -58,6 +58,20 @@ export class PackListComponent implements OnInit {
       });
     }
   }
+  editePack(id: number) {
+    console.log('ID à supprimer :', id); // Ajoute un log pour le débogage
+    if (confirm('Voulez-vous vraiment supprimer ce pack ?')) {
+      this.packService.deletePack(id).subscribe({
+        next: () => {
+          console.log('Pack supprimé avec succès');
+          this.loadPacks(); // Recharge les packs après suppression
+        },
+        error: (error) => {
+          console.error('Erreur lors de la suppression du pack', error);
+        }
+      });
+    }
+  }
   
   Ajouter(){
     this.router.navigate(["/add-pack"]);

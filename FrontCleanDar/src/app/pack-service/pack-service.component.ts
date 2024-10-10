@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Service } from '../models/Service';
 import { ServiceCrudService } from '../Services/crudservice.service';
 
@@ -16,7 +16,8 @@ export class PackServiceComponent implements OnInit {
 
   constructor(
     private crudService: ServiceCrudService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -60,25 +61,36 @@ export class PackServiceComponent implements OnInit {
       }
     );
   }
+  onAddService(): void {
+    this.router.navigate(['/AddService']); // Remplacez par la route de votre formulaire d'ajout de service
+}
+
+  updateService(serviceId: number): void {
+    this.router.navigate(['/service-edit', serviceId]); // Redirige vers le composant de mise à jour
+  }
 
   retryLoading(): void {
     if (this.packId) {
       this.loadServicesByPackId(this.packId);
     }
   }
-  deleteServices(id: number): void {
-    console.log(`Tentative de suppression du service avec ID: ${id}`);
-    if (confirm('Voulez-vous vraiment supprimer cette réservation ?')) {
-        this.crudService.deleteServices(id).subscribe({
-            next: () => {
-                console.log('Réservation supprimée avec succès');
-                this.loadServicesByPackId(this.packId); // Recharge les réservations après la suppression
-            },
-            error: (error) => {
-                console.error('Erreur lors de la suppression de la réservation', error);
-            }
-        });
+  deleteServices(id: number | undefined): void {
+    if (id === undefined) {
+      this.errorMessage = 'Impossible de supprimer un service sans identifiant';
+      return;
     }
-}
+
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce service ?')) {
+      this.crudService.deleteService(id).subscribe(
+        () => {
+          this.services = this.services.filter(service => service.id !== id);
+        },
+        error => {
+          this.errorMessage = 'Erreur lors de la suppression du service';
+          console.error(error);
+        }
+      );
+    }
+  }
 
 }

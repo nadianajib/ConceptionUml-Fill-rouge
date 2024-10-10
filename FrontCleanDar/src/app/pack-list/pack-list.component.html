@@ -10,7 +10,8 @@
       <span class="pack-price">{{ pack.prixTotal }} MAD</span>
 
       <ng-container *ngIf="role === 'ADMIN'">
-        <button class="learn-more-btn" (click)="deletePack(pack.id)">Supprimer</button>
+        <button class="learn-more-btn" (click)="deletePack(pack.id)"><i class="material-icons">delete</i></button>
+        <button class="learn-more-btn" (click)="editePack(pack.id)"><i class="material-icons">edite</i></button>
       </ng-container>
 
       <!-- Bouton de réservation pour les utilisateurs -->

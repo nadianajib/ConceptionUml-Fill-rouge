@@ -94,7 +94,7 @@ public class PackServiceImpl implements PackService {
         pack.setDescription(packDto.getDescription());
         pack.setImage(packDto.getImage());
 
-        Pack packReduction=this.modifierReduction(packDto, packDto.getReduction());
+        Pack packReduction=this.modifierReduction(pack, packDto.getReduction());
         pack.setReduction(packReduction.getReduction());
         pack.setPrixTotal(packReduction.getPrixTotal());
 
@@ -103,16 +103,16 @@ public class PackServiceImpl implements PackService {
         return packRepository.save(pack);
     }
 
-    public Pack modifierReduction(PackDto packDto, Double reduction){
+    public Pack modifierReduction(Pack packDto, Double reduction){
         Double prixTotal = packDto.getPrixTotal();
-        Double montantReduction = prixTotal * reduction;
-        Double prixFinal = prixTotal - montantReduction;
+        System.out.println(prixTotal);
+        Double totalsansReduction = prixTotal - packDto.getReduction();
+        Double montantReduction = totalsansReduction * reduction;
+        Double prixFinal = totalsansReduction + montantReduction;
         Pack pack = new Pack();
         pack.setPrixTotal(prixFinal);
         pack.setReduction(montantReduction);
         return pack;
-
-
     }
 
     @Override

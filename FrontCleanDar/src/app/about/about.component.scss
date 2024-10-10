@@ -1,0 +1,42 @@
+.about-us-section {
+    padding: 60px 20px;
+    background-color: #f8f9fa; /* Couleur de fond légère */
+    text-align: center;
+  
+    h2 {
+      color: #0056b3; /* Couleur bleue foncée */
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+  
+    p {
+      color: #333;
+      font-size: 1.125rem; /* Taille de police légèrement augmentée */
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  
+    /* Responsive */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 2rem;
+      }
+  
+      p {
+        font-size: 1rem;
+        padding: 0 15px;
+      }
+    }
+  
+    @media (max-width: 576px) {
+      h2 {
+        font-size: 1.75rem;
+      }
+  
+      p {
+        font-size: 0.875rem;
+      }
+    }
+  }
+  

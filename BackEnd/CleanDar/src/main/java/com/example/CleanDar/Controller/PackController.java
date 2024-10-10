@@ -63,4 +63,15 @@ public class PackController {
             return ResponseEntity.notFound().build();  // Retourne un 404 Not Found si la réservation n'est pas trouvée
         }
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<Pack> updatePack(@PathVariable("id") Long packId, @RequestBody PackDto packDto) {
+        try {
+            // Appeler le service pour modifier le pack
+            Pack updatedPack = packService.editPack(packId, packDto);
+            return new ResponseEntity<>(updatedPack, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            // Si une exception est levée, retourner une réponse d'erreur
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
 }

@@ -1,25 +1,89 @@
-// src/app/components/pack-service/pack-service.component.scss
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
 
-.service-item {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #f9f9f9;
-  
-    h3 {
-      margin: 0 0 5px;
-    }
-  
-    .service-image {
-      max-width: 100%;
-      height: auto;
-      margin-top: 10px;
-    }
+.service-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.service-title {
+  font-size: 1.2rem;
+  color: #0066cc;
+  margin: 15px 15px 10px;
+}
+
+.service-description {
+  font-size: 0.9rem;
+  color: #666666;
+  margin: 0 15px 10px;
+  flex-grow: 1;
+}
+
+.service-price {
+  font-size: 1.1rem;
+  color: #00aa00;
+  font-weight: bold;
+  margin: 0 15px 10px;
+}
+
+.btn-delete {
+  background-color: #ff0000;
+  ;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0077cc;
   }
-  
-  .error-message {
-    color: red;
-    font-weight: bold;
+}
+.btn-update{
+  background-color: #3cb371;
+  ;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #3cb371;
   }
-  
+}
+.error-message {
+  color: #ff0000;
+  background-color: #ffeeee;
+  border: 1px solid #ff0000;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 20px;
+  text-align: center;
+}
+.btn-success {
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}

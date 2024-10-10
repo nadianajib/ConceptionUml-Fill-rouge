@@ -19,7 +19,6 @@ import { ListReservationComponent } from './list-reservation/list-reservation.co
 import { NavbarComponent } from './navbar/navbar.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UpdateReservationComponent } from './update-reservation/update-reservation.component';
 import { AddPackComponent } from './add-pack/add-pack.component';
 import { PackListComponent } from './pack-list/pack-list.component';
 import { HomeComponent } from './home/home.component';
@@ -27,6 +26,7 @@ import { AddServiceComponent } from './add-service/add-service.component';
 import { ServiceListComponent } from './service-list/service-list.component';
 import { ServiceEditComponent } from './service-edit/service-edit.component';
 import { PackServiceComponent } from './pack-service/pack-service.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,6 @@ import { PackServiceComponent } from './pack-service/pack-service.component';
     LoginComponent,
     ListReservationComponent,
     NavbarComponent,
-    UpdateReservationComponent,
     DashbordComponent,
     AddPackComponent,
     PackListComponent,
@@ -45,6 +44,7 @@ import { PackServiceComponent } from './pack-service/pack-service.component';
     ServiceListComponent,
     ServiceEditComponent,
     PackServiceComponent,
+    AboutComponent,
     
 
   ],

@@ -25,7 +25,8 @@ export class PackService {
     return this.http.delete(`${this.apiUrl}/delete/${id}`);
   }
   
-  
+  editpack(id: number, pack:Pack): Observable<any> {
+    return this.http.put<Pack>(`${this.apiUrl}/${id}`, pack);
+  }
 
-  
 }

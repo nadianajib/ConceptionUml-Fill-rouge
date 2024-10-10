@@ -17,7 +17,6 @@ export class PackListComponent implements OnInit {
               private router: Router,
               private registrerService: RegistrerService) {}
               
-
   ngOnInit(): void {
     this.loadPacks();
     this.getUserRole();
@@ -39,8 +38,9 @@ export class PackListComponent implements OnInit {
       }
     );
   }
-   // Méthode pour rediriger vers le formulaire d'ajout de réservation
-   ajouterReservation(id: number) {
+
+  // Méthode pour rediriger vers le formulaire d'ajout de réservation
+  ajouterReservation(id: number) {
     this.router.navigate(['/add-reservation', id]); 
   }
 
@@ -58,26 +58,24 @@ export class PackListComponent implements OnInit {
       });
     }
   }
+
+  // Redirection vers le formulaire d'édition du pack
   editePack(id: number) {
-    console.log('ID à supprimer :', id); // Ajoute un log pour le débogage
-    if (confirm('Voulez-vous vraiment supprimer ce pack ?')) {
-      this.packService.deletePack(id).subscribe({
-        next: () => {
-          console.log('Pack supprimé avec succès');
-          this.loadPacks(); // Recharge les packs après suppression
-        },
-        error: (error) => {
-          console.error('Erreur lors de la suppression du pack', error);
-        }
-      });
-    }
+    console.log('ID à modifier :', id); // Log pour le débogage
+    this.router.navigate(['/edit-pack', id]); // Redirection vers le formulaire d'édition
+  }
+
+  // Redirection vers le formulaire d'édition de réservation
+  editeReservation(id: number) {
+    this.router.navigate([`/update-reservation/${id}`]);
   }
   
-  Ajouter(){
+  // Redirection vers le formulaire d'ajout de pack
+  Ajouter() {
     this.router.navigate(["/add-pack"]);
   }
+
   toServiceList(packId: number) {
     this.router.navigate([`service/pack/${packId}`]);
-}
-
+  }
 }

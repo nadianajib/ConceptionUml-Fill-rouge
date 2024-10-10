@@ -14,6 +14,8 @@ import { ServiceListComponent } from './service-list/service-list.component';
 import { ServiceEditComponent } from './service-edit/service-edit.component';
 import { PackServiceComponent } from './pack-service/pack-service.component';
 import { AboutComponent } from './about/about.component';
+import { EditPackComponent } from './edit-pack/edit-pack.component';
+import { UpdateReservationComponent } from './update-reservation/update-reservation.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashbordComponent, children: [
@@ -32,6 +34,10 @@ const routes: Routes = [
   { path: 'service-edit/:id', component: ServiceEditComponent },
   { path: 'service/pack/:packId', component: PackServiceComponent },
   {path:'about', component: AboutComponent},
+  { path: 'edit-pack/:id', component: EditPackComponent },
+  { path: 'update-reservation/:id', component: UpdateReservationComponent },
+
+
 
 
 

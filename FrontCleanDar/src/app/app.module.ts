@@ -8,8 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddReservationComponent } from './add-reservation/add-reservation.component';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RegistrercomponentComponent } from './resgistercomponent/resgistercomponent.component';
 import { LoginComponent } from './login/login.component';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
@@ -27,6 +27,8 @@ import { ServiceListComponent } from './service-list/service-list.component';
 import { ServiceEditComponent } from './service-edit/service-edit.component';
 import { PackServiceComponent } from './pack-service/pack-service.component';
 import { AboutComponent } from './about/about.component';
+import { EditPackComponent } from './edit-pack/edit-pack.component';
+import { UpdateReservationComponent } from './update-reservation/update-reservation.component';
 
 @NgModule({
   declarations: [
@@ -45,35 +47,28 @@ import { AboutComponent } from './about/about.component';
     ServiceEditComponent,
     PackServiceComponent,
     AboutComponent,
-    
-
+    EditPackComponent,
+    UpdateReservationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+  
     HttpClientModule,  
     FormsModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule, 
-    MatInputModule,
     MatIconModule,
-
-
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
-    [RegistrerService,
-      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true }
-    ],
+    RegistrerService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

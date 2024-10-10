@@ -22,13 +22,12 @@ export class ReservationService {
   }
 
   // Obtenir une réservation par ID
-  getReservationById(id: number): Observable<Reservation> {
-    return this.http.get<Reservation>(`${this.apiUrl}/${id}`);
+  updateReservation(id: number, reservation: Reservation): Observable<Reservation> {
+    return this.http.put<Reservation>(`${this.apiUrl}/update/${id}`, reservation);
   }
 
-  // Mettre à jour une réservation
-  updateReservation(id: number, reservation: Reservation): Observable<Reservation> {
-    return this.http.put<Reservation>(`${this.apiUrl}/${id}`, reservation);
+  getReservationById(id: number): Observable<Reservation> {
+    return this.http.get<Reservation>(`${this.apiUrl}/${id}`);
   }
    // Supprimer une réservation
   deleteReservation(id: number): Observable<void> {

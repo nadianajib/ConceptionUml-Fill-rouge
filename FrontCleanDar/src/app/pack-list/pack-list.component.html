@@ -1,6 +1,7 @@
 <ng-container *ngIf="role === 'ADMIN'">
   <button class="learn-more-btn-admin" (click)="Ajouter()">Ajouter</button>
 </ng-container>
+
 <div class="pack-container">
   <div (click)="toServiceList(pack.id)" class="pack-card" *ngFor="let pack of packs">
     <img class="pack-image" [src]="pack.image" alt="">
@@ -10,13 +11,25 @@
       <span class="pack-price">{{ pack.prixTotal }} MAD</span>
 
       <ng-container *ngIf="role === 'ADMIN'">
-        <button class="learn-more-btn" (click)="deletePack(pack.id)"><i class="material-icons">delete</i></button>
-        <button class="learn-more-btn" (click)="editePack(pack.id)"><i class="material-icons">edite</i></button>
+        <button class="learn-more-btn" (click)="deletePack(pack.id)">
+          <i class="material-icons">delete</i>
+        </button>
+        <button class="learn-more-btn" (click)="editePack(pack.id)">
+          <i class="material-icons">edit</i>
+        </button>
       </ng-container>
 
       <!-- Bouton de réservation pour les utilisateurs -->
       <ng-container *ngIf="role === 'USER'">
-        <button class="learn-more-btn" (click)="ajouterReservation(pack.id)">Ajouter une réservation</button>
+        <button class="learn-more-btn" (click)="ajouterReservation(pack.id)">
+          <i class="material-icons">add_circle</i>
+        </button>
+        
+        
+        <!-- <button class="learn-more-btn" (click)="ajouterReservation(pack.id)">Ajouter une réservation</button> -->
+        <button class="learn-more-btn" (click)="editeReservation(pack.id)">
+          <i class="material-icons">edit</i><!-- Icône pour le bouton d'édition -->
+        </button>
       </ng-container>
     </div>
   </div>

@@ -1,66 +1,65 @@
-// import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute, Router } from '@angular/router';
-// import { ReservationService } from '../Services/reservation.service';
-// import { Reservation } from '../models/Reservation';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Reservation } from '../models/Reservation';
+import { ReservationService } from '../Services/reservation.service';
 
-// @Component({
-//   selector: 'app-update-reservation',
-//   templateUrl: './update-reservation.component.html',
-//   styleUrls: ['./update-reservation.component.scss']
-// })
-// export class UpdateReservationComponent implements OnInit {
-//   reservationId!: number; // ID de la réservation à mettre à jour
-//   reservation!: Reservation; // Détails de la réservation
-//   loading: boolean = true; // État de chargement
+@Component({
+  selector: 'app-update-reservation',
+  templateUrl: './update-reservation.component.html',
+  styleUrls: ['./update-reservation.component.scss']
+})
+export class UpdateReservationComponent implements OnInit {
+  reservation: Reservation = {
+    id: 0,
+    dateDebut: '',
+    dateFin: '',
+    packId: 0,
+    utilisateurId: 0
+  };
+  reservationId: number | undefined;
 
-//   constructor(
-//     private reservationService: ReservationService,
-//     private route: ActivatedRoute,
-//     public router: Router // Router injecté ici
-//   ) {}
+  constructor(
+    private reservationService: ReservationService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-//   ngOnInit(): void {
-//     // Récupérer l'ID de la réservation à partir de l'URL
-//     this.reservationId = Number(this.route.snapshot.paramMap.get('id'));
-//     console.log('ID de la réservation récupéré:', this.reservationId); // Vérifiez ce qui est récupéré
-//     this.loadReservationDetails();
-//   }
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.reservationId = Number(id);
+      this.getReservationById(this.reservationId);
+    } else {
+      console.error('Reservation ID is undefined');
+      this.router.navigate(['/reservations']); // Redirigez l'utilisateur si l'ID n'est pas défini
+    }
+  }
 
-//   // Charger les détails de la réservation existante
-//   loadReservationDetails(): void {
-//     if (this.reservationId <= 0) {
-//       alert('ID de réservation invalide.');
-//       this.loading = false;
-//       return;
-//     }
-    
-//     console.log('Récupération des détails pour l\'ID:', this.reservationId);
-//     this.reservationService.getReservationById(this.reservationId).subscribe({
-//         next: (data) => {
-//             console.log('Détails de la réservation:', data);
-//             this.reservation = data;
-//             this.loading = false;
-//         },
-//         error: (error) => {
-//             console.error('Erreur lors de la récupération des détails:', error);
-//             this.loading = false;
-//             alert('Erreur lors du chargement des détails de la réservation.');
-//         }
-//     });
-//   }
+  getReservationById(id: number): void {
+    this.reservationService.getReservationById(id).subscribe(
+      (data: Reservation) => {
+        this.reservation = data;
+      },
+      (error) => {
+        console.error('Error fetching reservation:', error);
+      }
+    );
+  }
 
-//   // Méthode pour mettre à jour la réservation
-//   updateReservation(): void {
-//     this.reservationService.updateReservation(this.reservationId, this.reservation).subscribe({
-//       next: () => {
-//         // Rediriger ou afficher un message de succès
-//         alert('Réservation mise à jour avec succès !');
-//         this.router.navigate(['/list-reservation']); // Redirection après la mise à jour
-//       },
-//       error: (error) => {
-//         console.error('Erreur lors de la mise à jour de la réservation:', error);
-//         alert('Erreur lors de la mise à jour de la réservation.');
-//       }
-//     });
-//   }
-// }
+  updateReservation(): void {
+    // Vérifiez que reservationId n'est pas undefined avant la mise à jour
+    if (this.reservationId) {
+      this.reservationService.updateReservation(this.reservationId, this.reservation).subscribe(
+        () => {
+          alert('Reservation updated successfully!');
+          this.router.navigate(['/reservations']); // Rediriger vers la liste des réservations
+        },
+        (error) => {
+          console.error('Error updating reservation:', error);
+        }
+      );
+    } else {
+      console.error('Reservation ID is undefined during update');
+    }
+  }
+}

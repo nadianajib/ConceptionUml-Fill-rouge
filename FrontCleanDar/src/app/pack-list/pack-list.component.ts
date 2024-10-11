@@ -50,7 +50,8 @@ export class PackListComponent implements OnInit {
       this.packService.deletePack(id).subscribe({
         next: () => {
           console.log('Pack supprimé avec succès');
-          this.loadPacks(); // Recharge les packs après suppression
+          this.loadPacks();
+          this.router.navigate(['/pack-list']); // Recharge les packs après suppression
         },
         error: (error) => {
           console.error('Erreur lors de la suppression du pack', error);

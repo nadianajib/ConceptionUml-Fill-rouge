@@ -26,11 +26,8 @@
     </div>
 
     <div class="input-group">
-      <label for="packId">ID du Pack*</label>
-      <div class="input-wrapper">
-        <i class="fas fa-box"></i>
-        <input id="packId" formControlName="packId" type="number" placeholder="Entrez l'ID du pack">
-      </div>
+      
+      
       <div class="error-message" *ngIf="reservationForm.get('packId')?.hasError('required')">
         L'ID du pack est requis.
       </div>

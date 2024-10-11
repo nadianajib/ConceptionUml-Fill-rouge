@@ -57,12 +57,14 @@ export class EditPackComponent implements OnInit {
         description: this.editPackForm.value.description,
         prixTotal: this.editPackForm.value.prixTotal,
         reduction: this.editPackForm.value.reduction,
-        id: 0,
+        id: this.packId,
         image: ''
     };
 
     this.packService.editPack(this.packId, editPack).subscribe({
       next: () => {
+        console.log(editPack);
+        console.log(this.packId);
         this.router.navigate(['/pack-list']); // Rediriger vers la liste des packs après la mise à jour
       },
       error: (err) => {

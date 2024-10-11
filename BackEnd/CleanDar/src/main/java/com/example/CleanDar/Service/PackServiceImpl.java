@@ -25,31 +25,6 @@ public class PackServiceImpl implements PackService {
     @Autowired
     private ServiceServiceImpl serviceServiceImpl;
 
-//
-//    @Override
-//    public PackDto createPack(PackDto packDTO) {
-//        // Convert DTO to entity
-//        Pack pack = new Pack();
-//        pack.setPrixTotal(packDTO.getPrixTotal());
-//        pack.setReduction(packDTO.getReduction());
-//        pack.setTitre(packDTO.getTitre());
-//        pack.setImage(packDTO.getImage());
-//        pack.setDescription(packDTO.getDescription());
-//
-//        // Save entity
-//        Pack savedPack = packRepository.save(pack);
-//
-//        // Convert entity back to DTO
-//        PackDto result = new PackDto();
-//        result.setId(savedPack.getId());
-//        result.setPrixTotal(savedPack.getPrixTotal());
-//        result.setReduction(savedPack.getReduction());
-//        result.setTitre(savedPack.getTitre());
-//        result.setImage(savedPack.getImage());
-//        result.setDescription(savedPack.getDescription());
-//
-//        return result;
-//    }
 
     @Override
     public List<PackDto> getAllPacks() {

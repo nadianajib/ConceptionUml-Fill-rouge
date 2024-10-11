@@ -94,25 +94,29 @@ public class PackServiceImpl implements PackService {
         pack.setDescription(packDto.getDescription());
         pack.setImage(packDto.getImage());
 
-        Pack packReduction=this.modifierReduction(pack, packDto.getReduction());
-        pack.setReduction(packReduction.getReduction());
-        pack.setPrixTotal(packReduction.getPrixTotal());
+        modifierReduction(pack, packDto.getReduction());
+
 
 
         // Enregistrer les modifications dans la base de données
         return packRepository.save(pack);
     }
 
-    public Pack modifierReduction(Pack packDto, Double reduction){
-        Double prixTotal = packDto.getPrixTotal();
-        System.out.println(prixTotal);
-        Double totalsansReduction = prixTotal - packDto.getReduction();
-        Double montantReduction = totalsansReduction * reduction;
-        Double prixFinal = totalsansReduction + montantReduction;
-        Pack pack = new Pack();
-        pack.setPrixTotal(prixFinal);
-        pack.setReduction(montantReduction);
-        return pack;
+    public void modifierReduction(Pack pack, Double reduction) {
+        Double prixTotal = pack.getPrixTotal();
+        if (reduction <= 100) {
+            Double reductionFinal = reduction / 100;
+            Double montantReduction = prixTotal * reductionFinal;
+            Double prixFinal = prixTotal - montantReduction;
+            System.out.println("pt:" + prixTotal + " montantReduction: " + montantReduction + " prixFinal: " + prixFinal);
+
+            pack.setPrixTotal(prixFinal);
+            pack.setReduction(reduction);
+        } else {
+            System.out.println("reduction doit être inferieur ou égal à 100");
+        }
+
+
     }
 
     @Override

@@ -22,6 +22,8 @@ public class PackServiceImpl implements PackService {
     private PackService packService;
     @Autowired
     private ServiceNettoyageRepository serviceNettoyageRepository;
+    @Autowired
+    private ServiceServiceImpl serviceServiceImpl;
 
 //
 //    @Override
@@ -121,12 +123,16 @@ public class PackServiceImpl implements PackService {
 
     @Override
     public void annulerPack(Long id) {
+        List<ServiceNettoyage> serviceNettoyages=serviceNettoyageRepository.findAllByPackId(id);
+        for (int i = 0; i < serviceNettoyages.size(); i++) {
+            ServiceNettoyage serviceNettoyage=serviceNettoyages.get(i);
+            serviceServiceImpl.deleteService(serviceNettoyage.getId());
+        }
         packRepository.deleteById(id);
     }
 
 
     public Pack IncrementerPrixService(Long packId, Double prixService){
-        PackDto dto = new PackDto();
         Pack pack = packRepository.findById(packId).get();
         Double prixTotal = pack.getPrixTotal();
         Double prixFinal = prixTotal + prixService;

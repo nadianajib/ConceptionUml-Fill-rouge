@@ -52,7 +52,7 @@ export class UpdateReservationComponent implements OnInit {
       this.reservationService.updateReservation(this.reservationId, this.reservation).subscribe(
         () => {
           alert('Reservation updated successfully!');
-          this.router.navigate(['/reservations']); // Rediriger vers la liste des réservations
+          this.router.navigate(['/list-reservation']); // Rediriger vers la liste des réservations
         },
         (error) => {
           console.error('Error updating reservation:', error);
@@ -61,5 +61,8 @@ export class UpdateReservationComponent implements OnInit {
     } else {
       console.error('Reservation ID is undefined during update');
     }
+  }
+  cancelUpdate(): void {
+    this.router.navigate(['/list-reservation']);
   }
 }

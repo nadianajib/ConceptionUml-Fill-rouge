@@ -5,24 +5,19 @@
       <label for="dateDebut">Date de Début:</label>
       <input type="date" id="dateDebut" [(ngModel)]="reservation.dateDebut" name="dateDebut" required class="form-control" />
     </div>
-
     <div class="form-group">
       <label for="dateFin">Date de Fin:</label>
       <input type="date" id="dateFin" [(ngModel)]="reservation.dateFin" name="dateFin" required class="form-control" />
     </div>
-
     <div class="form-group">
       <label for="packId">ID du Pack:</label>
       <input type="number" id="packId" [(ngModel)]="reservation.packId" name="packId" required class="form-control" />
     </div>
-
     <div class="form-group">
       <label for="utilisateurId">ID de l'Utilisateur:</label>
       <input type="number" id="utilisateurId" [(ngModel)]="reservation.utilisateurId" name="utilisateurId" required class="form-control" />
     </div>
-
     <button type="submit" class="btn btn-primary">Mettre à jour la réservation</button>
   </form>
-  <!-- Ajout des mêmes classes au lien -->
-  <a routerLink="/reservations" class="btn btn-secondary btn-block">Annuler</a>
+  <button class="btn btn-secondary" (click)="cancelUpdate()">Annuler</button>
 </div>

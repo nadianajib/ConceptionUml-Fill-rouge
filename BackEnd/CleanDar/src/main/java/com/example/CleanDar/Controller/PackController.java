@@ -4,6 +4,7 @@ package com.example.CleanDar.Controller;
 import com.example.CleanDar.Dto.PackDto;
 import com.example.CleanDar.Service.PackService;
 import com.example.CleanDar.model.Pack;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,15 +64,30 @@ public class PackController {
             return ResponseEntity.notFound().build();  // Retourne un 404 Not Found si la réservation n'est pas trouvée
         }
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<Pack> updatePack(@PathVariable("id") Long packId, @RequestBody PackDto packDto) {
-        try {
-            // Appeler le service pour modifier le pack
-            Pack updatedPack = packService.editPack(packId, packDto);
-            return new ResponseEntity<>(updatedPack, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            // Si une exception est levée, retourner une réponse d'erreur
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Pack> updatePack(@PathVariable("id") Long packId, @RequestBody PackDto packDto) {
+//        try {
+//            // Appeler le service pour modifier le pack
+//            Pack updatedPack = packService.editPack(packId, packDto);
+//            return new ResponseEntity<>(updatedPack, HttpStatus.OK);
+//        } catch (RuntimeException e) {
+//            // Si une exception est levée, retourner une réponse d'erreur
+//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//        }
+//    }
+//}
+@PutMapping("/{id}")
+public ResponseEntity<Pack> updatePack(@PathVariable("id") Long packId, @RequestBody PackDto packDto) {
+    try {
+        // Appeler le service pour modifier le pack
+        Pack updatedPack = packService.editPack(packId, packDto);
+        return new ResponseEntity<>(updatedPack, HttpStatus.OK);
+    } catch (EntityNotFoundException e) {
+        // Si le pack n'est pas trouvé, retourner une réponse 404
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    } catch (RuntimeException e) {
+        // Gérer d'autres exceptions si nécessaire
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+}
 }

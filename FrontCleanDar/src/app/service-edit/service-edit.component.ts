@@ -26,7 +26,6 @@ export class ServiceEditComponent implements OnInit {
       nom: ['', Validators.required],
       description: ['', Validators.required],
       prix: [0, [Validators.required, Validators.min(0)]],
-      typeService: ['', Validators.required],
       image: ['', Validators.required]
     });
   }
@@ -38,6 +37,7 @@ export class ServiceEditComponent implements OnInit {
 
   loadServiceData(): void {
     this.serviceCrudService.getServiceById(this.serviceId).subscribe(service => {
+
       this.serviceForm.patchValue(service);
       this.image = service.image;
     });
@@ -47,6 +47,7 @@ export class ServiceEditComponent implements OnInit {
     this.submitted = true;
 
     if (this.serviceForm.invalid) {
+
       return;
     }
 
@@ -57,6 +58,7 @@ export class ServiceEditComponent implements OnInit {
       typeService: this.serviceForm.value.typeService,
       image: this.image as string
     };
+
 
     this.serviceCrudService.updateService(this.serviceId, updateService).subscribe({
       next: () => {

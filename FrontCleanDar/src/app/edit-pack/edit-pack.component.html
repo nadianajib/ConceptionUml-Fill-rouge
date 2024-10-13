@@ -1,21 +1,26 @@
 <form [formGroup]="editPackForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="titre">Titre</label>
-      <input type="text" id="titre" class="form-control" formControlName="titre" />
-    </div>
-  
-    <div class="form-group">
-      <label for="description">Description</label>
-      <textarea id="description" class="form-control" formControlName="description"></textarea>
-    </div>
-  
-   
-  
-    <div class="form-group">
-      <label for="reduction">Réduction (%)</label>
-      <input type="number" id="reduction" class="form-control" formControlName="reduction" />
-    </div>
-  
-    <button type="submit" class="btn btn-primary" [disabled]="editPackForm.invalid">Mettre à jour</button>
-  </form>
-  
+  <div class="form-group">
+    <label for="titre">Titre</label>
+    <input type="text" id="titre" class="form-control" formControlName="titre" />
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea id="description" class="form-control" formControlName="description"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="reduction">Réduction (%)</label>
+    <input type="number" id="reduction" class="form-control" formControlName="reduction" />
+  </div>
+
+  <div class="form-group">
+    <label for="image">Image</label>
+    <input type="file" id="image" class="form-control" (change)="onFileSelected($event)" />
+    <img *ngIf="image" [src]="image" alt="Prévisualisation" class="img-thumbnail mt-2 preview-img" />
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="editPackForm.invalid || isLoading">
+    {{ isLoading ? 'Mise à jour...' : 'Mettre à jour' }}
+  </button>
+</form>

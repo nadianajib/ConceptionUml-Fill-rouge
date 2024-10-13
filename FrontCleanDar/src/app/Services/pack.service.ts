@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { Pack } from '../models/Pack'; // Assurez-vous que vous avez un modèle Pack défini
 
 @Injectable({
@@ -25,12 +25,17 @@ export class PackService {
     return this.http.delete(`${this.apiUrl}/delete/${id}`);
   }
   
-  editPack(id: number, pack: Pack): Observable<any> {
-    return this.http.put<Pack>(`${this.apiUrl}/${id}`, pack);
+  editPack(id: number, pack: Pack): Observable<Pack | null> {
+    return this.http.put<Pack>(`${this.apiUrl}/${id}`, pack)
+      .pipe(
+        catchError(error => {
+          console.error('Erreur lors de la mise à jour du pack:', error);
+          return of(null); // Retourne null en cas d'erreur
+        })
+      );
   }
 
   getPackById(id: number): Observable<Pack> {
     return this.http.get<Pack>(`${this.apiUrl}/${id}`);
-  }
-
+}
 }

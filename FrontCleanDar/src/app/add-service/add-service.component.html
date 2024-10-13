@@ -20,7 +20,7 @@
   </div>
 
   <div>
-    <label for="packId">Sélectionner un pack</label>
+    <label for="packId">Sélectionner id pack</label>
     <select id="packId" formControlName="pack_id" required>
       <option *ngFor="let pack of pack" [value]="pack.id">{{ pack.id }}</option>
     </select>

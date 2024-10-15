@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PackDto {
-    private Long id; // Ajouter l'id pour identifier le pack
+    private Long id;
     private Double prixTotal;
     private Double reduction;
     private String titre;

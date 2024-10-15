@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ReservationService } from '../Services/reservation.service';
-import { Router, ActivatedRoute } from '@angular/router'; // Assure-toi que ActivatedRoute est importé
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-reservation',
@@ -9,23 +9,25 @@ import { Router, ActivatedRoute } from '@angular/router'; // Assure-toi que Acti
   styleUrls: ['./add-reservation.component.scss']
 })
 export class AddReservationComponent implements OnInit {
-  reservationForm!: FormGroup; // Déclaration du formulaire
-  packId!: number; // Déclaration de packId
+  reservationForm!: FormGroup;
+  packId!: number;
 
   constructor(
     private fb: FormBuilder,
     private reservationService: ReservationService,
     protected router: Router,
-    private route: ActivatedRoute // Injection d'ActivatedRoute
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    // Initialisation du formulaire avec des contrôles et des validateurs
-    this.reservationForm = this.fb.group({
-      dateDebut: ['', Validators.required],
-      dateFin: ['', Validators.required],
-      packId: ['', Validators.required]
-    });
+    this.reservationForm = this.fb.group(
+      {
+        dateDebut: ['', Validators.required],
+        dateFin: ['', Validators.required],
+        packId: ['', Validators.required]
+      },
+      { validators: this.dateMismatchValidator } // Appliquer le validateur au groupe de formulaire
+    );
 
     // Récupérer l'ID du pack depuis les paramètres de route
     this.packId = +this.route.snapshot.paramMap.get('packId')!;
@@ -36,21 +38,20 @@ export class AddReservationComponent implements OnInit {
   }
 
   // Validator personnalisé pour vérifier si la date de début est avant la date de fin
-  dateMismatchValidator(control: AbstractControl) {
-    const formGroup = control as FormGroup;
+  dateMismatchValidator(formGroup: FormGroup) {
     const dateDebut = formGroup.get('dateDebut')?.value;
     const dateFin = formGroup.get('dateFin')?.value;
 
     if (dateDebut && dateFin && new Date(dateDebut) >= new Date(dateFin)) {
-      return { dateMismatch: true }; // Erreur de validation
+      return { dateMismatch: true }; // Si la date de début >= date de fin, retourne une erreur
     }
-    return null; // Validation réussie
+    return null; // Sinon, tout va bien
   }
 
   // Fonction appelée lors de la soumission du formulaire
   onSubmit(): void {
     if (this.reservationForm.valid) {
-      const reservationData = this.reservationForm.value; // Récupération des données du formulaire
+      const reservationData = this.reservationForm.value; // Récupérer les données du formulaire
       this.reservationService.addReservation(reservationData).subscribe(
         response => {
           console.log('Réservation ajoutée avec succès', response);

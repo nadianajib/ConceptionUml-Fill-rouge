@@ -51,16 +51,24 @@ $error-color: #dc3545; // Couleur d'erreur
 
       input {
         width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
+        padding: 0.75rem;
+        border: 1px solid #ced4da;
         border-radius: 4px;
-        font-size: 14px;
-        transition: border-color 0.3s;
-
+        transition: border-color 0.3s, box-shadow 0.3s;
+        font-size: 16px; // Taille de police pour une meilleure lisibilité
+      
+        // Style du placeholder
+        &::placeholder {
+          color: #a0a0a0; // Couleur du placeholder
+          opacity: 1; // S'assurer que le placeholder est visible
+          text-align: center;
+        }
+      
+        // Changement de couleur lors de la mise au point
         &:focus {
-          border-color: $primary-color;
-          outline: none;
-          box-shadow: 0 0 5px rgba($primary-color, 0.5);
+          border-color: #80bdff; // Couleur de bordure lors de la mise au point
+          box-shadow: 0 0 5px rgba(128, 189, 255, 0)
+      
         }
       }
 

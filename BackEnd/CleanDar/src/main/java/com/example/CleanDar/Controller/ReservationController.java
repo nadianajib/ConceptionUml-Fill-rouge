@@ -47,7 +47,7 @@ public class ReservationController {
         try {
             Utilisateur utilisateurVerifie = userRepository
                     .findById(user.getId())
-                    .orElseThrow(() -> new RuntimeException("Utilisateur malgish f database"));
+                    .orElseThrow(() -> new RuntimeException("Utilisateur n'existe dans BD"));
 
             List<ReservationDto> userReservations = reservationService.getReservations(utilisateurVerifie);
             return ResponseEntity.ok(userReservations);

@@ -33,6 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/auth/registerAdmin", "/api/v1/auth/authenticate", "/api/v1/auth/register").permitAll()
                         .requestMatchers("/api/v1/auth/Admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/v1/User/**").hasAuthority("USER")
+                        .requestMatchers("/**").permitAll()
                         .requestMatchers("/api/v1/my-reservations/**").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest()
                         .authenticated()

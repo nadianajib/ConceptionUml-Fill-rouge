@@ -75,7 +75,7 @@ export class AddServiceComponent implements OnInit {
         .subscribe({
             next: (response) => {
                 console.log('Service ajouté avec succès', response);
-                this.router.navigate(['/service-list']);
+                this.router.navigate(['/pack-list']);
             },
             error: (error) => {
                 console.error('Erreur lors de l\'ajout du service', error);

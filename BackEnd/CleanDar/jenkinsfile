@@ -13,7 +13,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/nadianajib/ConceptionUml-Fill-rouge.git'
+//                 git branch: 'main', url: 'https://github.com/nadianajib/ConceptionUml-Fill-rouge.git'
+              checkout scm
             }
         }
 

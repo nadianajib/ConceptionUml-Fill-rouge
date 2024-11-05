@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'mvn'
+    }
+
+    environment {
+        SONARQUBE_TOKEN = 'squ_2a7c94bfcf041869b835f5330f418af2f88f6bae'
+        SONARQUBE_SERVER = 'http://localhost:9000'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/nadianajib/ConceptionUml-Fill-rouge.git'
+            }
+        }
+
+        stage('Build & Test filRouge') {
+            steps {
+                dir('BackEnd/CleanDar') {
+                    withMaven(maven: 'mvn') {
+                        bat 'mvn clean install'
+                    }
+                }
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def scannerHome = tool 'SonarQube'
+                    dir('BackEnd/CleanDar') {
+                        bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=CleanDar -Dsonar.sources=. -Dsonar.host.url=${SONARQUBE_SERVER} -Dsonar.login=${SONARQUBE_TOKEN} -Dsonar.java.binaries=target/classes"
+                    }
+                }
+            }
+        }
+
+
+
+
+    }
+}
